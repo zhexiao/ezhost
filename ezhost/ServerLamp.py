@@ -28,39 +28,32 @@ from fabric.state import output
 output['running'] = False
 
 class ServerLamp(ServerAbstract):
+    def __init__(self):
+        """ choose local environment """
+        env.host_string = '127.0.0.1:2222'
+        env.user = 'vagrant'
+        env.password = 'vagrant'
+        env.environment = 'local'
+
     def install(self):
-        command = 'fab -f {0}/ServerLamp local setup'.format(self.command_path)
-        os.system(command)
+        self.update_sys()
+        self.install_apache()
 
+    def update_sys(self):
+        """
+        update system package
+        """
+        if prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
+            sudo('apt-get update -y')
+            print(green(' * successfully updated your system package'))
+            print()
 
-def setup():
-    """ deploy function """
-    if env.environment not in ["local"]:
-        print( red(' * please choose a environment.') )
-    else:
-        # exec the specify environment install function 
-        globals()['setup_{0}'.format(env.environment)]()  
-        
-
-def local():
-    """ choose local environment """
-    env.hosts = ['127.0.0.1:2222']
-    env.user = 'vagrant'
-    env.password = 'vagrant'
-    env.environment = 'local'
-
-def setup_local():
-    update_sys()
-    install_apache()
-
-def update_sys():
-    """update system package"""
-    sudo('apt-get update -y')
-    print(green(' * successfully updated your system package'))
-
-def install_apache():
-    """ setup libraries """
-    if prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
-        sudo('apt-get install apache2 -y')
-        print(green(' * successfully installed apache2'))
+    def install_apache(self):
+        """ 
+        setup libraries 
+        """
+        if prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
+            sudo('apt-get install apache2 -y')
+            print(green(' * successfully installed apache2'))
+            print()
 
