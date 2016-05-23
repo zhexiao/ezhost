@@ -5,7 +5,7 @@ local environment.
 
 Usage:
     $ sudo pip install ezhost
-    $ python3 ezhost lamp
+    $ ezhost lamp or python3 -m ezhost lamp
 
 Author: Zhe Xiao
 
@@ -15,9 +15,8 @@ Contact: zhexiao27@gmail.com
     
 Github: https://github.com/zhexiao/ezhost.git
 """
-
-from ezhost.ServerAbstract import ServerAbstract
 import os
+from ezhost.ServerAbstract import ServerAbstract
 
 # fabric libs
 from fabric.colors import red, green
@@ -30,7 +29,7 @@ output['running'] = False
 
 class ServerLamp(ServerAbstract):
     def install(self):
-        command = 'fab -f /var/www/html/ezhost/ezhost/ServerLamp local setup'
+        command = 'fab -f {0}/ServerLamp local setup'.format(self.command_path)
         os.system(command)
 
 
