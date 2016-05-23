@@ -7,7 +7,6 @@ parsing options and commands
 The other callables defined in this module are internal only. Anything useful
 to individuals leveraging Fabric as a library, should be kept elsewhere.
 """
-
 import sys
 
 from ezhost.ServerLists import ServerLists
