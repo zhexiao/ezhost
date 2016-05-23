@@ -10,11 +10,10 @@ to individuals leveraging Fabric as a library, should be kept elsewhere.
 
 import sys
 
-from ServerLists import ServerLists
-from ServerLamp import ServerLamp
+from ezhost.ServerLists import ServerLists
+from ezhost.ServerLamp import ServerLamp
 
 def main():
-
     """
     Check args
     """

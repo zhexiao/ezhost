@@ -16,8 +16,17 @@ Contact: zhexiao27@gmail.com
 Github: https://github.com/zhexiao/ezhost.git
 """
 
-from ServerAbstract import *
+from ezhost.ServerAbstract import ServerAbstract
 import os
+
+# fabric libs
+from fabric.colors import red, green
+from fabric.api import env, prompt, run, sudo, local, put
+from fabric.contrib.files import exists
+from fabric.state import output
+
+# hide exec command
+output['running'] = False
 
 class ServerLamp(ServerAbstract):
     def install(self):
