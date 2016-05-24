@@ -30,30 +30,43 @@ output['running'] = False
 class ServerLamp(ServerAbstract):
     def __init__(self):
         """ choose local environment """
-        env.host_string = '127.0.0.1:2222'
+        env.host_string = '127.0.0.1:2200'
         env.user = 'vagrant'
         env.password = 'vagrant'
-        env.environment = 'local'
 
     def install(self):
         self.update_sys()
         self.install_apache()
+        self.install_mysql()
+        self.install_php()
 
     def update_sys(self):
-        """
-        update system package
-        """
         if prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
             print(green(' * successfully updated your system package'))
             print()
 
     def install_apache(self):
-        """ 
-        setup libraries 
-        """
         if prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
             sudo('apt-get install apache2 -y')
             print(green(' * successfully installed apache2'))
+            print()
+
+    def install_mysql(self):
+        if prompt(red(' * Install mysql (y/n)?'), default='y') == 'y':
+            sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
+            sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
+            sudo('apt-get install mysql-server php5-mysql -y')
+            print(green(' * successfully installed mysql'))
+            print()
+
+    def install_php(self):
+        if prompt(red(' * Install php5 (y/n)?'), default='y') == 'y':
+            sudo('apt-get install php5 php5-cli libapache2-mod-php5 php5-mcrypt -y')
+            # do apache config
+            sudo('echo "{0}">/etc/apache2/mods-enabled/dir.conf'.format(self.apache_dir_index))
+            # write phpinfo
+            sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.apache_web_dir))
+            print(green(' * successfully installed php5'))
             print()
 
