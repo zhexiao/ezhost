@@ -5,7 +5,7 @@ local environment.
 
 Usage:
     $ sudo pip install ezhost
-    $ ezhost lamp or python3 -m ezhost lamp
+    $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
 
 Author: Zhe Xiao
 
@@ -15,7 +15,7 @@ Contact: zhexiao27@gmail.com
     
 Github: https://github.com/zhexiao/ezhost.git
 """
-import os
+
 from ezhost.ServerAbstract import ServerAbstract
 
 # fabric libs
@@ -29,10 +29,7 @@ output['running'] = False
 
 class ServerLamp(ServerAbstract):
     def __init__(self):
-        self.host_string = '127.0.0.1:2201'
-        self.host_user = 'vagrant'
-        self.host_passwd = 'vagrant'
-        self.init_host()
+        pass
 
     def install(self):
         self.update_sys()

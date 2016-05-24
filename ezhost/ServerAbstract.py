@@ -6,13 +6,15 @@ Abstract class for all server class
 # internal libs
 import os
 from abc import ABCMeta, abstractmethod, abstractproperty
-from fabric.api import env
 
 class ServerAbstract(metaclass=ABCMeta):
     def __init__(self):
+        # host information
         self._host_string = None
         self._host_user = None
         self._host_passwd = None
+        # server type
+        self._server_type = None
 
     @property
     def host_string(self):
@@ -55,6 +57,20 @@ class ServerAbstract(metaclass=ABCMeta):
             Host password setter
         """
         self._host_passwd = value
+
+    @property
+    def server_type(self):
+        """
+            Server type getter
+        """
+        return self._server_type
+
+    @server_type.setter
+    def server_type(self, value):
+        """
+            Server type setter
+        """
+        self._server_type = value
  
     @property
     def command_path(self):
@@ -111,12 +127,3 @@ phpinfo();
             All subclass need implement this function
         """
         pass
-        
-    def init_host(self):
-        """
-            Initial vagrant host 
-        """
-        env.host_string = self._host_string
-        env.user = self._host_user
-        env.password = self._host_passwd
-
