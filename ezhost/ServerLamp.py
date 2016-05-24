@@ -29,10 +29,10 @@ output['running'] = False
 
 class ServerLamp(ServerAbstract):
     def __init__(self):
-        """ choose local environment """
-        env.host_string = '127.0.0.1:2200'
-        env.user = 'vagrant'
-        env.password = 'vagrant'
+        self.host_string = '127.0.0.1:2201'
+        self.host_user = 'vagrant'
+        self.host_passwd = 'vagrant'
+        self.init_host()
 
     def install(self):
         self.update_sys()
@@ -65,7 +65,7 @@ class ServerLamp(ServerAbstract):
             sudo('apt-get install php5 php5-cli libapache2-mod-php5 php5-mcrypt -y')
             # do apache config
             sudo('echo "{0}">/etc/apache2/mods-enabled/dir.conf'.format(self.apache_dir_index))
-            # write phpinfo
+            # write phpinfo for test 
             sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.apache_web_dir))
             print(green(' * successfully installed php5'))
             print()
