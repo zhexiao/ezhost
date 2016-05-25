@@ -5,8 +5,7 @@ ezhost is a tool to make it easy to install server.
 
 The main documentation for the site is organized into a couple sections:
 
-* :ref:`user-docs`
-* :ref:`search`
+
 
 
 .. _user-docs:
@@ -31,3 +30,8 @@ The main documentation for the site is organized into a couple sections:
    UserGuide/index
 
 
+Indices and tables		
+==================		
+
+* :ref:`user-docs`
+* :ref:`search`
