@@ -3,12 +3,9 @@ Welcome to ezhost's documentation!
 
 ezhost is a tool to make it easy to install server.
 
-The main documentation for the site is organized into a couple sections:
 
 * :ref:`user-docs`
-* :ref:`feature-docs`
-* :ref:`about-docs`
-
+* :ref:`developer-docs`
 
 .. _user-docs:
 
@@ -22,7 +19,7 @@ The main documentation for the site is organized into a couple sections:
 .. _feature-docs:
 
 .. toctree::
-   :caption: For users
+   :caption: Developer Documentation
    :maxdepth: 2
 
    UserGuide/index
@@ -31,5 +28,4 @@ The main documentation for the site is organized into a couple sections:
 Indices and tables		
 ==================		
 
-* :ref:`user-docs`
 * :ref:`search`
