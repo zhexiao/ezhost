@@ -16,7 +16,7 @@ You have to install python3 and pip3 before you install ezhost:
 Install
 ---------------
 
-You can install directly from PyPI using:
+You can install ezhost directly from PyPI using:
 
 .. code-block:: bash
 
