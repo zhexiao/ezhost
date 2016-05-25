@@ -3,6 +3,11 @@ Welcome to ezhost's documentation!
 
 ezhost is a tool to make it easy to install server.
 
+
+* :ref:`user-docs`		
+* :ref:`developer-docs`
+ 
+ 
 .. _user-docs:
 
 .. toctree::
