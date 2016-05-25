@@ -5,6 +5,7 @@ PyPI Install
 ^^^^^^^^^^^^
 
 You can also install directly from PyPI using:
+
 .. code-block:: python
 
    $ pip install ezhost
