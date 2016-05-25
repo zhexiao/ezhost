@@ -1,4 +1,4 @@
-Welcome to ezhost's documentation!
+ezhost documentation
 ==================================
 
 ezhost is a tool to make it easy to install server.
