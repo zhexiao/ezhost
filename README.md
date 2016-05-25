@@ -1,1 +1,3 @@
 # ezhost
+
+|build-status| |docs|
