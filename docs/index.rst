@@ -1,16 +1,6 @@
 Welcome to Ezhost documentation!
 *****************************************
 
-Contents:
-
-.. toctree::
-   :maxdepth: 1
-
-   intro
-   installing
-   tutorial
-   api
-
 Indices and tables
 ==================
 
