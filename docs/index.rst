@@ -13,6 +13,5 @@ ezhost is a tool to make it easy to install server.
 Indices and tables
 ==================
 
-* :ref:`genindex`
 * :ref:`search`
 
