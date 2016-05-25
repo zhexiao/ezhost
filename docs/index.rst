@@ -16,7 +16,7 @@ ezhost is a tool to make it easy to install server.
    getting_started
 
    
-.. _feature-docs:
+.. _developer-docs:
 
 .. toctree::
    :caption: Developer Documentation
