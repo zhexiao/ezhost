@@ -9,6 +9,7 @@ Requirement
 You have to install python3 and pip3 before you install ezhost.
 
 .. code-block:: bash
+
    $ sudo apt-get install python3-dev 
    $ sudo apt-get install python3-pip
 
