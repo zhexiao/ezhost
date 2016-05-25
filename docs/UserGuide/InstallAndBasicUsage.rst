@@ -4,18 +4,19 @@ Install and Basic Usage
 PyPI Install
 ^^^^^^^^^^^^
 
+You can also install directly from PyPI using:
+.. code-block:: bash
+   $ pip install ezhost
+   
+
 .. code-block:: python
    :emphasize-lines: 3,5
 
    def some_function():
-       interesting = False
-       print 'This line is highlighted.'
-       print 'This one is not...'
-       print '...but this one is.
-
-You can also install directly from PyPI using:
-.. code-block:: bash
-   $ pip install ezhost
+      interesting = False
+      print 'This line is highlighted.'
+      print 'This one is not...'
+      print '...but this one is.
 
 
 Starting ezhost
