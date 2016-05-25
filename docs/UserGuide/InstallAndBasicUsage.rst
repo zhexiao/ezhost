@@ -1,19 +1,16 @@
 Install and Basic Usage
 =======================
 
-
-Installation
-------------
-
 PyPI Install
 ^^^^^^^^^^^^
 
 You can also install directly from PyPI using:
+.. code-block:: bash
+    pip install ezhost
 
-``pip install ezhost``
 
 Starting ezhost
---------------
+^^^^^^^^^^^^
 
 As described above, to run Ganga simply execute ``ezhost`` (for PyPI install)
 
