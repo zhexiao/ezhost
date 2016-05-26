@@ -28,7 +28,7 @@ You will find complete documentation for setting up ezhost at `the Docs site`_.
     :scale: 100%
     :target: https://travis-ci.org/zhexiao/ezhost/builds
     
-.. |version| image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg?style=flat
+.. |version| image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg
     :alt: Version Status
     :scale: 100%
     :target: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6
