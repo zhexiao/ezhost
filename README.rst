@@ -1,7 +1,7 @@
 Welcome to ezhost
 =======================
 
-|docs| |build| {<img src="https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg?style=flat" alt="Dependency Status" />}[https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6]
+|docs| |build| |version|
 
 Purpose
 -------
@@ -27,3 +27,8 @@ You will find complete documentation for setting up ezhost at `the Docs site`_.
     :alt: Build Status
     :scale: 100%
     :target: https://travis-ci.org/zhexiao/ezhost/builds
+    
+.. |version| image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg?style=flat
+    :alt: Version Status
+    :scale: 100%
+    :target: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6
