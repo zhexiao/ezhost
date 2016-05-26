@@ -5,4 +5,4 @@ sudo: true
 install:
  - pip install ezhost
 script:
- - python tests/test_args.py
+ - ezhost -h
