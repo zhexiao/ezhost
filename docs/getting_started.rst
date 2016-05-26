@@ -62,6 +62,13 @@ After you installed ezhost from pip, you can easy to running the following comma
    
    $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
    
-The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5). ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
+The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``Vagrant``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
+
+
+.. code-block:: bash
+   
+   $ ezhost -s lamp -H ec2-11-111-11-111.compute-1.amazonaws.com -U ubuntu -K ~/.ssh/keyfile.pem
+   
+The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``AWS EC2``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-K`` indicate your host keyfile.
 
 .. note:: The installed lamp server is a very basic server. Run ``sudo apt-cache search php5-`` find what kind of php module you need. Then run ``sudo apt-get install package1 package2 ...`` to install it.
