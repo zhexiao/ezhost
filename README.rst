@@ -1,7 +1,7 @@
 Welcome to ezhost
 =======================
 
-|docs|
+|docs| |build| 
 
 Purpose
 -------
@@ -22,3 +22,8 @@ You will find complete documentation for setting up ezhost at `the Docs site`_.
     :alt: Documentation Status
     :scale: 100%
     :target: http://ezhost.readthedocs.io/en/latest/#
+
+.. |build| image:: https://travis-ci.org/zhexiao/ezhost.svg?branch=master
+    :alt: Build Status
+    :scale: 100%
+    :target: https://travis-ci.org/zhexiao/ezhost/builds
