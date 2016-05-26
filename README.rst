@@ -1,7 +1,7 @@
 Welcome to ezhost
 =======================
 
-|docs| |build| [![Dependency Status](https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6)
+|docs| |build| {<img src="https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg?style=flat" alt="Dependency Status" />}[https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6]
 
 Purpose
 -------
