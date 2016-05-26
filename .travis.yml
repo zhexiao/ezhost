@@ -1,0 +1,17 @@
+language: python
+python:
+ - 3.4
+sudo: true
+env:
+ - TOX_ENV=ezhost
+install:
+ - pip install ezhost
+ - pip install coveralls
+script:
+ - ezhost -h
+after_success:
+ - coveralls
+notifications:
+  slack:
+    on_success: change
+    on_failure: always
