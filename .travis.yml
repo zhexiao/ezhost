@@ -1,15 +1,11 @@
 language: python
 python:
  - "3.4"
-sudo: false
-env:
- - TOX_ENV=py34
+sudo: true
 install:
- - pip install tox
  - pip install coveralls
  - pip install ezhost
 script:
- - tox -e $TOX_ENV
  - ezhost -h
 after_success:
   coveralls
