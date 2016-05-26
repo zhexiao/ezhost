@@ -20,7 +20,7 @@ ezhost is a tool to make it easy to install server.
 .. _feature-docs:
 
 .. toctree::
-   :caption: Recommand Use with vagrant
+   :caption: Recommend Use with vagrant
    :maxdepth: 2
 
    Features/index
