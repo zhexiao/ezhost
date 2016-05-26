@@ -63,3 +63,5 @@ After you installed ezhost from pip, you can easy to running the following comma
    $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
    
 The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5). ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
+
+.. note:: You can use ``sphinx-autobuild`` to auto-reload your docs. Run ``sphinx-autobuild . _build_html`` instead.
