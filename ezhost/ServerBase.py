@@ -14,6 +14,7 @@ class ServerBase(ServerAbstract):
         self.host_string = args.host
         self.host_user = args.user
         self.host_passwd = args.passwd
+        self.host_keyfile = args.keyfile
         self.server_type = args.server
         
         # initial host 
@@ -37,6 +38,7 @@ class ServerBase(ServerAbstract):
         """
             Initial  host 
         """
-        env.host_string = self._host_string
-        env.user = self._host_user
-        env.password = self._host_passwd
+        env.host_string = self.host_string
+        env.user = self.host_user
+        env.password = self.host_passwd
+        env.key_filename = self.host_keyfile

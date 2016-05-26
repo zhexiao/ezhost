@@ -63,7 +63,7 @@ def main():
         return
 
     try:
-        if (args.host and args.user and args.passwd) is None:
+        if (args.host and args.user and (args.passwd or args.keyfile) ) is None:
             raise ValueError('Lack of required host information. Please check whether you have set user and password.')
     except Exception as e:
         print(e)

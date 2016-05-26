@@ -13,6 +13,7 @@ class ServerAbstract(metaclass=ABCMeta):
         self._host_string = None
         self._host_user = None
         self._host_passwd = None
+        self._host_keyfile = None
         # server type
         self._server_type = None
 
@@ -57,6 +58,20 @@ class ServerAbstract(metaclass=ABCMeta):
             Host password setter
         """
         self._host_passwd = value
+
+    @property
+    def host_keyfile(self):
+        """
+            Host keyfile getter
+        """
+        return self._host_keyfile
+
+    @host_keyfile.setter
+    def host_keyfile(self, value):
+        """
+            Host keyfile setter
+        """
+        self._host_keyfile = value
 
     @property
     def server_type(self):
