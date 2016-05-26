@@ -58,12 +58,17 @@ Basic Usage
 
 After you installed ezhost from pip, you can easy to running the following command to generate a new server:
 
+Using login user and password
+~~~~~~
+
 .. code-block:: bash
    
    $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
    
 The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``Vagrant``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
 
+Using login user and keyfile
+~~~~~~
 
 .. code-block:: bash
    
