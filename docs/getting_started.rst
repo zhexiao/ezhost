@@ -64,4 +64,4 @@ After you installed ezhost from pip, you can easy to running the following comma
    
 The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5). ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
 
-.. note:: You can use ``sphinx-autobuild`` to auto-reload your docs. Run ``sphinx-autobuild . _build_html`` instead.
+.. note:: The installed lamp server is a very basic server. Run ``sudo apt-cache search php5-`` find what kind of php module you need. Then run ``sudo apt-get install package1 package2 ...`` to install it.
