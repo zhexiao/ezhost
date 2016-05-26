@@ -1,4 +1,4 @@
-ezhost
+Welcome to ezhost
 =======================
 
 |docs|
