@@ -1,7 +1,7 @@
 Welcome to ezhost
 =======================
 
-|docs| |build| |version|
+|docs| |build| |coverage| |version|
 
 Purpose
 -------
@@ -28,7 +28,14 @@ You will find complete documentation for setting up ezhost at `the Docs site`_.
     :scale: 100%
     :target: https://travis-ci.org/zhexiao/ezhost/builds
     
+.. |coverage| image:: https://coveralls.io/repos/github/zhexiao/ezhost/badge.svg?branch=master
+    :alt: Coverage Percentage
+    :scale: 100%
+    :target: https://coveralls.io/github/zhexiao/ezhost?branch=master
+    
 .. |version| image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg
     :alt: Version Status
     :scale: 100%
     :target: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6
+    
+
