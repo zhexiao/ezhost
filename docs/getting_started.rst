@@ -56,7 +56,7 @@ You can install ezhost directly from PyPI using:
 Basic Usage
 ---------------
 
-After you installed ezhost from pip, you can easy running the following command to generate a new server:
+After you installed ezhost from pip, you can easy to running the following command to generate a new server:
 
 .. code-block:: bash
    
