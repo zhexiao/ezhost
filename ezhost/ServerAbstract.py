@@ -150,34 +150,38 @@ phpinfo();
         """
         long_text = """
 server {
-    listen   80;
- 
-    root /usr/share/nginx/www;
-    index index.php index.html index.htm;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root %s;
+
+    # Add index.php to the list if you are using PHP
+    index index.php index.html index.htm index.nginx-debian.html;
 
     server_name localhost;
 
     location / {
-            try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ =404;
     }
 
-    error_page 404 /404.html;
-
-    error_page 500 502 503 504 /50x.html;
-    location = /50x.html {
-          root /usr/share/nginx/www;
-    }
-
-    # pass the PHP scripts to FastCGI server listening on the php-fpm socket
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;   
+       include snippets/fastcgi-php.conf;   
+       # With php5-cgi alone:
+       # fastcgi_pass 127.0.0.1:9000;
+       # With php5-fpm:
+       fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    location ~ /\.ht {
+        deny all;
     }
 }
         """
+
+        long_text = long_text % (self.nginx_web_dir)
         return long_text
 
     @abstractmethod
