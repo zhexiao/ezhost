@@ -99,10 +99,17 @@ class ServerAbstract(metaclass=ABCMeta):
         """
             Mysql password
         """
-        return 'xiaozhe'
+        return 'password'
 
     @property
     def apache_web_dir(self):
+        """
+            default apache project dir
+        """
+        return '/var/www/html'
+
+    @property
+    def nginx_web_dir(self):
         """
             default apache project dir
         """
@@ -133,6 +140,43 @@ class ServerAbstract(metaclass=ABCMeta):
 <?php
 phpinfo();
 ?>
+        """
+        return long_text
+
+    @property
+    def nginx_web_config(self):
+        """
+           Nginx web config
+        """
+        long_text = """
+server {
+    listen   80;
+ 
+    root /usr/share/nginx/www;
+    index index.php index.html index.htm;
+
+    server_name localhost;
+
+    location / {
+            try_files $uri $uri/ /index.html;
+    }
+
+    error_page 404 /404.html;
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+          root /usr/share/nginx/www;
+    }
+
+    # pass the PHP scripts to FastCGI server listening on the php-fpm socket
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;   
+    }
+}
         """
         return long_text
 

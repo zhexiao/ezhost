@@ -7,6 +7,7 @@ from fabric.api import env
 from ezhost.ServerAbstract import ServerAbstract
 from ezhost.ServerLists import ServerLists
 from ezhost.ServerLamp import ServerLamp
+from ezhost.ServerLnmp import ServerLnmp
 
 class ServerBase(ServerAbstract):
     def __init__(self, args, configure_obj):
@@ -39,10 +40,10 @@ class ServerBase(ServerAbstract):
     def _parse_parameters(self):
         # set args from commmand parser
         if self.configure_obj is None:
-            self.host_string = args.host
-            self.host_user = args.user
-            self.host_passwd = args.passwd
-            self.host_keyfile = args.keyfile
+            self.host_string = self.args.host
+            self.host_user = self.args.user
+            self.host_passwd = self.args.passwd
+            self.host_keyfile = self.args.keyfile
 
         # set args from config file parser
         else:
@@ -62,9 +63,6 @@ class ServerBase(ServerAbstract):
                     self.host_passwd = self.configure_obj['passwd']
                 except Exception as e:
                     raise KeyError('Lack of required host information. Please check whether you have set login password or keyfile.')
-
-
-            
 
     def init_host(self):
         """
