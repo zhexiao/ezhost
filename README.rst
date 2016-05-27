@@ -27,7 +27,9 @@ This tool is aim to make user easy to install server, operate remote server from
 Requirements
 ============
 
-* > Python3 
+* Python 3.3+
+* python3-pip
+* python3.4-venv
 
 
 
