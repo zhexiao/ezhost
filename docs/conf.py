@@ -240,7 +240,7 @@ latex_documents = [
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-latex_show_pagerefs = True
+#latex_show_pagerefs = False
 
 # If true, show URL addresses after external links.
 #latex_show_urls = False
