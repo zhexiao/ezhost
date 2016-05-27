@@ -11,7 +11,7 @@ ezhost is a tool to make it easy to install server.
 .. _user-docs:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: User Documentation
 
    getting_started
@@ -22,7 +22,7 @@ ezhost is a tool to make it easy to install server.
 
 .. toctree::
    :caption: Recommend Use with vagrant
-   :maxdepth: 1
+   :maxdepth: 3
 
    Features/index
 
