@@ -25,6 +25,9 @@ Virtualenv
 
 We recommend using virtual environment for your packages. For python3.4, we can using pyvenv to generate virtualenv:
 
+Using pyvenv to create your virtualenv
+~~~~~~
+
 .. code-block:: bash
    
    # generate your virtualenv
