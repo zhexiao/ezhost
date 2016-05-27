@@ -7,13 +7,15 @@ parsing options and commands
 The other callables defined in this module are internal only. Anything useful
 to individuals leveraging Fabric as a library, should be kept elsewhere.
 """
-import argparse
+import argparse, configparser
 from ezhost.ServerBase import ServerBase
 
 def main():
     """
         Check args
     """
+
+    configure_obj = None
     try:
         parser = argparse.ArgumentParser(description='Easy to install server.')
         parser.add_argument(
@@ -26,8 +28,6 @@ def main():
             '-c', 
             '--config', 
             help='config file path of your host informations', 
-            type=argparse.FileType('r', encoding='UTF-8'), 
-            metavar='FILE'
         )
         parser.add_argument(
             '-H', 
@@ -62,13 +62,31 @@ def main():
         print(e)
         return
 
+    # check user and passwd
     try:
-        if (args.host and args.user and (args.passwd or args.keyfile) ) is None:
-            raise ValueError('Lack of required host information. Please check whether you have set user and password.')
+        if args.host is not None:
+            if (args.user and (args.passwd or args.keyfile) ) is None:
+                raise ValueError('Lack of required host information. Please check whether you have set login user, login password or keyfile.')
+    except Exception as e:
+        print(e)
+        return
+
+    # if exist config file, read configuration from file
+    try:
+        if args.config is not None:
+            # init configuration parser
+            configure = configparser.ConfigParser()
+            configure.read(args.config)
+
+            # check key exist
+            if 'ezhost' in configure:
+                configure_obj = configure['ezhost']
+            else:
+                raise KeyError('Can not found ezhost configuration informations.')
     except Exception as e:
         print(e)
         return
 
     # init server
-    ServerBase(args)
+    ServerBase(args, configure_obj)
 

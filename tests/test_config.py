@@ -8,8 +8,8 @@ import configparser
 class ConfTest(unittest.TestCase):
     def _setup_(self):
         self.config = configparser.ConfigParser()
-        self.path = os.path.dirname(os.path.realpath(__file__))
-        self.config.read('{0}/test_config.ini'.format(self.path))
+        self.path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        self.config.read('{0}/data/test_config.ini'.format(self.path))
 
     def test_config_non_namespace(self):
         self._setup_()
