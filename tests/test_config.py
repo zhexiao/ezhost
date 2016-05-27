@@ -24,7 +24,7 @@ class ConfTest(unittest.TestCase):
     def test_config_value(self):
         self._setup_()
         
-        self.assertEqual(self.config['ezhost']['user'], 'zx')
+        self.assertNotEqual(self.config['ezhost']['user'], 'zx')
 
     def test_config_non_exist(self):
         self._setup_()

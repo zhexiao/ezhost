@@ -6,6 +6,6 @@ install:
  - pip install coveralls
  - pip install ezhost
 script:
- - ezhost -h
+ - coverage run -m unittest 
 after_success:
   coveralls
