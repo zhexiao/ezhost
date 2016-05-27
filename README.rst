@@ -24,6 +24,13 @@ Purpose
 This tool is aim to make user easy to install server, operate remote server from local pc.
 
 
+Requirements
+============
+
+* > Python3 
+
+
+
 Documentation for ezhost
 ============
 
