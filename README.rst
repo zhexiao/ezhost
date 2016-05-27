@@ -2,8 +2,6 @@
 Welcome to ezhost
 ==============
 
-Status
-============
 
 .. image:: https://readthedocs.org/projects/ezhost/badge/?version=latest
     :target: http://ezhost.readthedocs.io/en/latest/#
@@ -30,7 +28,6 @@ Requirements
 * Python 3.3+
 * python3-pip
 * python3.4-venv
-
 
 
 Documentation for ezhost
