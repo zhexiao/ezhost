@@ -1,7 +1,5 @@
-==============
 Welcome to ezhost
-==============
-
+========================
 
 .. image:: https://readthedocs.org/projects/ezhost/badge/?version=latest
     :target: http://ezhost.readthedocs.io/en/latest/#
@@ -31,14 +29,8 @@ Requirements
 
 
 Documentation for ezhost
-============
+=============================
 
 You will find complete documentation for setting up ezhost at `the Docs site`_.
 
 .. _the Docs site: http://ezhost.readthedocs.io/en/latest/
-
-
-
-
-
-
