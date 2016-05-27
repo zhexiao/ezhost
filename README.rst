@@ -33,9 +33,8 @@ Requirements
 Documentation for ezhost
 ============
 
-You will find complete documentation for setting up ezhost at `the Docs site`_.
+You will find complete documentation for setting up ezhost at [the Docs site](http://ezhost.readthedocs.io/en/latest/#)
 
-.. _the Docs site: http://ezhost.readthedocs.io/en/latest/#
 
 
 
