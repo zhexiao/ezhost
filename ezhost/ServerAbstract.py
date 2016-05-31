@@ -16,6 +16,7 @@ class ServerAbstract(metaclass=ABCMeta):
         self._host_keyfile = None
         # server type
         self._server_type = None
+        self._project = None
 
     @property
     def host_string(self):
@@ -86,7 +87,21 @@ class ServerAbstract(metaclass=ABCMeta):
             Server type setter
         """
         self._server_type = value
- 
+    
+    @property
+    def project(self):
+        """
+            project getter
+        """
+        return self._project
+
+    @project.setter
+    def project(self, value):
+        """
+            project setter
+        """
+        self._project = value
+
     @property
     def command_path(self):
         """
@@ -183,6 +198,13 @@ server {
 
         long_text = long_text % (self.nginx_web_dir)
         return long_text
+
+    @property
+    def python_env_dir(self):
+        """
+            Python virtualenv dir
+        """
+        return '~/.py_env'
 
     @abstractmethod
     def install(self):

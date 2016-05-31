@@ -8,6 +8,7 @@ from ezhost.ServerAbstract import ServerAbstract
 from ezhost.ServerLists import ServerLists
 from ezhost.ServerLamp import ServerLamp
 from ezhost.ServerLnmp import ServerLnmp
+from ezhost.ServerDjangoUwsgi import ServerDjangoUwsgi
 from ezhost.ServerCommand import ServerCommand
 
 class ServerBase(ServerAbstract):
@@ -15,8 +16,8 @@ class ServerBase(ServerAbstract):
         self.args = args
         self.configure_obj = configure_obj
 
-        # set server type
-        self.server_type = args.server
+        # set common parameters
+        self.server_type = self.args.server
         
         # parser parameters
         self._parse_parameters()
@@ -70,7 +71,7 @@ class ServerBase(ServerAbstract):
         try:
             if self.args.server is not None:
                 server = ServerLists(self.server_type)
-                eval(server.name)().install()
+                eval(server.name)(self.args).install()
             else:
                 ServerCommand(self.args)
         except Exception as e:

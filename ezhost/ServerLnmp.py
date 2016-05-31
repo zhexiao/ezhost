@@ -26,8 +26,8 @@ from fabric.state import output
 output['running'] = False
 
 class ServerLnmp(ServerAbstract):
-    def __init__(self):
-        pass
+    def __init__(self, args):
+        self.args = args
 
     def install(self):
         self.update_sys()

@@ -29,6 +29,12 @@ def main():
             help='config file path of your host informations', 
         )
         parser.add_argument(
+            '-p', 
+            '--project', 
+            help='indicate your project name(some servers need this parameter for initial, default=demo)', 
+            default='demo'
+        )
+        parser.add_argument(
             '-gp', 
             '--git-pull', 
             help='give me your github project directory, we will auto git pull your server code', 
