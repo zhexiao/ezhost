@@ -169,15 +169,15 @@ server {
     listen [::]:80 default_server;
 
     root %s;
-
+    autoindex on;
     # Add index.php to the list if you are using PHP
     index index.php index.html index.htm index.nginx-debian.html;
 
     server_name localhost;
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
+    #location / {
+    #    try_files $uri $uri/ =404;
+    #}
 
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     location ~ \.php$ {
@@ -190,9 +190,9 @@ server {
 
     # deny access to .htaccess files, if Apache's document root
     # concurs with nginx's one
-    location ~ /\.ht {
-        deny all;
-    }
+    #location ~ /\.ht {
+    #    deny all;
+    #}
 }
         """
 
