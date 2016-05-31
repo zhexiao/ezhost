@@ -67,6 +67,8 @@ class ServerLnmp(ServerAbstract):
             sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_config))
             # write phpinfo for test 
             sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.nginx_web_dir))
+
+            sudo('service nginx restart')
             print(green(' * successfully installed php5'))
             print()
 

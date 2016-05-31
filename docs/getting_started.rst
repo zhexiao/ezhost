@@ -80,3 +80,14 @@ Using login user and keyfile
 The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``AWS EC2``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-K`` indicate your host keyfile.
 
 .. note:: The installed lamp server is a very basic server. Run ``sudo apt-cache search php5-`` find what kind of php module you need. Then run ``sudo apt-get install package1 package2 ...`` to install it.
+
+Update your github code on the remote server
+~~~~~~
+
+.. code-block:: bash
+   
+   $ ezhost --git-pull /var/www/html/project -H 127.0.0.1:2200 -U vagrant -P vagrant
+   
+The above code will go to ``/var/www/html/project`` folder and running ``git pull`` to make your github code up to date.
+
+.. note:: Before you running this command, please make sure you already installed ``git``.

@@ -22,12 +22,16 @@ def main():
             '-s', 
             '--server', 
             help='what kind of server you want to install',  
-            required=True
         )
         parser.add_argument(
             '-c', 
             '--config', 
             help='config file path of your host informations', 
+        )
+        parser.add_argument(
+            '-gp', 
+            '--git-pull', 
+            help='give me your github project directory, we will auto git pull your server code', 
         )
         parser.add_argument(
             '-H', 

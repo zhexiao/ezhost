@@ -8,6 +8,7 @@ from ezhost.ServerAbstract import ServerAbstract
 from ezhost.ServerLists import ServerLists
 from ezhost.ServerLamp import ServerLamp
 from ezhost.ServerLnmp import ServerLnmp
+from ezhost.ServerCommand import ServerCommand
 
 class ServerBase(ServerAbstract):
     def __init__(self, args, configure_obj):
@@ -25,17 +26,6 @@ class ServerBase(ServerAbstract):
 
         # install 
         self.install()
-
-    def install(self):
-        """
-            install the server
-        """
-        try:
-            server = ServerLists(self.server_type)
-            eval(server.name)().install()
-        except Exception as e:
-            raise e
-       
 
     def _parse_parameters(self):
         # set args from commmand parser
@@ -72,3 +62,17 @@ class ServerBase(ServerAbstract):
         env.user = self.host_user
         env.password = self.host_passwd
         env.key_filename = self.host_keyfile
+
+    def install(self):
+        """
+            install the server
+        """
+        try:
+            if self.args.server is not None:
+                server = ServerLists(self.server_type)
+                eval(server.name)().install()
+            else:
+                ServerCommand(self.args)
+        except Exception as e:
+            raise e
+       
