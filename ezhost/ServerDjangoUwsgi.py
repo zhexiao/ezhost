@@ -28,6 +28,8 @@ output['running'] = False
 class ServerDjangoUwsgi(ServerAbstract):
     def __init__(self, args):
         self.args = args
+        self.project = self.args.project
+        self.project_dir = '{0}/{1}'.format(self.nginx_web_dir, self.project)
 
     def install(self):
         self.update_sys()
@@ -38,41 +40,50 @@ class ServerDjangoUwsgi(ServerAbstract):
     def update_sys(self):
         if prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
+
             print(green(' * successfully updated your system package'))
             print()
 
     def install_libraries(self):
         if prompt(red(' * Install libraries (y/n)?'), default='y') == 'y':
-            sudo("apt-get install python3 python3-dev python3-pip python3.4-venv -y")
-            sudo("apt-get install python-mysqldb -y")
+            sudo('apt-get install python3 python3-pip python-pip -y')
+            sudo('pip install virtualenv')
+
             print(green(' * Done '))
             print()
-        # mysql
-        # sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
-        # sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
-        # sudo('apt-get install mysql-server -y')
-        # uwsgi
-        # sudo('pip3 install uwsgi')
-        # 
+
     def install_project(self):
         if prompt(red(' * Install Django project (y/n)?'), default='y') == 'y':
-            # create project virtualenv
-            if not exists(self.python_env_dir):
-                run('mkdir {0}'.format(self.python_env_dir))
-            run('python3 -m venv {0}/{1}'.format(self.python_env_dir, self.args.project))
-            run("{0}/{1}/bin/pip install django".format(self.python_env_dir, self.args.project))
-
             # create project
-            if not exists(self.nginx_web_dir):
-                sudo('mkdir -p {0}'.format(self.nginx_web_dir))
-            sudo('chmod -R 777 {0}'.format(self.nginx_web_dir))
-            run('cd {0} && {1}/{2}/bin/django-admin startproject {1}'.format(self.nginx_web_dir, self.python_env_dir, self.args.project))
+            if not exists( self.project_dir ):
+                sudo('mkdir -p {0}'.format(self.project_dir) )
+            sudo('chmod -R 777 {0}'.format(self.project_dir) )
+
+            # create project virtualenv
+            run('virtualenv -p python3 {0}'.format(self.python_env_dir) )
+            run("{0}/bin/pip install django markdown django-filter".format(self.python_env_dir) )
+            run('cd {0} && {1}/bin/django-admin startproject {2} .'.format(self.project_dir, self.python_env_dir, self.project))
+
             print(green(' * Done '))
             print()
 
     def install_uwsgi(self):
         if prompt(red(' * Install Uwsgi with Nginx (y/n)?'), default='y') == 'y':
+            # install nginx and uwsgi
             sudo('apt-get install nginx -y')
-            sudo('{0}/{1}/bin/pip install uwsgi'.format(self.python_env_dir, self.args.project))
+            sudo('pip3 install uwsgi')
+
+            # create uwsgi ini file
+            if not exists('{0}/{1}.ini'.format(self.project_dir, self.project)):
+                run('touch {0}/{1}.ini'.format(self.project_dir, self.project))
+
+            # uwsgi configuration
+            django_uwsgi_ini = self.django_uwsgi_ini.format(self.nginx_web_dir, self.project, self.python_env_dir)
+            sudo('echo "{0}">{1}/{2}.ini'.format(django_uwsgi_ini, self.project_dir, self.project))
+
+            # nginx configuration
+            sudo('echo "{0}">/etc/nginx/sites-enabled/default'.format(self.django_uwsgi_with_nginx))
+            sudo('service nginx restart')
+
             print(green(' * Done '))
             print()

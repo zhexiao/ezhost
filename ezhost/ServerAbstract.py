@@ -138,8 +138,7 @@ class ServerAbstract(metaclass=ABCMeta):
             web server to prefer PHP files, so we'll make Apache look for an 
             index.php file first.
         """
-        long_text = """
-<IfModule mod_dir.c>
+        long_text = """<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
         """
@@ -151,8 +150,7 @@ class ServerAbstract(metaclass=ABCMeta):
            In order to test that our system is configured properly for PHP, 
            we can create a very basic PHP script.
         """
-        long_text = """
-<?php
+        long_text = """<?php
 phpinfo();
 ?>
         """
@@ -163,8 +161,8 @@ phpinfo();
         """
            Nginx web config
         """
-        long_text = """
-server {
+        long_text = """server 
+{
     listen 80 default_server;
     listen [::]:80 default_server;
 
@@ -204,7 +202,52 @@ server {
         """
             Python virtualenv dir
         """
-        return '~/.py_env'
+        return '{0}/{1}/env'.format(self.nginx_web_dir, self.project)
+
+    @property
+    def django_uwsgi_ini(self):
+        """
+           This ini file is django uwsgi configuration
+        """
+        long_text = """[uwsgi]
+chdir = {0}/{1}
+home = {2}
+module = {1}.wsgi:application
+
+uid = vagrant
+gid = www-data
+
+master = true
+processes = 5
+
+socket = /tmp/{1}.sock
+chmod-socket = 664
+vacuum = true
+        """
+        return long_text
+
+    @property
+    def django_uwsgi_with_nginx(self):
+        """
+           This ini file nginx configuration with uwsgi application
+        """
+        long_text = """server {
+    listen 80;
+    server_name localhost;
+
+    location = /favicon.ico { 
+        access_log off; 
+        log_not_found off; 
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/tmp/%s.sock;
+    }
+}
+        """
+        long_text = long_text  % (self.project)
+        return long_text
 
     @abstractmethod
     def install(self):
