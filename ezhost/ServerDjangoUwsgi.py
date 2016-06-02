@@ -72,18 +72,35 @@ class ServerDjangoUwsgi(ServerAbstract):
             # install nginx and uwsgi
             sudo('apt-get install nginx -y')
             sudo('pip3 install uwsgi')
+            sudo("apt-get install supervisor -y")
 
             # create uwsgi ini file
             if not exists('{0}/{1}.ini'.format(self.project_dir, self.project)):
                 run('touch {0}/{1}.ini'.format(self.project_dir, self.project))
 
+            # create supervisor control configruation
+            if not exists('{0}/{1}_sysd.conf'.format(self.supervisor_config_dir, self.project) ):
+                sudo('touch {0}/{1}_sysd.conf'.format(self.supervisor_config_dir, self.project) )
+            # create supervisor log and error file
+            if not exists('/var/log/{0}_out.log'.format(self.project) ):
+                sudo('touch /var/log/{0}_out.log'.format(self.project) )
+            if not exists('/var/log/{0}_error.log'.format(self.project) ):
+                sudo('touch /var/log/{0}_error.log'.format(self.project) )
+
             # uwsgi configuration
             django_uwsgi_ini = self.django_uwsgi_ini.format(self.nginx_web_dir, self.project, self.python_env_dir)
             sudo('echo "{0}">{1}/{2}.ini'.format(django_uwsgi_ini, self.project_dir, self.project))
 
+            # supervisor control uwsgi config
+            supervisor_uwsgi_ini = self.supervisor_uwsgi_ini.format(self.project, self.project_dir)
+            sudo('echo "{0}">{1}/{2}_sysd.conf'.format(supervisor_uwsgi_ini, self.supervisor_config_dir, self.project) )
+
             # nginx configuration
             sudo('echo "{0}">/etc/nginx/sites-enabled/default'.format(self.django_uwsgi_with_nginx))
+
+            # restart server and supervisor
             sudo('service nginx restart')
+            sudo("sudo supervisorctl reread && sudo supervisorctl update")
 
             print(green(' * Done '))
             print()

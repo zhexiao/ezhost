@@ -249,6 +249,62 @@ vacuum = true
         long_text = long_text  % (self.project)
         return long_text
 
+    @property
+    def supervisor_uwsgi_ini(self):
+        """
+           supervisor control uwsgi configuration 
+        """
+        long_text = """[program:{0}]
+; Set full path to program if using virtualenv
+command=uwsgi --ini {1}/{0}.ini
+
+; The directory to your Django project
+directory={1}
+
+; Supervisor will start as many instances of this program as named by numprocs
+numprocs=1
+
+; Put process stdout output in this file
+stdout_logfile=/var/log/{0}_out.log
+
+; Put process stderr output in this file
+stderr_logfile=/var/log/{0}_error.log
+
+; If true, this program will start automatically when supervisord is started
+autostart=true
+
+; May be one of false, unexpected, or true. If false, the process will never
+; be autorestarted. If unexpected, the process will be restart when the program
+; exits with an exit code that is not one of the exit codes associated with this
+; process’ configuration (see exitcodes). If true, the process will be
+; unconditionally restarted when it exits, without regard to its exit code.
+autorestart=true
+
+; The total number of seconds which the program needs to stay running after
+; a startup to consider the start successful.
+startsecs=2
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs=2
+
+; When resorting to send SIGKILL to the program to terminate it
+; send SIGKILL to its whole process group instead,
+; taking care of its children as well.
+killasgroup=true
+
+; if your broker is supervised, set its priority higher, so it starts first
+priority=998   
+        """
+        return long_text
+
+    @property
+    def supervisor_config_dir(self):
+        """
+            supervisor control config dir
+        """
+        return '/etc/supervisor/conf.d'
+
     @abstractmethod
     def install(self):
         """
