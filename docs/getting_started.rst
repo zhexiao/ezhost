@@ -53,10 +53,12 @@ You can install ezhost directly from PyPI using:
 
 .. code-block:: bash
    
-   # after you activate your environment through above tutorial, you can easy to use pip to install ezhost
+   # after you activate your environment through above tutorial, 
+   # you can easy to use pip to install ezhost
    $ pip install ezhost
 
-   # if you want to use ezhost globally neither in virtual environment, do it as follows
+   # if you want to use ezhost globally neither in virtual environment, 
+   # do it as follows
    $ sudo pip3 install ezhost
 
 
