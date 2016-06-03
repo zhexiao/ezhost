@@ -14,26 +14,26 @@ You have to install python3 and pip3 before you install ezhost:
    # update system package
    $ sudo apt-get update 
    
-   # install python3, pip3 and python3 venv
-   $ sudo apt-get install python3
-   $ sudo apt-get install python3-pip
-   $ sudo apt-get install python3.4-venv
+   # install python3, pip3 and environment creator
+   $ sudo apt-get install python3 python3-pip
+   $ sudo pip3 install virtualenv
 
 
 Virtualenv
 ---------------
 
-We recommend using virtual environment for your packages. For python3.4, we can using pyvenv to generate virtualenv:
+We recommend using virtual environment for your packages. We can using virtualenv to generate virtual environment:
 
-Using pyvenv to create your virtualenv
+Using virtualenv to create your environment
 ~~~~~~
 
 .. code-block:: bash
    
-   # generate your virtualenv
-   $ python3 -m venv env 
-   Or 
-   $ pyvenv-3.4 env
+   # generate your env(for python3)
+   $ virtualenv -p python3 env 
+
+   # if you want to using python2
+   $ virtualenv env 
    
 After you generate your virtualenv, you can using the following command to active your env:
 
