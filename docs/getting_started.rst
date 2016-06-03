@@ -32,7 +32,7 @@ Using virtualenv to create your environment
    # generate your env(for python3)
    $ virtualenv -p python3 env 
 
-   # if you want to using python2
+   # if you want to use python2
    $ virtualenv env 
    
 After you generate your virtualenv, you can using the following command to active your env:
