@@ -1,7 +1,7 @@
 Getting Started
 ===============
 
-This document will show you how to get up and running with ezhost.
+This document will show you how to get up and run with ezhost.
 
 
 Requirement
@@ -22,7 +22,7 @@ You have to install python3 and pip3 before you install ezhost:
 Virtualenv
 ---------------
 
-We recommend using virtual environment for your packages. We can using virtualenv to generate virtual environment:
+We recommend use virtual environment for your packages. We can use virtualenv to generate virtual environment:
 
 Using virtualenv to create your environment
 ~~~~~~
@@ -30,12 +30,12 @@ Using virtualenv to create your environment
 .. code-block:: bash
    
    # generate your env(for python3)
-   $ virtualenv -p python3 env 
+   $ virtualenv -p python3 env --always-copy
 
    # if you want to use python2
    $ virtualenv env 
    
-After you generate your virtualenv, you can using the following command to active your env:
+After you generate your virtualenv, you can use the following commands to active your env:
 
 .. code-block:: bash
    
@@ -56,7 +56,7 @@ You can install ezhost directly from PyPI. After you activate your environment t
    $ pip install ezhost
 
 
-If you want to use ezhost globally neither in virtual environment, do it as follows:
+If you want to use ezhost globally rather than in virtual environment, do it as follows:
 
 .. code-block:: bash
 
@@ -66,7 +66,7 @@ If you want to use ezhost globally neither in virtual environment, do it as foll
 Basic Usage
 ---------------
 
-After you installed ezhost from pip, you can easy to running the following command to generate a new server:
+After you install ezhost from pip, you can easy to run the following command to generate a new server:
 
 Using login user and password
 ~~~~~~
