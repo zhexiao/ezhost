@@ -15,6 +15,6 @@ Install
 Server Configure
 ~~~~~~
 
-- default mysql password: ``password ``
+- default mysql password: ``password``
 - default web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
