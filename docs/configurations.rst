@@ -19,6 +19,12 @@ Server Configure
 - default web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
 
+Server Restart
+~~~~~~
+.. code-block:: bash
+   
+   $ sudo service apache2 restart
+
 LNMP Server(Linux + Nginx + Mysql + PHP)
 ---------------
 
@@ -36,4 +42,11 @@ Server Configure
 - default web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
 
-.. note:: For the php interpret, we are using php-fpm rathan then php-cgi, so when you want to restart the server, you should do ``service php5-fpm restart`` and ``service nginx restart``. 
+Server Restart
+~~~~~~
+.. code-block:: bash
+   
+   $ sudo service php5-fpm restart
+   $ sudo service nginx restart
+
+.. note:: For the php interpret, we are using php-fpm rathan then php-cgi.
