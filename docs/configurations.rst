@@ -10,7 +10,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lamp -H ``your_host_ip`` -U ``login_user`` -P ``login_password``
+   $ ezhost -s lamp -H your_host_ip -U login_user -P login_password
 
 Server Configure
 ~~~~~~
@@ -35,7 +35,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lnmp -H ``your_host_ip`` -U ``login_user`` -P ``login_password``
+   $ ezhost -s lnmp -H your_host_ip -U login_user -P login_password
 
 Server Configure
 ~~~~~~
@@ -52,4 +52,57 @@ Server Restart
    $ sudo service php5-fpm restart
    $ sudo service nginx restart
 
-.. note:: For the php interpret, we are using php-fpm rathan then php-cgi.
+.. note:: For the php interpret in LNMP Server, we are using ``php-fpm`` rathan then ``php-cgi``.
+
+
+
+Django Web Server(Django + Uwsgi + Nginx + Supervisor)
+---------------
+
+Install
+~~~~~~
+.. code-block:: bash
+   
+   $ ezhost -s django-uwsgi -p project_name -H your_host_ip -U login_user -P login_password
+
+Server Configure
+~~~~~~
+From above install command, if you indicate ``-p project_name``. We will create a ``project_name`` folder for your django web application, otherwise the project_name will use the default name ``demo``.
+
+- nginx config path: ``/etc/nginx/sites-enabled/default``
+- web root: ``/var/www/html``
+- project root: ``/var/www/html/project_name``
+- virtualenv path: ``/var/www/html/project_name/env``
+- uwsgi config path: ``/var/www/html/project_name/project_name.ini``
+- supervisor config path: ``/etc/supervisor/conf.d/project_name_sysd.conf``
+- django normal output file: ``/var/log/project_name_out.log``
+- django error output file: ``/var/log/project_name_error.log``
+
+.. note:: All the ``project_name`` in the above docs will convert to your ``-p`` value. For example, if you indicate ``-p zhex``. Then the project root will be ``/var/www/html/zhex``, the supervisor config path will be ``/etc/supervisor/conf.d/zhex_sysd.conf``
+
+
+Virtualenv
+~~~~~~
+For django project, we will auto use virtualenv to create a virtual environment for store all these installed packages. You can find your virtualenv path from ``Server Configure``.
+
+The following command is a basic usage for your virtualenv.
+
+.. code-block:: bash
+    
+   # go to your project dir
+   $ cd /var/www/html/project_name
+
+   # active your env
+   $ source env/bin/activate
+   
+   # if you want to deactive your env
+   $ deactivate
+
+Server Restart
+~~~~~~
+.. code-block:: bash
+   
+   $ service nginx restart
+   $ sudo supervisorctl reread && sudo supervisorctl update
+
+.. note:: we are use supervisor to control the uwsgi service auto restart. More details about supervisor: http://supervisord.org/index.html
