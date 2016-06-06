@@ -55,8 +55,22 @@ class ServerLnmp(ServerAbstract):
             sudo('apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C')
             sudo('apt-get update -y')
             sudo('apt-get install nginx -y')
-            print(green(' * successfully installed Nginx'))
-            print()
+
+            # do nginx config config
+            sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_config))
+
+        # want to using https?
+        if prompt(red(' * Change url from http to https (y/n)?'), default='y') == 'y':
+            if not exists(self.nginx_ssl_dir):
+                sudo('mkdir -p {0}'.format(self.nginx_ssl_dir) )
+            # generate ssh key
+            sudo('openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout {0}/cert.key -out {0}/cert.pem'.format(self.nginx_ssl_dir) )
+            # do nginx config config
+            sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_ssl_config) )
+
+        sudo('service nginx restart')
+        print(green(' * successfully installed Nginx') )
+        print()
 
 
     def install_php(self):
@@ -65,13 +79,10 @@ class ServerLnmp(ServerAbstract):
             sudo('apt-get install php5-fpm -y')
             sed('/etc/php5/fpm/php.ini', ';cgi.fix_pathinfo=1', 'cgi.fix_pathinfo=0', use_sudo=True)
 
-            # do nginx config config
-            sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_config))
             # write phpinfo for test 
             sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.nginx_web_dir))
 
             sudo('service php5-fpm restart')
-            sudo('service nginx restart')
             print(green(' * successfully installed php5'))
             print()
 

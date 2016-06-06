@@ -162,39 +162,71 @@ phpinfo();
            Nginx web config
         """
         long_text = """server 
-{
+{{
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root %s;
+    root {0};
     autoindex on;
+
     # Add index.php to the list if you are using PHP
     index index.php index.html index.htm index.nginx-debian.html;
 
     server_name localhost;
 
-    #location / {
-    #    try_files $uri $uri/ =404;
-    #}
+    # Don't log robots.txt or favicon.ico files
+    location = /favicon.ico {{ log_not_found off; access_log off; }}
+    location = /robots.txt  {{ access_log off; log_not_found off; }}
 
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    location ~ \.php$ {
+    location ~ \.php$ {{
        include snippets/fastcgi-php.conf;   
-       # With php5-cgi alone:
-       # fastcgi_pass 127.0.0.1:9000;
        # With php5-fpm:
        fastcgi_pass unix:/var/run/php5-fpm.sock;
-    }
-
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #location ~ /\.ht {
-    #    deny all;
-    #}
-}
+    }}
+}}
         """
 
-        long_text = long_text % (self.nginx_web_dir)
+        long_text = long_text.format(self.nginx_web_dir)
+        return long_text
+
+    @property
+    def nginx_web_ssl_config(self):
+        """
+           Nginx web ssl config
+        """
+        long_text = """server 
+{{
+    listen 443 default_server;
+    listen [::]:443 default_server;
+
+    root {dt[0]};
+    autoindex on;
+    
+    # Add index.php to the list if you are using PHP
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    server_name localhost;
+
+    # Don't log robots.txt or favicon.ico files
+    location = /favicon.ico {{ log_not_found off; access_log off; }}
+    location = /robots.txt  {{ access_log off; log_not_found off; }}
+
+    ssl on;
+    ssl_certificate {dt[1]}/cert.pem;
+    ssl_certificate_key {dt[1]}/cert.key;
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    location ~ \.php$ {{
+       include snippets/fastcgi-php.conf;   
+       # With php5-fpm:
+       fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }}
+}}
+        """
+
+        config = [self.nginx_web_dir, self.nginx_ssl_dir]
+        long_text = long_text.format(dt=config)
         return long_text
 
     @property
@@ -231,22 +263,22 @@ vacuum = true
         """
            This ini file nginx configuration with uwsgi application
         """
-        long_text = """server {
+        long_text = """server {{
     listen 80;
     server_name localhost;
 
-    location = /favicon.ico { 
+    location = /favicon.ico {{ 
         access_log off; 
         log_not_found off; 
-    }
+    }}
 
-    location / {
+    location / {{
         include uwsgi_params;
-        uwsgi_pass unix:/tmp/%s.sock;
-    }
-}
+        uwsgi_pass unix:/tmp/{0}.sock;
+    }}
+}}
         """
-        long_text = long_text  % (self.project)
+        long_text = long_text.format(self.project)
         return long_text
 
     @property
@@ -255,45 +287,16 @@ vacuum = true
            supervisor control uwsgi configuration 
         """
         long_text = """[program:{0}]
-; Set full path to program if using virtualenv
 command=uwsgi --ini {1}/{0}.ini
-
-; The directory to your Django project
 directory={1}
-
-; Supervisor will start as many instances of this program as named by numprocs
 numprocs=1
-
-; Put process stdout output in this file
 stdout_logfile=/var/log/{0}_out.log
-
-; Put process stderr output in this file
 stderr_logfile=/var/log/{0}_error.log
-
-; If true, this program will start automatically when supervisord is started
 autostart=true
-
-; May be one of false, unexpected, or true. If false, the process will never
-; be autorestarted. If unexpected, the process will be restart when the program
-; exits with an exit code that is not one of the exit codes associated with this
-; process’ configuration (see exitcodes). If true, the process will be
-; unconditionally restarted when it exits, without regard to its exit code.
 autorestart=true
-
-; The total number of seconds which the program needs to stay running after
-; a startup to consider the start successful.
 startsecs=2
-
-; Need to wait for currently executing tasks to finish at shutdown.
-; Increase this if you have very long running tasks.
 stopwaitsecs=2
-
-; When resorting to send SIGKILL to the program to terminate it
-; send SIGKILL to its whole process group instead,
-; taking care of its children as well.
 killasgroup=true
-
-; if your broker is supervised, set its priority higher, so it starts first
 priority=998   
         """
         return long_text
@@ -304,6 +307,14 @@ priority=998
             supervisor control config dir
         """
         return '/etc/supervisor/conf.d'
+
+
+    @property
+    def nginx_ssl_dir(self):
+        """
+            ssl directory
+        """
+        return '/etc/nginx/ssl'
 
     @abstractmethod
     def install(self):
