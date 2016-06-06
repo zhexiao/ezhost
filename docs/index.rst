@@ -5,8 +5,6 @@ ezhost is a tool to make it easy to install server.
 
 
 * :ref:`user-docs`		
-* :ref:`feature-docs`
- 
  
 .. _user-docs:
 
@@ -18,15 +16,6 @@ ezhost is a tool to make it easy to install server.
    configurations
 
    
-.. _feature-docs:
-
-.. toctree::
-   :caption: Recommend Use with vagrant
-   :maxdepth: 3
-
-   Features/index
-
-
 Indices and tables		
 ==================		
 
