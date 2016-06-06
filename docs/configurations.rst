@@ -10,7 +10,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
+   $ ezhost -s lamp -H ``your_host_ip`` -U ``login_user`` -P ``login_password``
 
 Server Configure
 ~~~~~~
@@ -35,7 +35,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lnmp -H 127.0.0.1:2201 -U vagrant -P vagrant
+   $ ezhost -s lnmp -H ``your_host_ip`` -U ``login_user`` -P ``login_password``
 
 Server Configure
 ~~~~~~
