@@ -78,7 +78,7 @@ From above install command, if you indicate ``-p project_name``. We will create 
 - django normal output file: ``/var/log/project_name_out.log``
 - django error output file: ``/var/log/project_name_error.log``
 
-.. note:: All the ``project_name`` in the above docs will convert to your ``-p`` value. For example, if you indicate ``-p zhex``. Then the project root will be ``/var/www/html/zhex``, the supervisor config path will be ``/etc/supervisor/conf.d/zhex_sysd.conf``
+.. note:: All the ``project_name`` in the above docs will convert to your ``-p`` value. For example, if you indicate ``-p zhex``. Then the project root will be ``/var/www/html/zhex``, the supervisor config path will be ``/etc/supervisor/conf.d/zhex_sysd.conf`` and so on...
 
 
 Virtualenv
