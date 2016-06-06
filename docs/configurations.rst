@@ -21,9 +21,12 @@ Server Configure
 
 Server Restart
 ~~~~~~
+
 .. code-block:: bash
    
    $ sudo service apache2 restart
+
+
 
 LNMP Server(Linux + Nginx + Mysql + PHP)
 ---------------
