@@ -1,4 +1,4 @@
-Configurations
+Server Lists
 ===============
 
 This document will show you all the exist configuration of ezhost.
