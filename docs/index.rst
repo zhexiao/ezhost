@@ -13,7 +13,7 @@ ezhost is a tool to make it easy to install server.
    :caption: User Documentation
 
    getting_started
-   configurations
+   server_lists
 
    
 Indices and tables		
