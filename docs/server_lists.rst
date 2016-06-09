@@ -77,6 +77,14 @@ Restart
 Django Web Server(Django + Uwsgi + Nginx + Supervisor)
 ----------------------------------------------------------
 
+Introduction
+~~~~~~~~~~~~~~~~
+
+Django is a powerful web framework that can help you get your Python application or website off the ground. Django includes a simplified development server for testing your code locally, but for anything even slightly production related, a more secure and powerful web server is required.
+
+In this guide, We will configure the uWSGI application container server to interface with our applications. We will then set up Nginx to reverse proxy to uWSGI, giving us access to its security and performance features to serve our apps. After that, we will install linux supervisor to control uWSGI service auto start.
+
+
 Install
 ~~~~~~~~~
 
@@ -84,10 +92,11 @@ Install
    
    $ ezhost -s django-uwsgi -p project_name -H your_server_address -U your_server_login_user -P your_server_login_password
 
+.. note:: if you give us the parameter ``-p project_name``. Then we will create a ``project_name folder`` for your django web application. Otherwise the project_name will use the default value ``demo``.
+
+
 Configuration
 ~~~~~~~~~~~~~~~
-
-From above install command, if you indicate ``-p project_name``. We will create a ``project_name`` folder for your django web application, otherwise the project_name will use the default name ``demo``.
 
 - nginx config path: ``/etc/nginx/sites-enabled/default``
 - web root: ``/var/www/html``
@@ -104,7 +113,7 @@ From above install command, if you indicate ``-p project_name``. We will create 
 Virtualenv
 ~~~~~~~~~~~
 
-For django project, we will auto use virtualenv to create a virtual environment for store all these installed packages. You can find your virtualenv path from ``Server Configure``.
+For django project, we will auto use virtualenv to create a virtual environment to save all these installed packages. You can find your virtualenv folder at ``/var/www/html/project_name/env``.
 
 The following command is a basic usage for your virtualenv.
 
