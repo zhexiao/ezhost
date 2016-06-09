@@ -7,8 +7,10 @@ parsing options and commands
 The other callables defined in this module are internal only. Anything useful
 to individuals leveraging Fabric as a library, should be kept elsewhere.
 """
-import argparse, configparser
+import argparse
+import configparser
 from ezhost.ServerBase import ServerBase
+
 
 def main():
     """
@@ -19,45 +21,59 @@ def main():
     try:
         parser = argparse.ArgumentParser(description='Easy to install server.')
         parser.add_argument(
-            '-s', 
-            '--server', 
-            help='what kind of server you want to install',  
+            '-s', '--server',
+            help='what kind of server you want to install',
+        )
+
+        # force to install packages without ask question
+        parser.add_argument(
+            '-f', '--force', 
+            dest='force', 
+            action='store_true',
+            help='force to install packages without ask question',
         )
         parser.add_argument(
-            '-c', 
-            '--config', 
-            help='config file path of your host informations', 
+            '-nf', '--not-force', 
+            dest='force',
+            action='store_false',
+            help='install packages with ask question',
         )
+        parser.set_defaults(force=False)
+
         parser.add_argument(
-            '-p', 
-            '--project', 
-            help='indicate your project name(some servers need this parameter for initial, default=demo)', 
+            '-c', '--config',
+            help='config file path of your host informations',
+        )
+
+        parser.add_argument(
+            '-p', '--project',
+            help='indicate your project name(some servers need this parameter for initial, default=demo)',
             default='demo'
         )
+
         parser.add_argument(
-            '-gp', 
-            '--git-pull', 
-            help='give me your github project directory, we will auto git pull your server code', 
+            '-gp', '--git-pull',
+            help='give me your github project directory, we will auto git pull your server code',
         )
+
         parser.add_argument(
-            '-H', 
-            '--host', 
-            help='host server address', 
+            '-H', '--host',
+            help='host server address',
         )
+
         parser.add_argument(
-            '-U', 
-            '--user', 
-            help='host server login user', 
+            '-U', '--user',
+            help='host server login user',
         )
+
         parser.add_argument(
-            '-P', 
-            '--passwd', 
-            help='host server login password', 
+            '-P', '--passwd',
+            help='host server login password',
         )
+
         parser.add_argument(
-            '-K', 
-            '--keyfile', 
-            help='host server key file path', 
+            '-K', '--keyfile',
+            help='host server key file path',
         )
 
         args = parser.parse_args()
@@ -67,7 +83,8 @@ def main():
     # if config file and host both not provide, throw a error
     try:
         if args.config is None and args.host is None:
-            raise ValueError('You have to setup your host information through -c(--config) or -H(--host)')
+            raise ValueError(
+                'You have to setup your host information through -c(--config) or -H(--host)')
     except Exception as e:
         print(e)
         return
@@ -75,8 +92,9 @@ def main():
     # check user and passwd
     try:
         if args.host is not None:
-            if (args.user and (args.passwd or args.keyfile) ) is None:
-                raise ValueError('Lack of required host information. Please check whether you have set login user, login password or keyfile.')
+            if (args.user and (args.passwd or args.keyfile)) is None:
+                raise ValueError(
+                    'Lack of required host information. Please check whether you have set login user, login password or keyfile.')
     except Exception as e:
         print(e)
         return
@@ -92,11 +110,11 @@ def main():
             if 'ezhost' in configure:
                 configure_obj = configure['ezhost']
             else:
-                raise KeyError('Can not found ezhost configuration informations.')
+                raise KeyError(
+                    'Can not found ezhost configuration informations.')
     except Exception as e:
         print(e)
         return
 
     # init server
     ServerBase(args, configure_obj)
-

@@ -40,14 +40,14 @@ class ServerDjangoUwsgi(ServerAbstract):
         self.install_supervisor()
 
     def update_sys(self):
-        if prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
 
             print(green(' * successfully updated your system package'))
             print()
 
     def install_libraries(self):
-        if prompt(red(' * Install libraries (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install libraries (y/n)?'), default='y') == 'y':
             sudo('apt-get install python3 python3-pip python-pip -y')
             sudo('pip install virtualenv')
 
@@ -55,7 +55,7 @@ class ServerDjangoUwsgi(ServerAbstract):
             print()
 
     def install_project(self):
-        if prompt(red(' * Install Django project (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install Django project (y/n)?'), default='y') == 'y':
             # create project
             if not exists( self.project_dir ):
                 sudo('mkdir -p {0}'.format(self.project_dir) )
@@ -70,7 +70,7 @@ class ServerDjangoUwsgi(ServerAbstract):
             print()
 
     def install_nginx(self):
-        if prompt(red(' * Install Nginx server (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install Nginx server (y/n)?'), default='y') == 'y':
             sudo('apt-get install nginx -y')
 
             # nginx configuration
@@ -83,7 +83,7 @@ class ServerDjangoUwsgi(ServerAbstract):
             print()
 
     def install_uwsgi(self):
-        if prompt(red(' * Install Uwsgi service (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install Uwsgi service (y/n)?'), default='y') == 'y':
             sudo('pip3 install uwsgi')
             
             # create uwsgi ini file
@@ -98,7 +98,7 @@ class ServerDjangoUwsgi(ServerAbstract):
             print()
 
     def install_supervisor(self):
-        if prompt(red(' * Install Supervisor for control Uwsgi service (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install Supervisor for control Uwsgi service (y/n)?'), default='y') == 'y':
             sudo('apt-get install supervisor -y')
 
             # create supervisor control configruation

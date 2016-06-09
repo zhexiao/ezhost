@@ -36,19 +36,19 @@ class ServerLamp(ServerAbstract):
         self.install_php()
 
     def update_sys(self):
-        if prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
             print(green(' * successfully updated your system package'))
             print()
 
     def install_apache(self):
-        if prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
             sudo('apt-get install apache2 -y')
             print(green(' * successfully installed apache2'))
             print()
 
     def install_mysql(self):
-        if prompt(red(' * Install mysql (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install mysql (y/n)?'), default='y') == 'y':
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
             sudo('apt-get install mysql-server php5-mysql -y')
@@ -56,7 +56,7 @@ class ServerLamp(ServerAbstract):
             print()
 
     def install_php(self):
-        if prompt(red(' * Install php5 (y/n)?'), default='y') == 'y':
+        if self.args.force or prompt(red(' * Install php5 (y/n)?'), default='y') == 'y':
             sudo('apt-get install php5 php5-cli libapache2-mod-php5 php5-mcrypt -y')
             # do apache config
             sudo('echo "{0}">/etc/apache2/mods-enabled/dir.conf'.format(self.apache_dir_index))
