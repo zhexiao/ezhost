@@ -14,87 +14,53 @@ You have to install python3 and pip3 before you install ezhost:
    # update system package
    $ sudo apt-get update 
    
-   # install python3, pip3 and environment creator
+   # install python3 and pip3 
    $ sudo apt-get install python3 python3-pip
-   $ sudo pip3 install virtualenv
 
-
-Virtualenv
----------------
-
-We recommend use virtual environment for your packages. We can use virtualenv to generate virtual environment:
-
-Using virtualenv to create your environment
-~~~~~~
-
-.. code-block:: bash
-   
-   # generate your env(for python3)
-   $ virtualenv -p python3 env --always-copy
-
-   # if you want to use python2
-   $ virtualenv env 
-   
-After you generate your virtualenv, you can use the following commands to active your env:
-
-.. code-block:: bash
-   
-   # active your env
-   $ source env/bin/activate
-   
-   # deactive your env
-   $ deactivate
-   
 
 Install
 ---------------
 
-You can install ezhost directly from PyPI. After you activate your environment through above tutorial. You can easy to use pip to install ezhost.
+After you install pip3, you can install ezhost directly from PyPI. 
 
 .. code-block:: bash
   
-   $ pip install ezhost
-
-
-If you want to use ezhost globally rather than in virtual environment, do it as follows:
-
-.. code-block:: bash
-
    $ sudo pip3 install ezhost
 
 
-Basic Usage
+Basic Examples
 ---------------
 
-After you install ezhost from pip, you can easy to run the following command to generate a new server:
+If you have the login user and password for your remote host server, you can easy to install a ``lamp(Linux + Apache + Mysql + PHP)`` server inside it.
 
-Using login user and password
+Using login user and password to create server
 ~~~~~~
 
 .. code-block:: bash
    
-   $ ezhost -s lamp -H 127.0.0.1:2201 -U vagrant -P vagrant
+   $ ezhost -s lamp -H your_server_address -U your_server_login_user -P your_server_login_password
    
-The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``Vagrant``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-P`` indicate your host passowrd for login.
 
-Using login user and keyfile
+If you have the keyfile to login your remote host server, you can easy to install a ``lamp`` server by using the following command.
+
+Using login user and keyfile to create server
 ~~~~~~
 
 .. code-block:: bash
    
-   $ ezhost -s lamp -H ec2-11-111-11-111.compute-1.amazonaws.com -U ubuntu -K ~/.ssh/keyfile.pem
+   $ ezhost -s lamp -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem
    
-The above code will generate a ``LAMP`` server(Linux, Apache, Mysql and PHP5) in ``AWS EC2``. ``-H`` indicate your host address. ``-U`` indicate your host login user. ``-K`` indicate your host keyfile.
+.. note:: The ``~/.ssh/keyfile.pem`` keyfile is just a example, each server may have a different name for his keyfile.
 
-.. note:: The installed lamp server is a very basic server. Run ``sudo apt-cache search php5-`` find what kind of php module you need. Then run ``sudo apt-get install package1 package2 ...`` to install it.
-
-Update your github code on the remote server
+Doing git pull on the remote server
 ~~~~~~
+
+If you do not want to login to your remote server to do git pull on your project. You can easy to run the following command to do ``git pull``.
 
 .. code-block:: bash
    
-   $ ezhost --git-pull /var/www/html/project -H 127.0.0.1:2200 -U vagrant -P vagrant
+   $ ezhost --git-pull /var/www/html/project -H your_server_address -U your_server_login_user -P your_server_login_password
    
-The above code will go to ``/var/www/html/project`` folder and running ``git pull`` to make your github code up to date.
+The above code will go to ``/var/www/html/project`` folder and running ``git pull`` to make your github project code up to date.
 
-.. note:: Before you running this command, please make sure you already installed ``git``.
+.. note:: If you are use server keyfile rather than password to login your remote server, you just need to change ``-P`` to ``-K``.
