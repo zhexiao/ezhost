@@ -4,23 +4,31 @@ Server Lists
 In here, i will show you all exist server command.
 
 LAMP Server(Linux + Apache + Mysql + PHP)
----------------
+-----------------------------------------------
+
+Introduction
+~~~~~~~~~~~~~
+A "LAMP" stack is a group of open source software that is typically installed together to enable a server to host dynamic websites and web apps. This term is actually an acronym which represents the Linux operating system, with the Apache web server. The site data is stored in a MySQL database, and dynamic content is processed by PHP.
+
 
 Install
-~~~~~~
+~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: bash
    
    $ ezhost -s lamp -H your_server_address -U your_server_login_user -P your_server_login_password
 
-Server Configure
-~~~~~~
+
+Configuration
+~~~~~~~~~~~~~~~~~~~
 
 - default mysql password: ``password``
 - default web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
 
-Server Restart
-~~~~~~
+
+Restart
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
    
@@ -29,24 +37,26 @@ Server Restart
 
 
 LNMP Server(Linux + Nginx + Mysql + PHP)
----------------
+-------------------------------------------
 
 Install
-~~~~~~
+~~~~~~~~~~~~~~~~~~~
+
 .. code-block:: bash
    
    $ ezhost -s lnmp -H your_server_address -U your_server_login_user -P your_server_login_password
 
-Server Configure
-~~~~~~
+Configuration
+~~~~~~~~~~~~~~~~~~~
 
 - default host config path: ``/etc/nginx/sites-available/default``
 - default mysql password: ``password``
 - default web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
 
-Server Restart
-~~~~~~
+Restart
+~~~~~~~~~~~~~~~~
+
 .. code-block:: bash
    
    $ sudo service php5-fpm restart
@@ -57,16 +67,18 @@ Server Restart
 
 
 Django Web Server(Django + Uwsgi + Nginx + Supervisor)
----------------
+----------------------------------------------------------
 
 Install
-~~~~~~
+~~~~~~~~~
+
 .. code-block:: bash
    
    $ ezhost -s django-uwsgi -p project_name -H your_server_address -U your_server_login_user -P your_server_login_password
 
-Server Configure
-~~~~~~
+Configuration
+~~~~~~~~~~~~~~~
+
 From above install command, if you indicate ``-p project_name``. We will create a ``project_name`` folder for your django web application, otherwise the project_name will use the default name ``demo``.
 
 - nginx config path: ``/etc/nginx/sites-enabled/default``
@@ -82,7 +94,8 @@ From above install command, if you indicate ``-p project_name``. We will create 
 
 
 Virtualenv
-~~~~~~
+~~~~~~~~~~~
+
 For django project, we will auto use virtualenv to create a virtual environment for store all these installed packages. You can find your virtualenv path from ``Server Configure``.
 
 The following command is a basic usage for your virtualenv.
@@ -98,8 +111,9 @@ The following command is a basic usage for your virtualenv.
    # if you want to deactive your env
    $ deactivate
 
-Server Restart
-~~~~~~
+Restart
+~~~~~~~~~
+
 .. code-block:: bash
    
    $ service nginx restart
