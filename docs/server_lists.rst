@@ -22,8 +22,8 @@ Install
 Configuration
 ~~~~~~~~~~~~~~~~~~~
 
-- default mysql password: ``password``
-- default web root: ``/var/www/html``
+- mysql password: ``password``
+- web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
 
 
@@ -39,6 +39,12 @@ Restart
 LNMP Server(Linux + Nginx + Mysql + PHP)
 -------------------------------------------
 
+Introduction
+~~~~~~~~~~~~~~~~~
+
+The LNMP software stack is a group of software that can be used to serve dynamic web pages and web applications. This is an acronym that describes a Linux operating system, with an Nginx web server. The backend data is stored in MySQL and the dynamic processing is handled by PHP.
+
+
 Install
 ~~~~~~~~~~~~~~~~~~~
 
@@ -46,13 +52,15 @@ Install
    
    $ ezhost -s lnmp -H your_server_address -U your_server_login_user -P your_server_login_password
 
+
 Configuration
 ~~~~~~~~~~~~~~~~~~~
 
-- default host config path: ``/etc/nginx/sites-available/default``
-- default mysql password: ``password``
-- default web root: ``/var/www/html``
+- web config path: ``/etc/nginx/sites-available/default``
+- mysql password: ``password``
+- web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
+
 
 Restart
 ~~~~~~~~~~~~~~~~
@@ -62,7 +70,7 @@ Restart
    $ sudo service php5-fpm restart
    $ sudo service nginx restart
 
-.. note:: For the php interpret in LNMP Server, we are using ``php-fpm`` rathan then ``php-cgi``.
+.. note:: For the php interpret in LNMP Server, we are use ``php-fpm`` rathan then ``php-cgi``.
 
 
 
