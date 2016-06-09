@@ -1,7 +1,7 @@
 Server Lists
 ===============
 
-This document will show you all the exist configuration of ezhost.
+In here, i will show you all exist server command.
 
 LAMP Server(Linux + Apache + Mysql + PHP)
 ---------------
@@ -10,7 +10,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lamp -H your_host_ip -U login_user -P login_password
+   $ ezhost -s lamp -H your_server_address -U your_server_login_user -P your_server_login_password
 
 Server Configure
 ~~~~~~
@@ -35,7 +35,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s lnmp -H your_host_ip -U login_user -P login_password
+   $ ezhost -s lnmp -H your_server_address -U your_server_login_user -P your_server_login_password
 
 Server Configure
 ~~~~~~
@@ -63,7 +63,7 @@ Install
 ~~~~~~
 .. code-block:: bash
    
-   $ ezhost -s django-uwsgi -p project_name -H your_host_ip -U login_user -P login_password
+   $ ezhost -s django-uwsgi -p project_name -H your_server_address -U your_server_login_user -P your_server_login_password
 
 Server Configure
 ~~~~~~
