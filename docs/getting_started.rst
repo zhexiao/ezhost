@@ -31,20 +31,20 @@ After you install pip3, you can install ezhost directly from PyPI.
 Basic Examples
 ---------------
 
-If you have the login user and password for your remote host server, you can easy to install a ``lamp(Linux + Apache + Mysql + PHP)`` server inside it.
-
 Using login user and password to create server
 ~~~~~~
+
+If you have the login user and password for your remote host server, you can easy to install a ``lamp(Linux + Apache + Mysql + PHP)`` server inside it.
 
 .. code-block:: bash
    
    $ ezhost -s lamp -H your_server_address -U your_server_login_user -P your_server_login_password
    
 
-If you have the keyfile to login your remote host server, you can easy to install a ``lamp`` server by using the following command.
-
 Using login user and keyfile to create server
 ~~~~~~
+
+If you have the keyfile to login your remote host server, you can easy to install a ``lamp`` server by using the following command.
 
 .. code-block:: bash
    
