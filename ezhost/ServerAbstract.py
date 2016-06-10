@@ -316,6 +316,45 @@ priority=998
         """
         return '/etc/nginx/ssl'
 
+
+    @property
+    def nginx_web_wordpress_config(self):
+        """
+           Nginx web wordpress config
+        """
+        long_text = """server 
+{{
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root {0}/{1};
+    autoindex on;
+
+    # Add index.php to the list if you are using PHP
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    server_name localhost;
+    location / {{
+        try_files $uri $uri/ /index.php?q=$uri&$args;
+    }}
+
+    # Don't log robots.txt or favicon.ico files
+    location = /favicon.ico {{ log_not_found off; access_log off; }}
+    location = /robots.txt  {{ access_log off; log_not_found off; }}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    location ~ \.php$ {{
+       include snippets/fastcgi-php.conf;   
+       # With php5-fpm:
+       fastcgi_pass unix:/var/run/php5-fpm.sock;
+       fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    }}
+}}
+        """
+
+        long_text = long_text.format(self.nginx_web_dir, self.project)
+        return long_text
+
     @abstractmethod
     def install(self):
         """

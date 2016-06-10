@@ -14,6 +14,8 @@ Contact: zhexiao27@gmail.com
 Github: https://github.com/zhexiao/ezhost.git
 """
 
+from io import StringIO
+
 from ezhost.ServerAbstract import ServerAbstract
 
 # fabric libs
@@ -38,13 +40,15 @@ class ServerLamp(ServerAbstract):
     def update_sys(self):
         if self.args.force or prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
-            print(green(' * successfully updated your system package'))
+
+            print(green(' * Done'))
             print()
 
     def install_apache(self):
         if self.args.force or prompt(red(' * Install apache2 (y/n)?'), default='y') == 'y':
             sudo('apt-get install apache2 -y')
-            print(green(' * successfully installed apache2'))
+
+            print(green(' * Done'))
             print()
 
     def install_mysql(self):
@@ -52,16 +56,20 @@ class ServerLamp(ServerAbstract):
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
             sudo('apt-get install mysql-server php5-mysql -y')
-            print(green(' * successfully installed mysql'))
+
+            print(green(' * Done'))
             print()
 
     def install_php(self):
         if self.args.force or prompt(red(' * Install php5 (y/n)?'), default='y') == 'y':
             sudo('apt-get install php5 php5-cli libapache2-mod-php5 php5-mcrypt -y')
+
             # do apache config
-            sudo('echo "{0}">/etc/apache2/mods-enabled/dir.conf'.format(self.apache_dir_index))
+            put(StringIO(self.apache_dir_index), '/etc/apache2/mods-enabled/dir.conf', use_sudo=True)
+
             # write phpinfo for test 
-            sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.apache_web_dir))
-            print(green(' * successfully installed php5'))
+            put(StringIO(self.phpinfo), '{0}/info.php'.format(self.apache_web_dir), use_sudo=True)
+
+            print(green(' * Done'))
             print()
 

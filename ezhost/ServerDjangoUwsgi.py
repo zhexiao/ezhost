@@ -14,6 +14,8 @@ Contact: zhexiao27@gmail.com
 Github: https://github.com/zhexiao/ezhost.git
 """
 
+from io import StringIO
+
 from ezhost.ServerAbstract import ServerAbstract
 
 # fabric libs
@@ -74,7 +76,7 @@ class ServerDjangoUwsgi(ServerAbstract):
             sudo('apt-get install nginx -y')
 
             # nginx configuration
-            sudo('echo "{0}">/etc/nginx/sites-enabled/default'.format(self.django_uwsgi_with_nginx))
+            put(StringIO(self.django_uwsgi_with_nginx), '/etc/nginx/sites-enabled/default', use_sudo=True)
 
             # restart server and supervisor
             sudo('service nginx restart')
@@ -92,7 +94,7 @@ class ServerDjangoUwsgi(ServerAbstract):
 
             # uwsgi configuration
             django_uwsgi_ini = self.django_uwsgi_ini.format(self.nginx_web_dir, self.project, self.python_env_dir)
-            sudo('echo "{0}">{1}/{2}.ini'.format(django_uwsgi_ini, self.project_dir, self.project))
+            put(StringIO(django_uwsgi_ini), '{0}/{1}.ini'.format(self.project_dir, self.project), use_sudo=True)
 
             print(green(' * Done '))
             print()
@@ -113,7 +115,7 @@ class ServerDjangoUwsgi(ServerAbstract):
 
             # supervisor control uwsgi config
             supervisor_uwsgi_ini = self.supervisor_uwsgi_ini.format(self.project, self.project_dir)
-            sudo('echo "{0}">{1}/{2}_sysd.conf'.format(supervisor_uwsgi_ini, self.supervisor_config_dir, self.project) )
+            put(StringIO(supervisor_uwsgi_ini), '{0}/{1}_sysd.conf'.format(self.supervisor_config_dir, self.project) , use_sudo=True)
 
             sudo('sudo supervisorctl reread && sudo supervisorctl update')
 

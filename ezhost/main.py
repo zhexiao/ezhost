@@ -83,8 +83,7 @@ def main():
     # if config file and host both not provide, throw a error
     try:
         if args.config is None and args.host is None:
-            raise ValueError(
-                'You have to setup your host information through -c(--config) or -H(--host)')
+            raise ValueError('You have to setup your host information through -c(--config) or -H(--host)')
     except Exception as e:
         print(e)
         return
@@ -93,8 +92,7 @@ def main():
     try:
         if args.host is not None:
             if (args.user and (args.passwd or args.keyfile)) is None:
-                raise ValueError(
-                    'Lack of required host information. Please check whether you have set login user, login password or keyfile.')
+                raise ValueError('Lack of required host information. Please check whether you have set login user, login password or keyfile.')
     except Exception as e:
         print(e)
         return
@@ -110,8 +108,7 @@ def main():
             if 'ezhost' in configure:
                 configure_obj = configure['ezhost']
             else:
-                raise KeyError(
-                    'Can not found ezhost configuration informations.')
+                raise KeyError('Can not found ezhost configuration informations.')
     except Exception as e:
         print(e)
         return

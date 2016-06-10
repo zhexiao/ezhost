@@ -14,6 +14,8 @@ Contact: zhexiao27@gmail.com
 Github: https://github.com/zhexiao/ezhost.git
 """
 
+from io import StringIO
+
 from ezhost.ServerAbstract import ServerAbstract
 
 # fabric libs
@@ -38,7 +40,8 @@ class ServerLnmp(ServerAbstract):
     def update_sys(self):
         if self.args.force or prompt(red(' * Update system package (y/n)?'), default='y') == 'y':
             sudo('apt-get update -y')
-            print(green(' * successfully updated your system package'))
+
+            print(green(' * Done'))
             print()
 
     def install_mysql(self):
@@ -46,7 +49,8 @@ class ServerLnmp(ServerAbstract):
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
             sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
             sudo('apt-get install mysql-server php5-mysql -y')
-            print(green(' * successfully installed Mysql'))
+
+            print(green(' * Done'))
             print()
 
     def install_nginx(self):
@@ -56,8 +60,9 @@ class ServerLnmp(ServerAbstract):
             sudo('apt-get update -y')
             sudo('apt-get install nginx -y')
 
-            # do nginx config config
-            sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_config))
+            # do nginx config 
+            put(StringIO(self.nginx_web_config), '/etc/nginx/sites-available/default', use_sudo=True)
+
 
         # want to using https?
         if prompt(red(' * Change url from http to https (y/n)?'), default='y') == 'y':
@@ -65,11 +70,13 @@ class ServerLnmp(ServerAbstract):
                 sudo('mkdir -p {0}'.format(self.nginx_ssl_dir) )
             # generate ssh key
             sudo('openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout {0}/cert.key -out {0}/cert.pem'.format(self.nginx_ssl_dir) )
+
             # do nginx config config
-            sudo('echo "{0}">/etc/nginx/sites-available/default'.format(self.nginx_web_ssl_config) )
+            put(StringIO(self.nginx_web_ssl_config), '/etc/nginx/sites-available/default', use_sudo=True)
 
         sudo('service nginx restart')
-        print(green(' * successfully installed Nginx') )
+
+        print(green(' * Done'))
         print()
 
 
@@ -80,9 +87,10 @@ class ServerLnmp(ServerAbstract):
             sed('/etc/php5/fpm/php.ini', ';cgi.fix_pathinfo=1', 'cgi.fix_pathinfo=0', use_sudo=True)
 
             # write phpinfo for test 
-            sudo('echo "{0}">{1}/info.php'.format(self.phpinfo, self.nginx_web_dir))
+            put(StringIO(self.phpinfo), '{0}/info.php'.format(self.nginx_web_dir), use_sudo=True)
 
             sudo('service php5-fpm restart')
-            print(green(' * successfully installed php5'))
+
+            print(green(' * Done'))
             print()
 
