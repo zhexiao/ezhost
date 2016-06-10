@@ -68,6 +68,11 @@ class ServerLnmpWordpress(ServerAbstract):
             with cd('/etc/nginx/sites-enabled'):
                 if exists(self.project):
                     sudo('rm {0}'.format(self.project))
+
+                # remove the default nginx configuration
+                if exists('default'):
+                    sudo('rm default')
+                    
                 sudo('ln -s /etc/nginx/sites-available/{0} .'.format(self.project))
 
             # restart server
