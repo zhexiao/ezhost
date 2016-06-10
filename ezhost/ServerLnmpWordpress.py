@@ -36,7 +36,7 @@ class ServerLnmpWordpress(ServerAbstract):
 
     def install(self):
         # first install lnmp server
-        # ServerLnmp(self.args).install()
+        ServerLnmp(self.args).install()
 
         self.install_wordpress()
 
