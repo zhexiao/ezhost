@@ -41,7 +41,7 @@ def main():
         parser.set_defaults(force=False)
 
 
-        # force to install packages without ask question
+        # login to remote mysql, default is false
         parser.add_argument(
             '-my', '--mysql', 
             dest='login_mysql', 
