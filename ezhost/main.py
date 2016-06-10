@@ -40,6 +40,16 @@ def main():
         )
         parser.set_defaults(force=False)
 
+
+        # force to install packages without ask question
+        parser.add_argument(
+            '-my', '--mysql', 
+            dest='login_mysql', 
+            action='store_true',
+            help='login to remote mysql server',
+        )
+        parser.set_defaults(login_mysql=False)
+
         parser.add_argument(
             '-c', '--config',
             help='config file path of your host informations',

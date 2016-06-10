@@ -35,8 +35,20 @@ class ServerCommand(ServerAbstract):
         if self.args.git_pull is not None:
             self.git_pull()
 
+        if self.args.login_mysql:
+            self.login_mysql()
+
     def install(self):
         pass
 
     def git_pull(self):
+        """
+        Doing git pull code from github
+        """
         run('cd {0} && git pull'.format(self.args.git_pull))
+
+    def login_mysql(self):
+        """
+        Login to remote mysql server
+        """
+        run('mysql -u root -p')
