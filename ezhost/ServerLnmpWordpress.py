@@ -51,12 +51,12 @@ class ServerLnmpWordpress(ServerAbstract):
                 # download latest wordpress   
                 sudo('wget https://wordpress.org/latest.tar.gz')
                 sudo('tar -zxvf latest.tar.gz')
-                sudo('sudo chown -R {0}:www-data wordpress'.format(self.args.user))
+                sudo('sudo chown -R www-data:www-data wordpress')
                 # rename wordpress project
                 sudo('mv wordpress {0}'.format(self.project))
                 # create uploads folder
                 sudo('mkdir {0}/wp-content/uploads'.format(self.project))
-                sudo('chown -R {0}:www-data {1}/wp-content/uploads'.format(self.args.user, self.project))
+                sudo('chown -R www-data:www-data {0}/wp-content/uploads'.format(self.project))
 
             # go to nginx available config
             with cd('/etc/nginx/sites-available'):
