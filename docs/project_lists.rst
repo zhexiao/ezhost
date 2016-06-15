@@ -28,21 +28,21 @@ Create Database
 
 As we know, wordpress use Mysql to save data. That's meaning when you project install finished, you have to create a database for mysql to save wordpress data. 
 
-1.Login your remote mysql server 
+1. Login your remote mysql server 
 
 .. code-block:: bash
 
    $ ezhost -my -H your_server_address -U your_server_login_user -P your_server_login_password
 
-2.Use ``password`` as your mysql password to login 
+2. Use ``password`` as your mysql password to login 
 
-3.Create a database
+3. Create a database
 
 .. code-block:: bash
 
    mysql> create database name_you_want;
 
-4.Check your database
+4. Check your database
 
 .. code-block:: bash
 
