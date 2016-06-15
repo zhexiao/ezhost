@@ -39,6 +39,7 @@ class ServerLnmpWordpress(ServerAbstract):
         ServerLnmp(self.args).install()
 
         self.install_wordpress()
+        self.vagrant_workspace()
 
     def install_wordpress(self):
         if self.args.force or prompt(red(' * Install wordpress (y/n)?'), default='y') == 'y':
@@ -81,3 +82,8 @@ class ServerLnmpWordpress(ServerAbstract):
 
             print(green(' * Done'))
             print()
+
+    def vagrant_workspace(self):
+        if prompt(red(' * Are you working on the vagrant server (y/n)?'), default='y') == 'y':
+            sudo('mv /var/www/html/ /vagrant/')
+            sudo('cd /var/www/ && ln -s /vagrant/html/ .')
