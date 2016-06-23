@@ -39,13 +39,13 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
    user=your_server_login_user
    passwd=your_server_login_password
 
-.. note:: DO NOT MISSING THE TITLE **[ezhost]**
+.. note:: If you want to change **passwd** to **keyfil**, just need to replace ``passwd=your_server_login_password`` to ``keyfile=~/.ssh/keyfile.pem``.
 
-
+After you have ezhost config file, you can use the following command to run it:
 
 .. code-block:: bash
 
-   $ ezhost -c **/var/www/html/development.ini** -s server_type 
+   $ ezhost -c /var/www/html/development.ini -s server_type 
 
 
 
