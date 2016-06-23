@@ -39,7 +39,7 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
    user=your_server_login_user
    passwd=your_server_login_password
 
-.. note:: If you want to change **passwd** to **keyfil**, just need to replace ``passwd=your_server_login_password`` to ``keyfile=~/.ssh/keyfile.pem``.
+.. note:: If you want to change **passwd** to **keyfile**, just need to replace ``passwd=your_server_login_password`` to ``keyfile=~/.ssh/keyfile.pem``.
 
 After you have ezhost config file, you can use the following command to run it:
 
