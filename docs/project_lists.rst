@@ -3,7 +3,7 @@ Project Lists
 
 In here, i will show you all exist projects in ezhost.
 
-Wordpress Project With LNMP Server
+Wordpress with LNMP 
 -------------------------------------------------------
 
 Introduction

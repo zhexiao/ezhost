@@ -3,11 +3,14 @@ Server Lists
 
 In here, i will show you all exist server command.
 
-LAMP Server(Linux + Apache + Mysql + PHP)
+LAMP Server
 -----------------------------------------------
 
 Introduction
 ~~~~~~~~~~~~~
+
+Linux + Apache + Mysql + PHP
+
 A "LAMP" stack is a group of open source software that is typically installed together to enable a server to host dynamic websites and web apps. This term is actually an acronym which represents the Linux operating system, with the Apache web server. The site data is stored in a MySQL database, and dynamic content is processed by PHP.
 
 
@@ -36,11 +39,13 @@ Restart
 
 
 
-LNMP Server(Linux + Nginx + Mysql + PHP)
+LNMP Server
 -------------------------------------------
 
 Introduction
 ~~~~~~~~~~~~~~~~~
+
+Linux + Nginx + Mysql + PHP
 
 The LNMP software stack is a group of software that can be used to serve dynamic web pages and web applications. This is an acronym that describes a Linux operating system, with an Nginx web server. The backend data is stored in MySQL and the dynamic processing is handled by PHP.
 
@@ -74,11 +79,13 @@ Restart
 
 
 
-Django Web Server(Django + Uwsgi + Nginx + Supervisor)
+Django Web Server
 ----------------------------------------------------------
 
 Introduction
 ~~~~~~~~~~~~~~~~
+
+Django + Uwsgi + Nginx + Supervisor
 
 Django is a powerful web framework that can help you get your Python application or website off the ground. Django includes a simplified development server for testing your code locally, but for anything even slightly production related, a more secure and powerful web server is required.
 
