@@ -14,13 +14,10 @@ Linux + Apache + Mysql + PHP
 A "LAMP" stack is a group of open source software that is typically installed together to enable a server to host dynamic websites and web apps. This term is actually an acronym which represents the Linux operating system, with the Apache web server. The site data is stored in a MySQL database, and dynamic content is processed by PHP.
 
 
-Install
+Keyword
 ~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
-   
-   $ ezhost -s lamp -H your_server_address -U your_server_login_user -P your_server_login_password
-
+**-s lamp**
 
 Configuration
 ~~~~~~~~~~~~~~~~~~~
