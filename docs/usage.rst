@@ -45,7 +45,7 @@ After you have ezhost config file, you can use the following command to run it:
    $ ezhost -c /var/www/html/development.ini [keyword]
 
 
-.. note:: All **[keyword]** will replace as a exist command, such as ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on.
+.. warning:: All **[keyword]** will replace as a exist command, such as ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on.
 
 
 Basic Example
