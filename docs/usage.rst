@@ -45,9 +45,6 @@ After you have ezhost config file, you can use the following command to run it:
    $ ezhost -c /var/www/html/development.ini [keyword]
 
 
-.. warning:: All **[keyword]** will replace as a exist command, such as ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on.
-
-
 Code analysis
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,11 +65,13 @@ Code analysis
    -c config_path
       require your config file path
 
-.. seealso:: **[keyword]** will be replaced by command keyword, server keyword or project keyword.
+.. warning:: **[keyword]** will be replaced by command keyword, server keyword or project keyword. For example, ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on ...
 
 
 Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is two examples by replace the **[keyword]**  as a exist keyword
 
 Install LAMP Server
 --------------------
