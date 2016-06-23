@@ -31,7 +31,8 @@ Use config file
 Assuming you have a config file **development.ini** in **/var/www/html** folder.
 
 .. code-block:: bash
-
+   :linenos:
+   
     [ezhost]
     host=your_server_address
     user=your_server_login_user
