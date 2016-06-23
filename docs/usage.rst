@@ -1,7 +1,9 @@
 Usages
 ===============
 
-Use user and password to install server
+This document will show you all exist options in ezhost.
+
+Use user and password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you know your remote host's user and password, you can use the following command to install server:
@@ -13,7 +15,7 @@ If you know your remote host's user and password, you can use the following comm
 .. note:: All exist **server_type** you can find from the *Servers* docs.
 
 
-Use user and keyfile to install server
+Use user and keyfile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have your remote host's user and keyfile, you can use the following command to install server:
@@ -23,7 +25,7 @@ If you have your remote host's user and keyfile, you can use the following comma
    $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem -s server_type 
 
 
-Use git pull in remote server
+Use git pull
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can run the following command to update your github project in remote server:
@@ -34,3 +36,16 @@ You can run the following command to update your github project in remote server
 
 
 .. note:: ``/var/www/html/project`` is your gituhb project folder. 
+
+
+Use mysql
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can run the following command to login to your remote mysql server:
+
+.. code-block:: bash
+
+   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -my
+
+
+.. note:: Use **password** as your mysql password for login .
