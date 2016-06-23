@@ -17,7 +17,10 @@ A "LAMP" stack is a group of open source software that is typically installed to
 Keyword
 ~~~~~~~~~~~~~~~~~~~
 
-**-s lamp**
+.. code-block:: bash
+   
+   $ -s lamp 
+
 
 Configuration
 ~~~~~~~~~~~~~~~~~~~
@@ -47,12 +50,12 @@ Linux + Nginx + Mysql + PHP
 The LNMP software stack is a group of software that can be used to serve dynamic web pages and web applications. This is an acronym that describes a Linux operating system, with an Nginx web server. The backend data is stored in MySQL and the dynamic processing is handled by PHP.
 
 
-Install
+Keyword
 ~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
    
-   $ ezhost -s lnmp -H your_server_address -U your_server_login_user -P your_server_login_password
+   $ -s lnmp
 
 
 Configuration
@@ -89,12 +92,12 @@ Django is a powerful web framework that can help you get your Python application
 In this guide, We will configure the uWSGI application container server to interface with our applications. We will then set up Nginx to reverse proxy to uWSGI, giving us access to its security and performance features to serve our apps. After that, we will install linux supervisor to control uWSGI service auto start.
 
 
-Install
+Keyword
 ~~~~~~~~~
 
 .. code-block:: bash
    
-   $ ezhost -s django-uwsgi -p project_name -H your_server_address -U your_server_login_user -P your_server_login_password
+   $ -s django-uwsgi -p project_name
 
 .. note:: if you give us the parameter ``-p project_name``. Then we will create a ``project_name folder`` for your django web application. Otherwise the project_name will use the default value ``demo``.
 
