@@ -1,8 +1,8 @@
 Usages
----------------
+===============
 
 Use user and password to install server
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you know your remote host's user and password, you can use the following command to install server:
 
@@ -14,7 +14,7 @@ If you know your remote host's user and password, you can use the following comm
 
 
 Use user and keyfile to install server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have your remote host's user and keyfile, you can use the following command to install server:
 
