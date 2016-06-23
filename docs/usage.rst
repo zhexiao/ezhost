@@ -28,7 +28,7 @@ If you have your remote host's user and keyfile, you can use the following comma
 Use config file 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you have a config file **development.ini** in **/var/www/html** folder. Then you should have the following format in **development.ini**:
+Assuming you have a config file **development.ini** in **/var/www/html** folder.
 
 .. highlight:: python
    :linenothreshold: 5
