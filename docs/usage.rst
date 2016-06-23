@@ -46,6 +46,3 @@ You can run the following command to login to your remote mysql server:
 .. code-block:: bash
 
    $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -my
-
-
-.. note:: Use **password** as your mysql password for login .
