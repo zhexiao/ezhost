@@ -32,7 +32,6 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
 
 .. code-block:: bash
    :linenos:
-   :caption: development.ini
 
    [ezhost]
    host=your_server_address
