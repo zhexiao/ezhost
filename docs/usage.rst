@@ -71,7 +71,7 @@ Code analysis
 Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is two examples by replace the **[keyword]**  as a exist keyword
+There are two examples about replace the **[keyword]** as a exist keyword.
 
 Install LAMP Server
 --------------------
