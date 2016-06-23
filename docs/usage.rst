@@ -68,6 +68,8 @@ Code analysis
    -c config_path
       require your config file path
 
+.. seealso:: **[keyword]** will be replaced by command keyword, server keyword or project keyword.
+
 
 Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
