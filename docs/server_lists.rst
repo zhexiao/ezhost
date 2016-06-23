@@ -1,7 +1,7 @@
 Server Lists
 ===============
 
-In here, i will show you all exist server command.
+In here, i will show you all exist servers.
 
 LAMP Server
 -----------------------------------------------
@@ -19,7 +19,7 @@ Keyword
 
 .. code-block:: bash
    
-   -s lamp 
+   -s lamp or --server lamp
 
 
 Configuration
@@ -55,7 +55,7 @@ Keyword
 
 .. code-block:: bash
    
-   -s lnmp
+   -s lnmp or --server lnmp
 
 
 Configuration
@@ -97,7 +97,7 @@ Keyword
 
 .. code-block:: bash
    
-   -s django-uwsgi -p project_name
+   -s django-uwsgi -p project_name or --server django-uwsgi --project project_name
 
 .. note:: if you give us the parameter ``-p project_name``. Then we will create a ``project_name folder`` for your django web application. Otherwise the project_name will use the default value ``demo``.
 

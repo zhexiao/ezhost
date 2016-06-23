@@ -1,7 +1,7 @@
 Project Lists
 ===============
 
-In here, i will show you all exist projects in ezhost.
+In here, i will show you all exist projects.
 
 Wordpress with LNMP 
 -------------------------------------------------------
@@ -18,7 +18,7 @@ Keyword
 
 .. code-block:: bash
 
-   -s lnmp-wordpress -p news
+   -s lnmp-wordpress -p news or --server lnmp-wordpress --project news
 
 .. note:: ``-p news`` meaning ezhost will save all wordpress files into ``news`` folder. If you are not use ``-p`` flag, ezhost will use the default folder name ``demo``. 
 
@@ -32,7 +32,7 @@ As we know, wordpress use Mysql to save data. That's meaning when you project in
 
    .. code-block:: bash
 
-      $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -my 
+      $ ezhost -H host -U user -P password --mysql
 
 2. Use **password** as your mysql password to login 
 

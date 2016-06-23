@@ -1,24 +1,31 @@
 Commands
 ===============
 
-Use git pull
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In here, i will show you all exist commands.
 
-You can run the following command to update your github project in remote server:
+Use git pull
+--------------------
+
+You can use the following *[keyword]* to update your github project in remote server:
+
+Keyword
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password --git-pull /var/www/html/project 
-
+   -gp /var/www/html/project or --git-pull /var/www/html/project 
 
 .. note:: ``/var/www/html/project`` is your gituhb project folder. 
 
 
 Use mysql
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------
 
-You can run the following command to login to your remote mysql server:
+You can use the following *[keyword]* to login to your remote mysql server:
+
+Keyword
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -my
+   -my or --mysql
