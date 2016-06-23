@@ -48,6 +48,27 @@ After you have ezhost config file, you can use the following command to run it:
 .. warning:: All **[keyword]** will replace as a exist command, such as ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on.
 
 
+Code analysis
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. glossary::
+
+   -H host_address
+      require your host address
+
+   -U host_user
+      require your host login user
+
+   -P host_password
+      require your host login password
+
+   -K host_keyfile
+      require your host keyfile path
+
+   -c config_path
+      require your config file path
+
+
 Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
