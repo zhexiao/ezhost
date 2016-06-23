@@ -18,7 +18,7 @@ Keyword
 
 .. code-block:: bash
 
-   $ -s lnmp-wordpress -p news
+   -s lnmp-wordpress -p news
 
 .. note:: ``-p news`` meaning ezhost will save all wordpress files into ``news`` folder. If you are not use ``-p`` flag, ezhost will use the default folder name ``demo``. 
 
