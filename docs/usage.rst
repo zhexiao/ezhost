@@ -12,7 +12,7 @@ If you know your remote host's user and password, you can use the following comm
 
    $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -s server_type
 
-.. note:: All exist **server_type** you can find from the *Servers* docs.
+.. note:: All exist **server_type** you can find at :ref:`server_lists`.
 
 
 Use user and keyfile
