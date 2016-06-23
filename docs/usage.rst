@@ -34,16 +34,17 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
    :linenothreshold: 5
 
     [ezhost]
-    host=127.0.0.1:2200
-    user=vagrant
-    passwd=vagrant
+    host=your_server_address
+    user=your_server_login_user
+    passwd=your_server_login_password
 
+.. note:: DO NOT MISSING THE TITLE **[ezhost]**
 
 
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem **-c /var/www/html/development.ini**
+   $ ezhost -c **/var/www/html/development.ini** -s server_type 
 
 
 
