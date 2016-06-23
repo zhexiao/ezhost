@@ -32,11 +32,11 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
 
 .. code-block:: bash
    :linenos:
-   
-    [ezhost]
-    host=your_server_address
-    user=your_server_login_user
-    passwd=your_server_login_password
+
+   [ezhost]
+   host=your_server_address
+   user=your_server_login_user
+   passwd=your_server_login_password
 
 .. note:: DO NOT MISSING THE TITLE **[ezhost]**
 
