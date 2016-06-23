@@ -14,6 +14,7 @@ Ezhost is a tool to make it easy to install server.
 
    Get Started <getting_started>
    Usages <usage>
+   Commands <commands>
    Servers <server_lists>
    Projects <project_lists>
 

@@ -1,7 +1,7 @@
 Usages
 ===============
 
-This document will show you all exist options in ezhost.
+Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host
 
 Use user and password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -10,9 +10,7 @@ If you know your remote host's user and password, you can use the following comm
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -s server_type
-
-.. note:: All exist **server_type** you can find at :doc:`server_lists`.
+   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password
 
 
 Use user and keyfile
@@ -22,7 +20,7 @@ If you have your remote host's user and keyfile, you can use the following comma
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem -s server_type 
+   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem
 
 
 Use config file 
@@ -44,28 +42,5 @@ After you have ezhost config file, you can use the following command to run it:
 
 .. code-block:: bash
 
-   $ ezhost -c /var/www/html/development.ini -s server_type 
+   $ ezhost -c /var/www/html/development.ini
 
-
-
-Use git pull
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can run the following command to update your github project in remote server:
-
-.. code-block:: bash
-
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password --git-pull /var/www/html/project 
-
-
-.. note:: ``/var/www/html/project`` is your gituhb project folder. 
-
-
-Use mysql
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can run the following command to login to your remote mysql server:
-
-.. code-block:: bash
-
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password -my
