@@ -25,6 +25,28 @@ If you have your remote host's user and keyfile, you can use the following comma
    $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem -s server_type 
 
 
+Use config file 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Assuming you have a config file **development.ini** in **/var/www/html** folder. Then you should have the following format in **development.ini**:
+
+.. highlight:: python
+   :linenothreshold: 5
+
+    [ezhost]
+    host=127.0.0.1:2200
+    user=vagrant
+    passwd=vagrant
+
+
+
+
+.. code-block:: bash
+
+   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem **-c /var/www/html/development.ini**
+
+
+
 Use git pull
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
