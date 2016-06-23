@@ -30,8 +30,7 @@ Use config file
 
 Assuming you have a config file **development.ini** in **/var/www/html** folder.
 
-.. highlight:: python
-   :linenothreshold: 5
+.. code-block:: bash
 
     [ezhost]
     host=your_server_address
