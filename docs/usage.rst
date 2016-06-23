@@ -1,7 +1,7 @@
 Usages
 ===============
 
-Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host
+Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host.
 
 Use user and password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -10,7 +10,7 @@ If you know your remote host's user and password, you can use the following comm
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password
+   $ ezhost -H your_server_address -U your_server_login_user -P your_server_login_password [keyword]
 
 
 Use user and keyfile
@@ -20,7 +20,7 @@ If you have your remote host's user and keyfile, you can use the following comma
 
 .. code-block:: bash
 
-   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem
+   $ ezhost -H your_server_address -U your_server_login_user -K ~/.ssh/keyfile.pem [keyword]
 
 
 Use config file 
@@ -42,5 +42,5 @@ After you have ezhost config file, you can use the following command to run it:
 
 .. code-block:: bash
 
-   $ ezhost -c /var/www/html/development.ini
+   $ ezhost -c /var/www/html/development.ini [keyword]
 
