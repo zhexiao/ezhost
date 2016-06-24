@@ -46,7 +46,7 @@ After you have ezhost config file, you can use the following command to run it:
 
 .. code-block:: bash
 
-   $ ezhost -c /var/www/html/development.ini [keyword]
+   $ ezhost -C /var/www/html/development.ini [keyword]
 
 |
 
@@ -67,7 +67,7 @@ Code analysis
    -K host_keyfile
       require your host keyfile path
 
-   -c config_path
+   -C config_path
       require your config file path
 
 .. warning:: **[keyword]** will be replaced by command keyword, server keyword or project keyword. For example, ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on ...
@@ -84,7 +84,7 @@ Install LAMP Server
 
 .. code-block:: bash
 
-   $ ezhost -c /var/www/html/development.ini -s lamp
+   $ ezhost -C /var/www/html/development.ini -s lamp
 
 .. note:: In here, we replace **[keyword]**  as ``-s lamp``.
 
@@ -94,6 +94,6 @@ Install Django Server
 
 .. code-block:: bash
 
-   $ ezhost -c /var/www/html/development.ini -s django-uwsgi -p project_name
+   $ ezhost -C /var/www/html/development.ini -s django-uwsgi -p project_name
 
 .. note:: In here, we replace **[keyword]**  as ``-s django-uwsgi -p project_name``.
