@@ -3,6 +3,8 @@ Usages
 
 Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host.
 
+|
+
 Use user and password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
