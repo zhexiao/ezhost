@@ -22,7 +22,7 @@ Keyword
 
    -s lnmp-wordpress -p news or --server lnmp-wordpress --project news
 
-.. note:: ``-p news`` meaning ezhost will save all wordpress files into ``news`` folder. If you are not use ``-p`` flag, ezhost will use the default folder name ``demo``. 
+.. note:: If you have the option ``-p news``, ezhost will create a folder at **/var/www/html/news** and save all wordpress files into that folder. If you do not have ``-p`` option, ezhost will use the default project name **demo** and save all your wordpress files into **/var/www/html/demo** .
 
 
 Create Database 
