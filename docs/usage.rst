@@ -3,7 +3,7 @@ Usages
 
 Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host.
 
-#. Use user and password
+Use user and password
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you know your remote host's user and password, you can use the following command to install server:
@@ -13,7 +13,7 @@ If you know your remote host's user and password, you can use the following comm
    $ ezhost -H host -U user -P password [keyword]
 
 
-#. Use user and keyfile
+Use user and keyfile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have your remote host's user and keyfile, you can use the following command to install server:
@@ -23,7 +23,7 @@ If you have your remote host's user and keyfile, you can use the following comma
    $ ezhost -H host -U user -K ~/.ssh/keyfile.pem [keyword]
 
 
-#. Use config file 
+Use config file 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Assuming you have a config file **development.ini** in **/var/www/html** folder.
@@ -45,7 +45,7 @@ After you have ezhost config file, you can use the following command to run it:
    $ ezhost -c /var/www/html/development.ini [keyword]
 
 
-#. Code analysis
+Code analysis
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. glossary::
@@ -68,7 +68,7 @@ After you have ezhost config file, you can use the following command to run it:
 .. warning:: **[keyword]** will be replaced by command keyword, server keyword or project keyword. For example, ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on ...
 
 
-#. Basic Example
+Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two examples about replace the **[keyword]** as a exist keyword.
