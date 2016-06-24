@@ -12,6 +12,8 @@ If you know your remote host's user and password, you can use the following comm
 
    $ ezhost -H host -U user -P password [keyword]
 
+|
+|
 
 Use user and keyfile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,6 +24,8 @@ If you have your remote host's user and keyfile, you can use the following comma
 
    $ ezhost -H host -U user -K ~/.ssh/keyfile.pem [keyword]
 
+|
+|
 
 Use config file 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,6 +48,8 @@ After you have ezhost config file, you can use the following command to run it:
 
    $ ezhost -c /var/www/html/development.ini [keyword]
 
+|
+|
 
 Code analysis
 ~~~~~~~~~~~~~~~~~~~~~~~
