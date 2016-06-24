@@ -50,11 +50,13 @@ class ServerBase(ServerAbstract):
             except Exception as e:
                 self.host_keyfile = None
 
-            if self.host_keyfile is None:
-                try:
-                    self.host_passwd = self.configure_obj['passwd']
-                except Exception as e:
-                    raise KeyError('Lack of required host information. Please check whether you have set login password or keyfile.')
+            try:
+                self.host_passwd = self.configure_obj['passwd']
+            except Exception as e:
+                self.host_passwd = None
+
+            if self.host_passwd is None and self.host_keyfile is None:
+                raise KeyError('Lack of required host information. Please check whether you have set login password or keyfile.')
 
     def init_host(self):
         """
