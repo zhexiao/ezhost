@@ -45,7 +45,7 @@ After you have ezhost config file, you can use the following command to run it:
    $ ezhost -c /var/www/html/development.ini [keyword]
 
 
-Code analysis
+#. Code analysis
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. glossary::
@@ -68,7 +68,7 @@ Code analysis
 .. warning:: **[keyword]** will be replaced by command keyword, server keyword or project keyword. For example, ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on ...
 
 
-Basic Example
+#. Basic Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two examples about replace the **[keyword]** as a exist keyword.
