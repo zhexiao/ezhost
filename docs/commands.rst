@@ -3,6 +3,8 @@ Commands
 
 In here, i will show you all exist commands.
 
+|
+
 Use git pull
 --------------------
 
@@ -17,6 +19,7 @@ Keyword
 
 .. note:: ``/var/www/html/project`` is your gituhb project folder. 
 
+|
 
 Use mysql
 -------------------
@@ -29,3 +32,5 @@ Keyword
 .. code-block:: bash
 
    -my or --mysql
+
+|
