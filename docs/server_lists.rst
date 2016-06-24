@@ -3,6 +3,8 @@ Server Lists
 
 In here, i will show you all exist servers.
 
+|
+
 LAMP Server
 -----------------------------------------------
 
@@ -37,7 +39,7 @@ Restart
    
    $ sudo service apache2 restart
 
-
+|
 
 LNMP Server
 -------------------------------------------
@@ -77,7 +79,7 @@ Restart
 
 .. note:: For the php interpret in LNMP Server, we are use ``php-fpm`` rathan then ``php-cgi``.
 
-
+|
 
 Django Web Server
 ----------------------------------------------------------
@@ -144,3 +146,5 @@ Restart
    $ sudo supervisorctl reread && sudo supervisorctl update
 
 .. note:: we are use supervisor to control the uwsgi service auto restart. More details about supervisor: http://supervisord.org/index.html
+
+|
