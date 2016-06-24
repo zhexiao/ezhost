@@ -77,7 +77,7 @@ Restart
    $ sudo service php5-fpm restart
    $ sudo service nginx restart
 
-.. note:: For the php interpret in LNMP Server, we are use ``php-fpm`` rathan then ``php-cgi``.
+.. note:: For the php interpret in LNMP Server, we are use ``php-fpm`` rather than ``php-cgi``.
 
 |
 
