@@ -9,7 +9,6 @@ Ezhost is a tool to make it easy to install server.
 .. _user-docs:
 
 .. toctree::
-   :collapse: False
    :maxdepth: 3
    :caption: User Documentation
 
