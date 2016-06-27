@@ -27,28 +27,36 @@ def main():
 
         # force to install packages without ask question
         parser.add_argument(
-            '-f', '--force', 
-            dest='force', 
+            '-f', '--force',
+            dest='force',
             action='store_true',
             help='force to install packages without ask question',
         )
         parser.add_argument(
-            '-nf', '--not-force', 
+            '-nf', '--not-force',
             dest='force',
             action='store_false',
             help='install packages with ask question',
         )
         parser.set_defaults(force=False)
 
-
         # login to remote mysql, default is false
         parser.add_argument(
-            '-my', '--mysql', 
-            dest='login_mysql', 
+            '-my', '--mysql',
+            dest='login_mysql',
             action='store_true',
             help='login to remote mysql server',
         )
         parser.set_defaults(login_mysql=False)
+
+        # login to server
+        parser.add_argument(
+            '-login', '--login',
+            dest='login_server',
+            action='store_true',
+            help='login to remote server',
+        )
+        parser.set_defaults(login_server=False)
 
         parser.add_argument(
             '-p', '--project',

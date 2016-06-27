@@ -34,3 +34,19 @@ Keyword
    -my or --mysql
 
 |
+
+Login to server
+-------------------
+
+You can use the following *[keyword]* to login into your remote server:
+
+Keyword
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   -login or --login
+
+.. warning:: **login** only works with ``keyfile``. Otherwise, you have to type your server password to login into server.
+
+|

@@ -38,6 +38,9 @@ class ServerCommand(ServerAbstract):
         if self.args.login_mysql:
             self.login_mysql()
 
+        if self.args.login_server:
+            self.login_server()
+
     def install(self):
         pass
 
@@ -52,3 +55,9 @@ class ServerCommand(ServerAbstract):
         Login to remote mysql server
         """
         run('mysql -u root -p')
+
+    def login_server(self):
+        """
+        Login to server
+        """
+        local('ssh -i {0} {1}@{2}'.format(env.key_filename, env.user, env.host_string))
