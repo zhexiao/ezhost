@@ -5,6 +5,20 @@ In here, i will show you all exist commands.
 
 |
 
+Force install
+--------------------
+
+You can use the following *[keyword]* to install all packages without questions:
+
+Keyword
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+   -f or --force 
+
+|
+
 Git pull code
 --------------------
 

@@ -35,6 +35,7 @@ class ServerDjangoUwsgi(ServerAbstract):
 
     def install(self):
         self.update_sys()
+        self.install_mysql()
         self.install_libraries()
         self.install_project()
         self.install_nginx()
@@ -46,6 +47,15 @@ class ServerDjangoUwsgi(ServerAbstract):
             sudo('apt-get update -y')
 
             print(green(' * successfully updated your system package'))
+            print()
+
+    def install_mysql(self):
+        if self.args.force or prompt(red(' * Install mysql (y/n)?'), default='y') == 'y':
+            sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password password {0}'".format(self.mysql_password))
+            sudo("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password {0}'".format(self.mysql_password))
+            sudo('apt-get install mysql-server -y')
+
+            print(green(' * Done'))
             print()
 
     def install_libraries(self):

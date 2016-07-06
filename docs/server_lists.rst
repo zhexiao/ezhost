@@ -107,6 +107,7 @@ Keyword
 Configuration
 ~~~~~~~~~~~~~~~
 
+- mysql password: ``password``
 - nginx config path: ``/etc/nginx/sites-enabled/default``
 - web root: ``/var/www/html``
 - project root: ``/var/www/html/project_name``
