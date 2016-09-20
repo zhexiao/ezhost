@@ -1,7 +1,7 @@
 Welcome to ezhost's documentation!
 ==================================
 
-Ezhost is a tool to make it easy to install server.
+Ezhost is a tool for easily install server.
 
 
 * :ref:`user-docs`		
