@@ -23,7 +23,7 @@ You have to install python3 and pip3 before you install ezhost:
 Dependency Install
 ---------------
 
-If you have error happens during the ezhost install, you'd better install these dependency as well.
+If you have any errors during the ezhost installing, you'd better install these dependencies as well.
 
 .. code-block:: bash
 
