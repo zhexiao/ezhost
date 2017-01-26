@@ -51,21 +51,29 @@ class ServerLnmp(ServerCommon):
         if self.args.force or prompt(red(' * Install Nginx (y/n)?'), default='y') == 'y':
             self.common_install_nginx()
 
-            # do nginx config
-            put(StringIO(self.nginx_web_config), '/etc/nginx/sites-available/default', use_sudo=True)
-            sudo('service nginx restart')
-
     def install_php(self):
         if self.args.force or prompt(red(' * Install PHP (y/n)?'), default='y') == 'y':
             # try install php7 or php5
             try:
-                sudo('apt-get install php7-fpm php7-mysql -y')
-                print(green(' * Installed php7 and php7-mysql in the system.'))
+                sudo('apt-get install php7.0-fpm php7.0-mysql php7.0-gd php7.0-curl -y')
+
+                # Find the line, cgi.fix_pathinfo=1, and change the 1 to 0.
+                sed('/etc/php/7.0/fpm/php.ini', ';cgi.fix_pathinfo=1', 'cgi.fix_pathinfo=0', use_sudo=True)
+                # do nginx config
+                put(StringIO(self.nginx_php7_web_config), '/etc/nginx/sites-available/default', use_sudo=True)
+
+                sudo('service nginx restart')
+                sudo('service php7.0-fpm restart')
+                print(green(' * Installed php7.0 and php7-mysql in the system.'))
             except:
-                sudo('apt-get install php5-fpm php5-mysql -y')
+                sudo('apt-get install php5-fpm php5-mysql php5-gd php5-curl -y')
 
                 # Find the line, cgi.fix_pathinfo=1, and change the 1 to 0.
                 sed('/etc/php5/fpm/php.ini', ';cgi.fix_pathinfo=1', 'cgi.fix_pathinfo=0', use_sudo=True)
+                # do nginx config
+                put(StringIO(self.nginx_web_config), '/etc/nginx/sites-available/default', use_sudo=True)
+
+                sudo('service nginx restart')
                 sudo('service php5-fpm restart')
                 print(green(' * Installed php5 and php5-mysql in the system.'))
 

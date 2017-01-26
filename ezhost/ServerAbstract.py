@@ -167,6 +167,14 @@ class ServerAbstract(metaclass=ABCMeta):
         return nginx_conf_string.simple_web_config.format(self.nginx_web_dir)
 
     @property
+    def nginx_php7_web_config(self):
+        """
+           Nginx web config
+        """
+
+        return nginx_conf_string.simple_php7_web_config.format(self.nginx_web_dir)
+
+    @property
     def nginx_web_ssl_config(self):
         """
            Nginx web ssl config
