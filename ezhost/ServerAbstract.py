@@ -6,8 +6,14 @@ Abstract class for all server class
 # internal libs
 import os
 from abc import ABCMeta, abstractmethod, abstractproperty
+import ezhost.config.apache_conf_string as apache_conf_string
+import ezhost.config.php_conf_string as php_conf_string
+import ezhost.config.nginx_conf_string as nginx_conf_string
+import ezhost.config.django_conf_string as django_conf_string
+
 
 class ServerAbstract(metaclass=ABCMeta):
+
     def __init__(self):
         # host information
         self._host_string = None
@@ -87,7 +93,7 @@ class ServerAbstract(metaclass=ABCMeta):
             Server type setter
         """
         self._server_type = value
-    
+
     @property
     def project(self):
         """
@@ -121,113 +127,53 @@ class ServerAbstract(metaclass=ABCMeta):
         """
             default apache project dir
         """
-        return '/var/www/html'
+
+        return apache_conf_string.web_dir
 
     @property
     def nginx_web_dir(self):
         """
             default apache project dir
         """
-        return '/var/www/html'
+
+        return nginx_conf_string.web_dir
 
     @property
     def apache_dir_index(self):
         """
-            Currently, if a user requests a directory from the server, Apache 
-            will first look for a file called index.html. We want to tell our 
-            web server to prefer PHP files, so we'll make Apache look for an 
+            Currently, if a user requests a directory from the server, Apache
+            will first look for a file called index.html. We want to tell our
+            web server to prefer PHP files, so we'll make Apache look for an
             index.php file first.
         """
-        long_text = """<IfModule mod_dir.c>
-    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
-</IfModule>
-        """
-        return long_text
+
+        return apache_conf_string.module_index_str
 
     @property
     def phpinfo(self):
         """
-           In order to test that our system is configured properly for PHP, 
+           In order to test that our system is configured properly for PHP,
            we can create a very basic PHP script.
         """
-        long_text = """<?php
-phpinfo();
-?>
-        """
-        return long_text
+
+        return php_conf_string.phpinfo_str
 
     @property
     def nginx_web_config(self):
         """
            Nginx web config
         """
-        long_text = """server 
-{{
-    listen 80 default_server;
-    listen [::]:80 default_server;
 
-    root {0};
-    autoindex on;
-
-    # Add index.php to the list if you are using PHP
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    server_name localhost;
-
-    # Don't log robots.txt or favicon.ico files
-    location = /favicon.ico {{ log_not_found off; access_log off; }}
-    location = /robots.txt  {{ access_log off; log_not_found off; }}
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    location ~ \.php$ {{
-       include snippets/fastcgi-php.conf;   
-       # With php5-fpm:
-       fastcgi_pass unix:/var/run/php5-fpm.sock;
-    }}
-}}
-        """
-
-        long_text = long_text.format(self.nginx_web_dir)
-        return long_text
+        return nginx_conf_string.simple_web_config.format(self.nginx_web_dir)
 
     @property
     def nginx_web_ssl_config(self):
         """
            Nginx web ssl config
         """
-        long_text = """server 
-{{
-    listen 443 default_server;
-    listen [::]:443 default_server;
 
-    root {dt[0]};
-    autoindex on;
-    
-    # Add index.php to the list if you are using PHP
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    server_name localhost;
-
-    # Don't log robots.txt or favicon.ico files
-    location = /favicon.ico {{ log_not_found off; access_log off; }}
-    location = /robots.txt  {{ access_log off; log_not_found off; }}
-
-    ssl on;
-    ssl_certificate {dt[1]}/cert.pem;
-    ssl_certificate_key {dt[1]}/cert.key;
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    location ~ \.php$ {{
-       include snippets/fastcgi-php.conf;   
-       # With php5-fpm:
-       fastcgi_pass unix:/var/run/php5-fpm.sock;
-    }}
-}}
-        """
-
-        config = [self.nginx_web_dir, self.nginx_ssl_dir]
-        long_text = long_text.format(dt=config)
-        return long_text
+        dt = [self.nginx_web_dir, self.nginx_ssl_dir]
+        return nginx_conf_string.simple_ssl_web_conf.format(dt=dt)
 
     @property
     def python_env_dir(self):
@@ -241,119 +187,48 @@ phpinfo();
         """
            This ini file is django uwsgi configuration
         """
-        long_text = """[uwsgi]
-chdir = {0}/{1}
-home = {2}
-module = {1}.wsgi:application
 
-uid = vagrant
-gid = www-data
-
-master = true
-processes = 5
-
-socket = /tmp/{1}.sock
-chmod-socket = 664
-vacuum = true
-        """
-        return long_text
+        return django_conf_string.uwsgi_ini_conf
 
     @property
     def django_uwsgi_with_nginx(self):
         """
            This ini file nginx configuration with uwsgi application
         """
-        long_text = """server {{
-    listen 80;
-    server_name localhost;
 
-    location = /favicon.ico {{ 
-        access_log off; 
-        log_not_found off; 
-    }}
-
-    location / {{
-        include uwsgi_params;
-        uwsgi_pass unix:/tmp/{0}.sock;
-    }}
-}}
-        """
-        long_text = long_text.format(self.project)
-        return long_text
+        return django_conf_string.uwsgi_nginx_conf.format(self.project)
 
     @property
     def supervisor_uwsgi_ini(self):
         """
-           supervisor control uwsgi configuration 
+           supervisor control uwsgi configuration
         """
-        long_text = """[program:{0}]
-command=uwsgi --ini {1}/{0}.ini
-directory={1}
-numprocs=1
-stdout_logfile=/var/log/{0}_out.log
-stderr_logfile=/var/log/{0}_error.log
-autostart=true
-autorestart=true
-startsecs=2
-stopwaitsecs=2
-killasgroup=true
-priority=998   
-        """
-        return long_text
+
+        return django_conf_string.uwsgi_supervisor_conf
 
     @property
     def supervisor_config_dir(self):
         """
             supervisor control config dir
         """
-        return '/etc/supervisor/conf.d'
-
+        return django_conf_string.supervisor_dir
 
     @property
     def nginx_ssl_dir(self):
         """
             ssl directory
         """
-        return '/etc/nginx/ssl'
-
+        return nginx_conf_string.web_ssl_dir
 
     @property
     def nginx_web_wordpress_config(self):
         """
            Nginx web wordpress config
         """
-        long_text = """server 
-{{
-    listen 80 default_server;
-    listen [::]:80 default_server;
 
-    root {0}/{1};
-    autoindex on;
-
-    # Add index.php to the list if you are using PHP
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    server_name localhost;
-    location / {{
-        try_files $uri $uri/ /index.php?q=$uri&$args;
-    }}
-
-    # Don't log robots.txt or favicon.ico files
-    location = /favicon.ico {{ log_not_found off; access_log off; }}
-    location = /robots.txt  {{ access_log off; log_not_found off; }}
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    location ~ \.php$ {{
-       include snippets/fastcgi-php.conf;   
-       # With php5-fpm:
-       fastcgi_pass unix:/var/run/php5-fpm.sock;
-       fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    }}
-}}
-        """
-
-        long_text = long_text.format(self.nginx_web_dir, self.project)
-        return long_text
+        return nginx_conf_string.wordpress_web_conf.format(
+            self.nginx_web_dir, self.project
+        )
 
     @abstractmethod
     def install(self):

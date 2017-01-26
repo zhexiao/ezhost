@@ -12,21 +12,22 @@ from ezhost.ServerLnmpWordpress import ServerLnmpWordpress
 from ezhost.ServerDjangoUwsgi import ServerDjangoUwsgi
 from ezhost.ServerCommand import ServerCommand
 
+
 class ServerBase(ServerAbstract):
+
     def __init__(self, args, configure_obj):
         self.args = args
         self.configure_obj = configure_obj
 
         # set common parameters
         self.server_type = self.args.server
-        
         # parser parameters
         self._parse_parameters()
 
-        # initial host 
+        # initial host
         self.init_host()
 
-        # install 
+        # install
         self.install()
 
     def _parse_parameters(self):
@@ -42,25 +43,27 @@ class ServerBase(ServerAbstract):
             try:
                 self.host_string = self.configure_obj['host']
                 self.host_user = self.configure_obj['user']
-            except Exception as e:
-                raise KeyError('Lack of required host information. Please check whether you have set host address or login user.')
-           
+            except:
+                raise KeyError(
+                    'Lack of required host information. Please check whether you have set host address or login user.')
+
             try:
                 self.host_keyfile = self.configure_obj['keyfile']
-            except Exception as e:
+            except:
                 self.host_keyfile = None
 
             try:
                 self.host_passwd = self.configure_obj['passwd']
-            except Exception as e:
+            except:
                 self.host_passwd = None
 
             if self.host_passwd is None and self.host_keyfile is None:
-                raise KeyError('Lack of required host information. Please check whether you have set login password or keyfile.')
+                raise KeyError(
+                    'Lack of required host information. Please check whether you have set login password or keyfile.')
 
     def init_host(self):
         """
-            Initial  host 
+            Initial host
         """
         env.host_string = self.host_string
         env.user = self.host_user
@@ -71,6 +74,7 @@ class ServerBase(ServerAbstract):
         """
             install the server
         """
+
         try:
             if self.args.server is not None:
                 server = ServerLists(self.server_type)
@@ -79,4 +83,3 @@ class ServerBase(ServerAbstract):
                 ServerCommand(self.args)
         except Exception as e:
             raise e
-       

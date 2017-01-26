@@ -23,7 +23,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version='1.3.6',
 
-    description='Easily install server',
+    description='Let server install became simple and easy.',
     long_description=long_description,
 
     # The project's main homepage.
@@ -31,7 +31,7 @@ setup(
 
     # Author details
     author='Zhe Xiao',
-    author_email='zhexiao27@gmail.com',
+    author_email='zhexiao@163.com',
 
     # Choose your license
     license='MIT',
