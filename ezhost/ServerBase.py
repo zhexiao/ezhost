@@ -44,8 +44,7 @@ class ServerBase(ServerAbstract):
                 self.host_string = self.configure_obj['host']
                 self.host_user = self.configure_obj['user']
             except:
-                raise KeyError(
-                    'Lack of required host information. Please check whether you have set host address or login user.')
+                raise KeyError('Lack of required host information. Please check whether you have set host address or login user.')
 
             try:
                 self.host_keyfile = self.configure_obj['keyfile']
@@ -58,8 +57,7 @@ class ServerBase(ServerAbstract):
                 self.host_passwd = None
 
             if self.host_passwd is None and self.host_keyfile is None:
-                raise KeyError(
-                    'Lack of required host information. Please check whether you have set login password or keyfile.')
+                raise KeyError('Lack of required host information. Please check whether you have set login password or keyfile.')
 
     def init_host(self):
         """
