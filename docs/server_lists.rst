@@ -63,7 +63,7 @@ Keyword
 Configuration
 ~~~~~~~~~~~~~~~~~~~
 
-- web config path: ``/etc/nginx/sites-available/default``
+- nginx config path: ``/etc/nginx/sites-available/default``
 - mysql password: ``password``
 - web root: ``/var/www/html``
 - phpinfo path: ``/var/www/html/info.php``
@@ -73,11 +73,16 @@ Restart
 ~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
-   
+   # for php5
    $ sudo service php5-fpm restart
+
+   # for php7
+   $ sudo service php7.0-fpm restart
+
+   # for niginx
    $ sudo service nginx restart
 
-.. note:: For the php interpret in LNMP Server, we are use ``php-fpm`` rather than ``php-cgi``.
+.. note:: We use ``php-fpm`` as the php interpret in LNMP Server.
 
 |
 
