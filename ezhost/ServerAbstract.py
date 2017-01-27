@@ -238,6 +238,16 @@ class ServerAbstract(metaclass=ABCMeta):
             self.nginx_web_dir, self.project
         )
 
+    @property
+    def nginx_php7_web_wordpress_config(self):
+        """
+           Nginx web wordpress config
+        """
+
+        return nginx_conf_string.wordpress_php7_web_conf.format(
+            self.nginx_web_dir, self.project
+        )
+
     @abstractmethod
     def install(self):
         """

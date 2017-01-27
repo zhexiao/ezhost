@@ -1,11 +1,11 @@
 Project Lists
 ===============
 
-In here, i will show you all exist projects.
+In here, we can install the most popular projects just by few commands.
 
 |
 
-Wordpress with LNMP 
+Wordpress with LNMP (Linux+Nignx+Mysql+PHP)
 -------------------------------------------------------
 
 Introduction
@@ -22,7 +22,7 @@ Keyword
 
    -s lnmp-wordpress -p news or --server lnmp-wordpress --project news
 
-.. note:: If you have the option ``-p news``, project will save into ``/var/www/html/news``. Otherwise, it will save to default folder ``/var/www/html/demo``.
+.. note:: ``-p`` is indicate the project name. If you are use the option ``-p news``, project will create at ``/var/www/html/news``. Otherwise, project will use the default name ``demo`` and create a folder which is ``/var/www/html/demo``.
 
 
 Create Database 
