@@ -38,9 +38,6 @@ class ServerLnmpWordpress(ServerCommon):
 
     def install_wordpress(self):
         if self.args.force or prompt(red(' * Install Wordpress (y/n)?'), default='y') == 'y':
-            # for wordpress plugin, using SSH respectively.
-            sudo('sudo apt-get install libssh2-php -y')
-
             # create project web server config file if not exist
             with cd('/etc/nginx/sites-available'):
                 if not exists(self.project):
@@ -52,7 +49,7 @@ class ServerLnmpWordpress(ServerCommon):
                     # save wordpress config
                     put(StringIO(self.nginx_web_wordpress_config), self.project, use_sudo=True)
                 except:
-                    sudo('php7.0-fpm -v')
+                    sudo('php-fpm7.0 -v')
                     # save wordpress config
                     put(StringIO(self.nginx_php7_web_wordpress_config), self.project, use_sudo=True)
 
