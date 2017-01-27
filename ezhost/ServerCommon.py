@@ -72,3 +72,13 @@ class ServerCommon(ServerAbstract):
             print(green(' * Make Nginx from http to https.'))
             print(green(' * Done'))
             print()
+
+    def common_install_apache2(self):
+        """
+            Install apache2 web server
+        """
+        sudo('apt-get install apache2 -y')
+
+        print(green(' * Installed Apache2 in the system.'))
+        print(green(' * Done'))
+        print()
