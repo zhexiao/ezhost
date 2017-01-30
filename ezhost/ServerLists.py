@@ -8,5 +8,6 @@ All valid server lists
 class ServerLists(Enum):
     ServerLamp = 'lamp'
     ServerLnmp = 'lnmp'
-    ServerLnmpWordpress = 'lnmp-wordpress'
+    ServerDjango = 'django'
     ServerDjangoUwsgi = 'django-uwsgi'
+    ServerLnmpWordpress = 'lnmp-wordpress'

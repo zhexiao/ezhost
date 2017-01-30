@@ -1,7 +1,7 @@
 Server Lists
 ===============
 
-In here, i will show you all exist servers.
+In here, we can install the most popular servers just by few commands.
 
 |
 
@@ -83,6 +83,86 @@ Restart
    $ sudo service nginx restart
 
 .. note:: We use ``php-fpm`` as the php interpret in LNMP Server.
+
+|
+
+Django Basic Web Server
+----------------------------------------------------------
+
+Introduction
+~~~~~~~~~~~~~~~~
+
+Django + Mysql
+
+Django is a powerful web framework that can help you get your Python application or website off the ground. Django includes a simplified development server for testing your code locally, but for anything even slightly production related, a more secure and powerful web server is required.
+
+
+Keyword
+~~~~~~~~~
+
+.. code-block:: bash
+   
+   -s django -p project_name or --server django --project project_name
+
+.. note:: if you provide the parameter ``-p project_name``. We will create ``project_name folder`` for your django web application. Otherwise the project_name will use the default name ``demo``.
+
+
+Configuration
+~~~~~~~~~~~~~~~
+
+- mysql password: ``password``
+- web root: ``/var/www/html``
+- project root: ``/var/www/html/project_name``
+- virtualenv path: ``~/.project_name``
+
+.. note:: The ``project_name`` come from ``-p`` value. For example, if you provide ``-p zhex``. Then we will generate ``/var/www/html/zhex`` as project root.
+
+
+Mysql Config
+~~~~~~~~~~~~~~
+Use Mysql database rather than default django database Sqlite3.
+
+- Go to ``/var/www/html/project_name/project_name`` and edit settings.py
+- Change DATABASES config as follows
+
+.. code-block:: bash
+   
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'HOST': 'localhost',
+           'NAME' : 'your_database_name',
+           'USER' : 'root',
+           'PASSWORD' : 'password'
+       }
+   }
+
+- Go to ``/var/www/html/project_name`` and running database migrate
+
+.. code-block:: bash
+   
+   $ python manage.py migrate 
+
+
+Virtualenv
+~~~~~~~~~~~
+Virtualenv is a tool to create isolated Python environments.
+
+For django project, we will use virtualenv to create your project virtual environment and save your python packages inside. You can find your virtualenv folder at ``~/.project_name``.
+
+The following command is a basic usage for your virtualenv.
+
+.. code-block:: bash
+    
+   # go to your env dir
+   $ cd ~/.project_name
+
+   # active your env
+   $ source bin/activate
+   
+   # deactive your env
+   $ deactivate
+
 
 |
 

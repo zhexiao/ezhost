@@ -8,9 +8,6 @@ Usage:
     $ ezhost -s lnmp -H 127.0.0.1:2201 -U vagrant -P vagrant
 
 Author: Zhe Xiao
-
-Contact: zhexiao27@gmail.com
-
 Github: https://github.com/zhexiao/ezhost.git
 """
 
