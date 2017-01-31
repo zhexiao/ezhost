@@ -87,8 +87,7 @@ class ServerCommon(ServerAbstract):
         sudo('apt-get install python3 python3-pip -y')
         sudo('pip3 install virtualenv')
 
-        self.virtual_env_path = '~/.{0}'.format(self.project)
-        run('virtualenv {0}'.format(self.virtual_env_path))
+        run('virtualenv {0}'.format(self.python_env_dir))
 
         print(green(' * Installed Python3 virtual environment in the system.'))
         print(green(' * Done'))

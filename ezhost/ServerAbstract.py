@@ -188,7 +188,7 @@ class ServerAbstract(metaclass=ABCMeta):
         """
             Python virtualenv dir
         """
-        return '{0}/{1}/env'.format(self.nginx_web_dir, self.project)
+        return '~/.{0}'.format(self.project)
 
     @property
     def django_uwsgi_ini(self):

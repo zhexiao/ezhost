@@ -53,7 +53,7 @@ class ServerDjango(ServerCommon):
     def install_packages(self):
         if self.args.force or prompt(red(' * Install Python3 packages into virtual environment (y/n)?'), default='y') == 'y':
             # go to virtualenv folder
-            with cd(self.virtual_env_path):
+            with cd(self.python_env_dir):
                 run('./bin/pip install django djangorestframework django-filter markdown mysqlclient')
                 run('./bin/pip freeze')
 
@@ -69,7 +69,7 @@ class ServerDjango(ServerCommon):
 
             # go to project folder and create django project
             with cd(self.nginx_web_dir):
-                sudo('{0}/bin/django-admin startproject {1}'.format(self.virtual_env_path, self.project))
+                sudo('{0}/bin/django-admin startproject {1}'.format(self.python_env_dir, self.project))
                 sudo('chmod -R 777 {0}/{1}'.format(self.nginx_web_dir, self.project))
 
             print(green(' * Installed Django project at /var/www/html.'))

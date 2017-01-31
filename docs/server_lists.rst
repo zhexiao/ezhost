@@ -39,6 +39,7 @@ Restart
    
    $ sudo service apache2 restart
 
+
 |
 
 LNMP Server
@@ -83,6 +84,7 @@ Restart
    $ sudo service nginx restart
 
 .. note:: We use ``php-fpm`` as the php interpret in LNMP Server.
+
 
 |
 
@@ -181,7 +183,7 @@ The following command is a basic usage for your virtualenv.
 
 |
 
-Django Web Server
+Django Advanced Web Server
 ----------------------------------------------------------
 
 Introduction
@@ -201,42 +203,52 @@ Keyword
    
    -s django-uwsgi -p project_name or --server django-uwsgi --project project_name
 
-.. note:: if you give us the parameter ``-p project_name``. Then we will create a ``project_name folder`` for your django web application. Otherwise the project_name will use the default value ``demo``.
+.. note:: if you provide the parameter ``-p project_name``. We will create ``project_name folder`` for your django web application. Otherwise the project_name will use the default name ``demo``.
 
 
 Configuration
 ~~~~~~~~~~~~~~~
 
-- mysql password: ``password``
-- nginx config path: ``/etc/nginx/sites-enabled/default``
+Normal Config
+==============
 - web root: ``/var/www/html``
 - project root: ``/var/www/html/project_name``
-- virtualenv path: ``/var/www/html/project_name/env``
+- virtualenv path: ``~/.project_name``
+- mysql password: ``password``
+
+Server Config
+==============
+- nginx config path: ``/etc/nginx/sites-enabled/default``
 - uwsgi config path: ``/var/www/html/project_name/project_name.ini``
 - supervisor config path: ``/etc/supervisor/conf.d/project_name_sysd.conf``
+
+Log Config
+=============
 - django normal output file: ``/var/log/project_name_out.log``
 - django error output file: ``/var/log/project_name_error.log``
 
-.. note:: All the ``project_name`` in the above docs will convert to your ``-p`` value. For example, if you indicate ``-p zhex``. Then the project root will be ``/var/www/html/zhex``, the supervisor config path will be ``/etc/supervisor/conf.d/zhex_sysd.conf`` and so on...
+.. note:: The ``project_name`` come from ``-p`` value. For example, if you provide ``-p zhex``. Then we will generate ``/var/www/html/zhex`` as project root and the supervisor config path will became ``/etc/supervisor/conf.d/zhex_sysd.conf``
 
 
 Virtualenv
 ~~~~~~~~~~~
+Virtualenv is a tool to create isolated Python environments.
 
-For django project, we will auto use virtualenv to create a virtual environment to save all these installed packages. You can find your virtualenv folder at ``/var/www/html/project_name/env``.
+For django project, we will use virtualenv to create your project virtual environment and save your python packages inside. You can find your virtualenv folder at ``~/.project_name``.
 
 The following command is a basic usage for your virtualenv.
 
 .. code-block:: bash
     
-   # go to your project dir
-   $ cd /var/www/html/project_name
+   # go to your env dir
+   $ cd ~/.project_name
 
    # active your env
-   $ source env/bin/activate
+   $ source bin/activate
    
-   # if you want to deactive your env
+   # deactive your env
    $ deactivate
+
 
 Restart
 ~~~~~~~~~
@@ -246,6 +258,6 @@ Restart
    $ service nginx restart
    $ sudo supervisorctl reread && sudo supervisorctl update
 
-.. note:: we are use supervisor to control the uwsgi service auto restart. More details about supervisor: http://supervisord.org/index.html
+.. important:: We use supervisor as the uwsgi service controller in order to auto restart. More details about supervisor: http://supervisord.org/index.html
 
 |
