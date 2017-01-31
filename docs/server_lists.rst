@@ -273,6 +273,7 @@ Restart
 .. seealso:: If you reboot server and get a ``502 bad request`` at your website. Don't worry, it happens because supervisor service is not autostart.
 
 .. code-block:: bash
+
    For ubuntu 16
    # make sure Supervisor comes up after a reboot.
    $ sudo systemctl enable supervisor
