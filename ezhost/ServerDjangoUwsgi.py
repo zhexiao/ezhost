@@ -48,12 +48,19 @@ class ServerDjangoUwsgi(ServerCommon):
             # nginx configuration
             put(StringIO(self.django_uwsgi_with_nginx), '/etc/nginx/sites-enabled/default', use_sudo=True)
 
+            # restart server
+            sudo('service nginx restart')
+
     def install_uwsgi(self):
         if self.args.force or prompt(red(' * Install Uwsgi service (y/n)?'), default='y') == 'y':
             sudo('pip3 install uwsgi')
 
+            # uwsgi config need real env path
+            with cd(self.python_env_dir):
+                real_env_path = run('pwd')
+
             # uwsgi config string
-            django_uwsgi_ini = self.django_uwsgi_ini.format(self.nginx_web_dir, self.project, self.python_env_dir)
+            django_uwsgi_ini = self.django_uwsgi_ini.format(self.nginx_web_dir, self.project, real_env_path)
 
             # modify uwsgi config file
             with cd(self.project_dir):
@@ -81,6 +88,11 @@ class ServerDjangoUwsgi(ServerCommon):
                 # supervisor control uwsgi config
                 put(StringIO(supervisor_uwsgi_ini), '{0}_sysd.conf'.format(self.project), use_sudo=True)
 
+            # start supervisord
+            with cd(self.supervisor_etc_dir):
+                sudo('supervisord -c supervisord.conf')
+                # sudo('supervisorctl -c supervisord.conf')
+
             # create supervisor log and error file
             with cd('/var/log'):
                 if not exists('{0}_out.log'.format(self.project)):
@@ -89,7 +101,12 @@ class ServerDjangoUwsgi(ServerCommon):
                 if not exists('{0}_error.log'.format(self.project)):
                     sudo('touch {0}_error.log'.format(self.project))
 
-            sudo('sudo supervisorctl reread && sudo supervisorctl update')
+            # update config file
+            sudo('supervisorctl reread')
+            sudo('supervisorctl update')
+
+            # start uwsgi services
+            sudo('supervisorctl start {0}'.format(self.project))
 
             print(green(' * Installed Supervisor controller in the system.'))
             print(green(' * Done '))

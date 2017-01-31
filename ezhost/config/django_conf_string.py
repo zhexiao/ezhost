@@ -1,4 +1,5 @@
-supervisor_dir = '/etc/supervisor/conf.d'
+supervisor_dir = '/etc/supervisor'
+supervisor_conf_dir = '{0}/conf.d'.format(supervisor_dir)
 
 uwsgi_ini_conf = """[uwsgi]
 chdir = {0}/{1}

@@ -255,8 +255,18 @@ Restart
 
 .. code-block:: bash
    
+   # restart nginx server
    $ service nginx restart
-   $ sudo supervisorctl reread && sudo supervisorctl update
+
+   # restart uwsgi service
+   $ sudo supervisorctl restart project_name
+
+   # start uwsgi service
+   $ sudo supervisorctl start project_name
+
+   # reload supervisor file (only run it when you have supervisor config changes)
+   $ sudo supervisorctl reread
+   $ sudo supervisorctl update
 
 .. important:: We use supervisor as the uwsgi service controller in order to auto restart. More details about supervisor: http://supervisord.org/index.html
 

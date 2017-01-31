@@ -215,11 +215,18 @@ class ServerAbstract(metaclass=ABCMeta):
         return django_conf_string.uwsgi_supervisor_conf
 
     @property
-    def supervisor_config_dir(self):
+    def supervisor_etc_dir(self):
         """
             supervisor control config dir
         """
         return django_conf_string.supervisor_dir
+
+    @property
+    def supervisor_config_dir(self):
+        """
+            supervisor control config dir
+        """
+        return django_conf_string.supervisor_conf_dir
 
     @property
     def nginx_ssl_dir(self):
