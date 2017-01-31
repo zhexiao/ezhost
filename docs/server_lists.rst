@@ -123,6 +123,12 @@ Mysql Config
 Use Mysql database rather than default django database Sqlite3.
 
 - Go to ``/var/www/html/project_name/project_name`` and edit settings.py
+
+.. code-block:: bash
+   
+   $ cd /var/www/html/project_name/project_name
+   $ vim settings.py
+
 - Change DATABASES config as follows
 
 .. code-block:: bash
@@ -137,11 +143,20 @@ Use Mysql database rather than default django database Sqlite3.
        }
    }
 
+- Active your project virtual environment
+
+.. code-block:: bash
+   
+   $ source ~/.project_name/bin/activate 
+
 - Go to ``/var/www/html/project_name`` and running database migrate
 
 .. code-block:: bash
    
+   $ cd ..
    $ python manage.py migrate 
+
+.. important:: Before you run `migrate`, please make sure you already create your database.
 
 
 Virtualenv
