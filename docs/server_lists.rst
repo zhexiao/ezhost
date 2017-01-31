@@ -275,14 +275,14 @@ Restart
 .. code-block:: bash
 
    For ubuntu 16
-   # make sure Supervisor comes up after a reboot.
+   # supervisor comes up after a reboot.
    $ sudo systemctl enable supervisor
 
-   # bring Supervisor up right now.
+   # bring supervisor up right now.
    $ sudo systemctl start supervisor
    
    For ubuntu 14
-   #  Supervisor comes up after a reboot
+   # supervisor comes up after a reboot
    $ sudo update-rc.d supervisor enable
    
 |
