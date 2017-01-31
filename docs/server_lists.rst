@@ -210,20 +210,20 @@ Configuration
 ~~~~~~~~~~~~~~~
 
 Normal Config
-==============
+
 - web root: ``/var/www/html``
 - project root: ``/var/www/html/project_name``
 - virtualenv path: ``~/.project_name``
 - mysql password: ``password``
 
 Server Config
-==============
+
 - nginx config path: ``/etc/nginx/sites-enabled/default``
 - uwsgi config path: ``/var/www/html/project_name/project_name.ini``
 - supervisor config path: ``/etc/supervisor/conf.d/project_name_sysd.conf``
 
 Log Config
-=============
+
 - django normal output file: ``/var/log/project_name_out.log``
 - django error output file: ``/var/log/project_name_error.log``
 
