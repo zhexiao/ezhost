@@ -274,10 +274,10 @@ Restart
 
 .. code-block:: bash
    
-   # Make sure Supervisor comes up after a reboot.
-   sudo systemctl enable supervisor
+   # make sure Supervisor comes up after a reboot.
+   $ sudo systemctl enable supervisor
 
-   # Bring Supervisor up right now.
-   sudo systemctl start supervisor
+   # bring Supervisor up right now.
+   $ sudo systemctl start supervisor
 
 |
