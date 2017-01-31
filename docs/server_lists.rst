@@ -270,4 +270,14 @@ Restart
 
 .. important:: We use supervisor as the uwsgi service controller in order to auto restart. More details about supervisor: http://supervisord.org/index.html
 
+.. seealso:: If you reboot server and get a ``502 bad request`` at your website. Don't worry, it happens because supervisor service is not autostart.
+
+.. code-block:: bash
+   
+   # Make sure Supervisor comes up after a reboot.
+   sudo systemctl enable supervisor
+
+   # Bring Supervisor up right now.
+   sudo systemctl start supervisor
+
 |
