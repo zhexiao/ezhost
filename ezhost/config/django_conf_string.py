@@ -6,7 +6,7 @@ chdir = {0}/{1}
 home = {2}
 module = {1}.wsgi:application
 
-uid = vagrant
+uid = {3}
 gid = www-data
 
 master = true
