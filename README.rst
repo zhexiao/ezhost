@@ -7,9 +7,6 @@ Welcome to ezhost
 .. image:: https://travis-ci.org/zhexiao/ezhost.svg?branch=master
     :target: https://travis-ci.org/zhexiao/ezhost/builds
     
-.. image:: https://coveralls.io/repos/github/zhexiao/ezhost/badge.svg?branch=master
-    :target: https://coveralls.io/github/zhexiao/ezhost?branch=master
-    
 .. image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg
     :target: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6
     
