@@ -100,8 +100,15 @@ class ServerDjangoUwsgi(ServerCommon):
                     sudo('touch {0}_error.log'.format(self.project))
 
             # enable and start supervisor
-            sudo('systemctl enable supervisor')
-            sudo('systemctl start supervisor')
+            try:
+                # ubuntu 16
+                sudo('systemctl enable supervisor')
+                sudo('systemctl start supervisor')
+            except:
+                # ubuntu 14
+                sudo('supervisorctl reread')
+                sudo('supervisorctl update')
+                sudo('update-rc.d supervisor enable')
 
             print(green(' * Installed Supervisor controller in the system.'))
             print(green(' * Done '))
