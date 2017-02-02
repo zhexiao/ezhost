@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Abstract class for all server class
-"""
-
-# internal libs
 import os
 from abc import ABCMeta, abstractmethod, abstractproperty
 import ezhost.config.apache_conf_string as apache_conf_string
@@ -13,6 +8,9 @@ import ezhost.config.django_conf_string as django_conf_string
 
 
 class ServerAbstract(metaclass=ABCMeta):
+    """
+        Server abstract class, all server should extend from it
+    """
 
     def __init__(self):
         # host information

@@ -1,4 +1,4 @@
-Welcome to ezhost's documentation!
+Welcome to ezhost's documentation
 ==================================
 
 Ezhost is a python package used for make server install and configuration became simple 

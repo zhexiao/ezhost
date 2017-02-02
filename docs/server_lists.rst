@@ -74,6 +74,7 @@ Restart
 ~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
+
    # for php5
    $ sudo service php5-fpm restart
 

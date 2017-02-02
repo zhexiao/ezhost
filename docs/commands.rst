@@ -36,7 +36,7 @@ Keyword
 |
 
 Login to host server
--------------------
+----------------------
 
 You can use the following *[keyword]* to login into your remote server:
 
@@ -52,7 +52,7 @@ Keyword
 |
 
 Login to mysql server
--------------------
+-----------------------
 
 You can use the following *[keyword]* to login to your remote mysql server:
 

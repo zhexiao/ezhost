@@ -15,6 +15,9 @@ from ezhost.ServerCommand import ServerCommand
 
 
 class ServerBase(ServerAbstract):
+    """
+        Server command bootstrap class
+    """
 
     def __init__(self, args, configure_obj):
         self.args = args
