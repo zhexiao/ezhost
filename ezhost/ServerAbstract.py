@@ -25,7 +25,8 @@ class ServerAbstract(metaclass=ABCMeta):
     @property
     def host_string(self):
         """
-            Host String getter
+            Returns:
+                str: hostname string
         """
         return self._host_string
 
