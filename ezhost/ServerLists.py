@@ -1,11 +1,11 @@
 from enum import Enum
 
-"""
-All valid server lists
-"""
-
 
 class ServerLists(Enum):
+    """
+        All valid server lists and shortcut
+    """
+
     ServerLamp = 'lamp'
     ServerLnmp = 'lnmp'
     ServerDjango = 'django'
