@@ -55,5 +55,4 @@ If your working environment is python2, run the following command for setup virt
    $ source ~/.ezhost/bin/activate
    $ pip install ezhost
 
-
- .. important:: If your environment is python2, before running ``ezhost`` command, please activate your virtualenv at first ``source ~/.ezhost/bin/activate``.
+.. important:: If your environment is python2, before running ``ezhost`` command, please activate your virtualenv at first ``source ~/.ezhost/bin/activate``.
