@@ -40,13 +40,13 @@ If you have any errors during the ezhost installing, you'd better install these 
 Ezhost Install
 ---------------
 
-if your working environment is python>=3.*, run the following command for install.
+if your working environment is ``python>=3.*``, run the following command for install.
 
 .. code-block:: bash
   
    $ sudo pip3 install ezhost
 
-If your working environment is python2, run the following command for setup virtualenv.
+If your working environment is ``python2``, run the following command for setup virtualenv.
 
 .. code-block:: bash
   
