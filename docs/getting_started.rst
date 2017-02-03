@@ -40,8 +40,19 @@ If you have any errors during the ezhost installing, you'd better install these 
 Ezhost Install
 ---------------
 
-After you install pip3, you can install ezhost directly from PyPI.
+if your working environment is python>=3.*, run the following command for install.
 
 .. code-block:: bash
+  
+   $ sudo pip3 install ezhost
 
-   $ sudo pip3 install ezhost
+If your working environment is python2, run the following command for setup virtualenv.
+
+.. code-block:: bash
+  
+   $ sudo pip install virtualenv
+   $ virtualenv -p python3 ~/.ezhost
+   $ source ~/.ezhost/bin/activate
+   $ pip install ezhost
+   
+ .. important:: If your environment is python2, before running ``ezhost`` command, please activate your virtualenv at first ``source ~/.ezhost/bin/activate``.
