@@ -10,7 +10,6 @@ Welcome to ezhost
 .. image:: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6/badge.svg
     :target: https://www.versioneye.com/user/projects/57475872ce8d0e0047372ed6
     
-
 Purpose
 ============
 
