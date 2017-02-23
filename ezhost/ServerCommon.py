@@ -18,6 +18,10 @@ from fabric.contrib.files import exists
 
 
 class ServerCommon(ServerAbstract):
+    """
+        All common function will create inside this class.
+    """
+
     def common_update_sys(self):
         """
             update system package
@@ -84,6 +88,9 @@ class ServerCommon(ServerAbstract):
         print()
 
     def common_install_python_env(self):
+        """
+            Install python virtualenv
+        """
         sudo('apt-get install python3 python3-pip -y')
         sudo('pip3 install virtualenv')
 

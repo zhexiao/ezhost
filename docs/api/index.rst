@@ -8,4 +8,5 @@ code.
 
     server_abstract
     server_base
+    server_common
     server_lamp
