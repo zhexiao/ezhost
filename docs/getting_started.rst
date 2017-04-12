@@ -28,8 +28,8 @@ If you have any errors during the ezhost installing, you'd better install these 
 .. code-block:: bash
 
    # update python tool
-   $ pip3 install --upgrade setuptools
-   $ pip3 install --upgrade distribute
+   $ sudo pip3 install --upgrade setuptools
+   $ sudo pip3 install --upgrade distribute
 
    # install cryptography
    $ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
