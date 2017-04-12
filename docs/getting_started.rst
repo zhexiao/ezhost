@@ -33,7 +33,7 @@ If you have any errors during the ezhost installing, you'd better install these 
 
    # install cryptography
    $ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-   $ pip3 install cryptography
+   $ sudo pip3 install cryptography
   
 |
 
