@@ -1,138 +1,100 @@
-Server Lists
+服务器列表
 ===============
 
-In here, we can install the most popular servers just by few commands.
-
-|
-
-LAMP Server
+LAMP服务器
 -----------------------------------------------
 
-Introduction
+介绍
 ~~~~~~~~~~~~~
 
 Linux + Apache + Mysql + PHP
 
-A "LAMP" stack is a group of open source software that is typically installed together to enable a server to host dynamic websites and web apps. This term is actually an acronym which represents the Linux operating system, with the Apache web server. The site data is stored in a MySQL database, and dynamic content is processed by PHP.
-
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: bash
    
-   -s lamp or --server lamp
+   -s lamp 或者 --server lamp
 
-
-Configuration
+默认的配置信息
 ~~~~~~~~~~~~~~~~~~~
 
-- mysql password: ``password``
-- web root: ``/var/www/html``
-- phpinfo path: ``/var/www/html/info.php``
+- Mysql密码: ``password``
+- Web工作目录: ``/var/www/html``
+- phpinfo路径: ``/var/www/html/info.php``
 
-
-Restart
+服务器重启
 ~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
    
    $ sudo service apache2 restart
 
-
-|
-
 LNMP Server
 -------------------------------------------
 
-Introduction
+介绍
 ~~~~~~~~~~~~~~~~~
 
 Linux + Nginx + Mysql + PHP
 
-The LNMP software stack is a group of software that can be used to serve dynamic web pages and web applications. This is an acronym that describes a Linux operating system, with an Nginx web server. The backend data is stored in MySQL and the dynamic processing is handled by PHP.
-
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: bash
    
-   -s lnmp or --server lnmp
+   -s lnmp 或者 --server lnmp
 
-
-Configuration
+默认的配置信息
 ~~~~~~~~~~~~~~~~~~~
 
-- nginx config path: ``/etc/nginx/sites-available/default``
-- mysql password: ``password``
-- web root: ``/var/www/html``
-- phpinfo path: ``/var/www/html/info.php``
+- nginx配置文件路径: ``/etc/nginx/sites-available/default``
+- Mysql密码: ``password``
+- Web工作目录: ``/var/www/html``
+- phpinfo路径: ``/var/www/html/info.php``
 
-
-Restart
+重启
 ~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   # for php5
+   # php5
    $ sudo service php5-fpm restart
 
-   # for php7
+   # php7
    $ sudo service php7.0-fpm restart
 
-   # for niginx
+   # nginx
    $ sudo service nginx restart
 
-.. note:: We use ``php-fpm`` as the php interpret in LNMP Server.
-
-
-|
-
-Django Basic Web Server
+基础的Django Web服务器
 ----------------------------------------------------------
 
-Introduction
+介绍
 ~~~~~~~~~~~~~~~~
 
 Django + Mysql
 
-Django is a powerful web framework that can help you get your Python application or website off the ground. Django includes a simplified development server for testing your code locally, but for anything even slightly production related, a more secure and powerful web server is required.
-
-
-Keyword
-~~~~~~~~~
-
 .. code-block:: bash
    
-   -s django -p project_name or --server django --project project_name
+   -s django -p project_name 或者 --server django --project project_name
 
-.. note:: if you provide the parameter ``-p project_name``. We will create ``project_name folder`` for your django web application. Otherwise the project_name will use the default name ``demo``.
+.. note:: 如果使用 ``-p project_name`` 参数，则会创建一个以 ``project_name`` 为名字的文件夹，并将Django项目放置在该文件夹下面，否则默认使用 ``demo`` 作为文件夹名。
 
 
-Configuration
+默认的配置信息
 ~~~~~~~~~~~~~~~
 
-- mysql password: ``password``
-- web root: ``/var/www/html``
-- project root: ``/var/www/html/project_name``
-- virtualenv path: ``~/.project_name``
+- Mysql密码: ``password``
+- 项目路径: ``/var/www/html/project_name``
+- Python虚拟环境路径: ``~/.project_name``
 
-.. note:: The ``project_name`` come from ``-p`` value. For example, if you provide ``-p zhex``. Then we will generate ``/var/www/html/zhex`` as project root.
+Django的Mysql配置
+~~~~~~~~~~~~~~~~~~~
+默认安装完成后,Django使用的数据库是Sqlite3,我们需要将其修改成为Mysql
 
-
-Mysql Config
-~~~~~~~~~~~~~~
-Use Mysql database rather than default django database Sqlite3.
-
-- Go to ``/var/www/html/project_name/project_name`` and edit settings.py
+- 编辑``/var/www/html/project_name/project_name/settings.py``
 
 .. code-block:: bash
    
    $ cd /var/www/html/project_name/project_name
    $ vim settings.py
 
-- Change DATABASES config as follows
+- 修改数据库配置为Mysql
 
 .. code-block:: bash
    
@@ -146,144 +108,78 @@ Use Mysql database rather than default django database Sqlite3.
        }
    }
 
-- Active your project virtual environment
+- 激活Django项目的虚拟环境
 
 .. code-block:: bash
    
    $ source ~/.project_name/bin/activate 
 
-- Go to ``/var/www/html/project_name`` and running database migrate
+- 进入 ``/var/www/html/project_name`` 目录并执行数据库迁移
 
 .. code-block:: bash
    
-   $ cd ..
+   $ cd /var/www/html/project_name
    $ python manage.py migrate 
 
-.. important:: Before you run `migrate`, please make sure you already create your database.
 
 
-Virtualenv
-~~~~~~~~~~~
-Virtualenv is a tool to create isolated Python environments.
-
-For django project, we will use virtualenv to create your project virtual environment and save your python packages inside. You can find your virtualenv folder at ``~/.project_name``.
-
-The following command is a basic usage for your virtualenv.
-
-.. code-block:: bash
-    
-   # go to your env dir
-   $ cd ~/.project_name
-
-   # active your env
-   $ source bin/activate
-   
-   # deactive your env
-   $ deactivate
-
-
-|
-
-Django Advanced Web Server
+高级的Django Web服务器
 ----------------------------------------------------------
 
-Introduction
+介绍
 ~~~~~~~~~~~~~~~~
 
 Django + Uwsgi + Nginx + Supervisor
 
-Django is a powerful web framework that can help you get your Python application or website off the ground. Django includes a simplified development server for testing your code locally, but for anything even slightly production related, a more secure and powerful web server is required.
-
-In this guide, We will configure the uWSGI application container server to interface with our applications. We will then set up Nginx to reverse proxy to uWSGI, giving us access to its security and performance features to serve our apps. After that, we will install linux supervisor to control uWSGI service auto start.
-
-
-Keyword
-~~~~~~~~~
-
 .. code-block:: bash
    
-   -s django-uwsgi -p project_name or --server django-uwsgi --project project_name
+   -s django-uwsgi -p project_name 或者 --server django-uwsgi --project project_name
 
-.. note:: if you provide the parameter ``-p project_name``. We will create ``project_name folder`` for your django web application. Otherwise the project_name will use the default name ``demo``.
-
-
-Configuration
+默认的配置信息
 ~~~~~~~~~~~~~~~
 
-Normal Config
+基本配置：
 
-- web root: ``/var/www/html``
-- project root: ``/var/www/html/project_name``
-- virtualenv path: ``~/.project_name``
-- mysql password: ``password``
+- 项目目录: ``/var/www/html/project_name``
+- python虚拟环境: ``~/.project_name``
+- Mysql密码: ``password``
 
-Server Config
+服务器配置：
 
-- nginx config path: ``/etc/nginx/sites-enabled/default``
-- uwsgi config path: ``/var/www/html/project_name/project_name.ini``
-- supervisor config path: ``/etc/supervisor/conf.d/project_name_sysd.conf``
+- nginx配置文件路径: ``/etc/nginx/sites-enabled/default``
+- uwsgi配置文件路径: ``/var/www/html/project_name/project_name.ini``
+- supervisor配置文件路径: ``/etc/supervisor/conf.d/project_name_sysd.conf``
 
-Log Config
+日志配置：
 
-- django normal output file: ``/var/log/project_name_out.log``
-- django error output file: ``/var/log/project_name_error.log``
+- django基本输出日志: ``/var/log/project_name_out.log``
+- django错误信息日志: ``/var/log/project_name_error.log``
 
-.. note:: The ``project_name`` come from ``-p`` value. For example, if you provide ``-p zhex``. Then we will generate ``/var/www/html/zhex`` as project root and the supervisor config path will became ``/etc/supervisor/conf.d/zhex_sysd.conf``
-
-
-Virtualenv
-~~~~~~~~~~~
-Virtualenv is a tool to create isolated Python environments.
-
-For django project, we will use virtualenv to create your project virtual environment and save your python packages inside. You can find your virtualenv folder at ``~/.project_name``.
-
-The following command is a basic usage for your virtualenv.
-
-.. code-block:: bash
-    
-   # go to your env dir
-   $ cd ~/.project_name
-
-   # active your env
-   $ source bin/activate
-   
-   # deactive your env
-   $ deactivate
-
-
-Restart
+重启
 ~~~~~~~~~
 
 .. code-block:: bash
    
-   # restart nginx server
+   # nginx服务器重启
    $ service nginx restart
 
-   # restart uwsgi service
+   # uwsgi服务器重启
    $ sudo supervisorctl restart project_name
 
-   # start uwsgi service
+   # 启动uwsgi服务
    $ sudo supervisorctl start project_name
 
-   # reload supervisor file (only run it when you have supervisor config changes)
+   # 重加载supervisor配置文件
    $ sudo supervisorctl reread
    $ sudo supervisorctl update
 
-.. important:: We use supervisor as the uwsgi service controller in order to auto restart. More details about supervisor: http://supervisord.org/index.html
-
-.. seealso:: If you reboot server and get a ``502 bad request`` at your website. Don't worry, it happens because supervisor service is not autostart.
+设置supervisor默认启动
 
 .. code-block:: bash
 
-   For ubuntu 16
-   # supervisor comes up after a reboot.
+   # 针对ubuntu 16，supervisor重启后自动运行
    $ sudo systemctl enable supervisor
-
-   # bring supervisor up right now.
    $ sudo systemctl start supervisor
-   
-   For ubuntu 14
-   # supervisor comes up after a reboot
+
+   # 针对ubuntu 14
    $ sudo update-rc.d supervisor enable
-   
-|

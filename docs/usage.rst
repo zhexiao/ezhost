@@ -1,36 +1,26 @@
-Usages
+使用方法
 ===============
 
-Before you use ezhost, you have to connect to your host at first, in here i will show you three ways to connect your host.
+Ezhost主要是用于主机与客户机通信执行自动化安装，在主机上执行一系列的安装命令来控制客户机。
 
-|
-
-Use user and password
+使用客户机的用户名与密码进行连接
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you know your remote host's user and password, you can use the following command to install server:
 
 .. code-block:: bash
 
    $ ezhost -H host -U user -P password [keyword]
 
-|
-
-Use user and keyfile
+使用客户机的用户名与SSH KEY进行连接
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you have your remote host's user and keyfile, you can use the following command to install server:
 
 .. code-block:: bash
 
    $ ezhost -H host -U user -K ~/.ssh/keyfile.pem [keyword]
 
-|
-
-Use config file 
+使用客户机的配置文件进行连接
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Assuming you have a config file **development.ini** in **/var/www/html** folder.
+创建一个文件保存配置文件，例如创建一个 **development.ini** 的配置文件，然后在此配置文件中写入如下配置：
 
 .. code-block:: bash
    :linenos:
@@ -40,60 +30,35 @@ Assuming you have a config file **development.ini** in **/var/www/html** folder.
    user=user
    passwd=password
 
-.. note:: If you want to change **passwd** to **keyfile**, just need to replace ``passwd=password`` to ``keyfile=~/.ssh/keyfile.pem``.
+.. note:: 如果你不想暴露你的客户机密码，则可以使用SSH KEY代替密码。将 ``passwd=password`` 改成 ``keyfile=~/.ssh/keyfile.pem`` 即可.（此处假设你的SSH KEY文件保存在~/.ssh/keyfile.pem里面）
 
-After you have ezhost config file, you can use the following command to run it:
+当你的配置文件创建完成后，可以使用如下命令访问到客户机：
 
 .. code-block:: bash
 
-   $ ezhost -C /var/www/html/development.ini [keyword]
+   $ ezhost -C development.ini [keyword]
 
-|
 
-Code analysis
+[keyword]的使用方法
+~~~~~~~~~~~~~~~~~~~~~~~
+
+[keyword]是一系列的，已存在于Ezhost里面的服务器替代名，例如这里安装LAMP服务器，我们就把[keyword]替换成了 `-s lamp`。
+
+.. code-block:: bash
+
+   $ ezhost -C development.ini -s lamp
+
+参数解释
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. glossary::
 
-   -H host_address
-      require your host address
+   -H 客户机地址
 
-   -U host_user
-      require your host login user
+   -U 客户机用户名
 
-   -P host_password
-      require your host login password
+   -P 客户机密码
 
-   -K host_keyfile
-      require your host keyfile path
+   -K 客户机SSH KEY路径
 
-   -C config_path
-      require your config file path
-
-.. warning:: **[keyword]** will be replaced by command keyword, server keyword or project keyword. For example, ``-s lamp``, ``-s django-uwsgi -p project_name`` and so on ...
-
-|
-
-Basic Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-There are two examples about replace the **[keyword]** as a exist keyword.
-
-Install LAMP Server
---------------------
-
-.. code-block:: bash
-
-   $ ezhost -C /var/www/html/development.ini -s lamp
-
-.. note:: In here, we replace **[keyword]**  as ``-s lamp``.
-
-
-Install Django Server
-----------------------
-
-.. code-block:: bash
-
-   $ ezhost -C /var/www/html/development.ini -s django-uwsgi -p project_name
-
-.. note:: In here, we replace **[keyword]**  as ``-s django-uwsgi -p project_name``.
+   -C 配置文件路径

@@ -1,58 +1,30 @@
-Getting Started
-===============
+开始安装
+========
 
-This document will show you how to get up and running with ezhost.
-
-|
-
-Python and Pip Install
+安装python3-pip
 -------------------------
 
-You have to install python3 and pip3 before you install ezhost:
+Ezhost是基于Python3开发的，在安装Ezhost之前，需要安装python3-pip。
 
 .. code-block:: bash
 
-   # update system package
-   $ sudo apt-get update
+   # 安装python3-pip
+   $ sudo apt-get install python3-pip
 
-   # install python3 and pip3
-   $ sudo apt-get install python3 python3-pip
+安装Ezhost
+-------------------------
 
-|
-
-Dependency Install
----------------------
-
-If you have any errors during the ezhost installing, you'd better install these dependencies as well.
+在安装Ezhost之前，需要安装一些Ubuntu中的依赖库
 
 .. code-block:: bash
 
-   # update python tool
-   $ sudo pip3 install --upgrade setuptools
-   $ sudo pip3 install --upgrade distribute
+   # 安装依赖库
+   $ sudo apt-get install libffi-dev libssl-dev
+   $ sudo pip3 install cryptography pynacl
 
-   # install cryptography
-   $ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-   $ sudo pip3 install cryptography
-  
-|
-
-Ezhost Install
----------------
-
-if your working environment is ``python>=3.*``, run the following command for install.
+通过pip3安装Ezhost
 
 .. code-block:: bash
-  
-   $ sudo pip3 install ezhost
 
-If your working environment is ``python2``, run the following command for setup virtualenv.
-
-.. code-block:: bash
-  
-   $ sudo pip install virtualenv
-   $ virtualenv -p python3 ~/.ezhost
-   $ source ~/.ezhost/bin/activate
-   $ pip install ezhost
-
-.. important:: If your environment is python2, before running ``ezhost`` command, please activate your virtualenv at first ``source ~/.ezhost/bin/activate``.
+   # 安装依赖库
+   $ sudo pip3 install ezhost

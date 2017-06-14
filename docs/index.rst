@@ -1,12 +1,7 @@
-Welcome to ezhost's documentation
+欢迎来到Ezhost
 ==================================
 
-Ezhost is a python package used for make server install and configuration became simple 
-and easy. You can find most of the popular server stacks from the documents. For example,
-if you want to build your LNMP server (Linux+Nginx+Mysql+PHP), you just need one command and
-drink coffee. That's it.
-
-The main documentation for the site is organized into a couple sections:
+Ezhost是一个自动化安装常见服务器服务的Python命令库，例如LAMP、LNMP等等。
 
 * :ref:`user-docs`		
 * :ref:`api-docs`
@@ -16,25 +11,20 @@ The main documentation for the site is organized into a couple sections:
 .. toctree::
    :numbered:
    :maxdepth: 2
-   :caption: User Documentation
+   :caption: 用户使用文档
 
-   Get Started <getting_started>
-   Usages <usage>
-   Commands <commands>
-   Servers <server_lists>
-   Projects <project_lists>
+   开始安装 <getting_started>
+   使用方法 <usage>
+   命令行列表 <commands>
+   服务器列表 <server_lists>
+   项目列表 <project_lists>
 
 .. _api-docs:
 
 .. toctree::
    :numbered:
    :maxdepth: 2
-   :caption: Api Documentation
+   :caption: 类文档
 
    api/index
    
-Indices and tables		
-==================		
-
-* :ref:`search`
-* :ref:`user-docs`      

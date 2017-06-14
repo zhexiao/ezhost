@@ -1,67 +1,42 @@
-Commands
+命令行列表
 ===============
 
-In here, i will show you all exist commands.
-
-|
-
-Force install
+默认安装
 --------------------
 
-You can use the following *[keyword]* to install all packages without questions:
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
+默认安装就是不在询问用户，直接执行安装程序
 
 .. code-block:: bash
 
-   -f or --force 
+   -f 或者 --force
 
-|
 
-Git pull code
+git代码更新
 --------------------
 
-You can use the following *[keyword]* to update your github project in remote server:
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
+通过主机控制远程客户机的代码进行更新
 
 .. code-block:: bash
 
-   -gp /var/www/html/project or --git-pull /var/www/html/project 
+   -gp /var/www/html/project 或者 --git-pull /var/www/html/project
 
-.. note:: ``/var/www/html/project`` is your gituhb project folder. 
+.. note:: 其中 ``/var/www/html/project`` 是你的客户机git代码的保存目录
 
-|
 
-Login to host server
+登录到远程客户机
 ----------------------
 
-You can use the following *[keyword]* to login into your remote server:
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
+通过主机登录到客户机
 
 .. code-block:: bash
 
-   -login or --login
+   -login 或者 --login
 
-.. warning:: **login** only works with ``keyfile``. Otherwise, you have to type your server password to login into server.
+登录到远程客户机的Mysql服务器
+-------------------------------
 
-|
-
-Login to mysql server
------------------------
-
-You can use the following *[keyword]* to login to your remote mysql server:
-
-Keyword
-~~~~~~~~~~~~~~~~~~~
+直接通过主机登录到客户机的Mysql服务器，然后就可以操作Mysql服务器的一些指令
 
 .. code-block:: bash
 
-   -my or --mysql
-
-|
-
+   -my 或者 --mysql
