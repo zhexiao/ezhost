@@ -26,5 +26,5 @@ Ezhost是基于Python3开发的，在安装Ezhost之前，需要安装python3-pi
 
 .. code-block:: bash
 
-   # 安装依赖库
+   # 安装Ezhost
    $ sudo pip3 install ezhost

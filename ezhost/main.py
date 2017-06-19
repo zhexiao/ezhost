@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python
 """
 This module contains `main` method plus related subroutines.
@@ -19,10 +20,10 @@ def main():
 
     configure_obj = None
     try:
-        parser = argparse.ArgumentParser(description='Easy to install server.')
+        parser = argparse.ArgumentParser(description='自动化安装')
         parser.add_argument(
             '-s', '--server',
-            help='what kind of server you want to install',
+            help='服务器代替名',
         )
 
         # force to install packages without ask question
@@ -30,13 +31,13 @@ def main():
             '-f', '--force',
             dest='force',
             action='store_true',
-            help='force to install packages without ask question',
+            help='不询问是否安装',
         )
         parser.add_argument(
             '-nf', '--not-force',
             dest='force',
             action='store_false',
-            help='install packages with ask question',
+            help='询问是否安装',
         )
         parser.set_defaults(force=False)
 
@@ -45,7 +46,7 @@ def main():
             '-my', '--mysql',
             dest='login_mysql',
             action='store_true',
-            help='login to remote mysql server',
+            help='登录到Mysql数据库',
         )
         parser.set_defaults(login_mysql=False)
 
@@ -54,44 +55,44 @@ def main():
             '-login', '--login',
             dest='login_server',
             action='store_true',
-            help='login to remote server',
+            help='登录到远程服务器',
         )
         parser.set_defaults(login_server=False)
 
         parser.add_argument(
             '-p', '--project',
-            help='indicate your project name(some servers need this parameter for initial, default=demo)',
+            help='项目名称，默认是demo',
             default='demo'
         )
 
         parser.add_argument(
             '-gp', '--git-pull',
-            help='give me your github project directory, we will auto git pull your server code',
+            help='Github项目的保存目录',
         )
 
         parser.add_argument(
             '-C', '--config',
-            help='config file path of your host informations',
+            help='配置文件路径',
         )
 
         parser.add_argument(
             '-H', '--host',
-            help='host server address',
+            help='客户机地址',
         )
 
         parser.add_argument(
             '-U', '--user',
-            help='host server login user',
+            help='客户机用户名',
         )
 
         parser.add_argument(
             '-P', '--passwd',
-            help='host server login password',
+            help='客户机登录密码',
         )
 
         parser.add_argument(
             '-K', '--keyfile',
-            help='host server key file path',
+            help='客户机SSH KEY的路径',
         )
 
         args = parser.parse_args()
@@ -101,7 +102,7 @@ def main():
     # if config file and host both not provide, throw a error
     try:
         if args.config is None and args.host is None:
-            raise ValueError('You have to setup your host information through -c(--config) or -H(--host)')
+            raise ValueError('缺少配置文件-C(--config) 或 客户机地址-H(--host)')
     except Exception as e:
         print(e)
         return
@@ -110,7 +111,7 @@ def main():
     try:
         if args.host is not None:
             if (args.user and (args.passwd or args.keyfile)) is None:
-                raise ValueError('Lack of required host information. Please check whether you have set login user, login password or keyfile.')
+                raise ValueError('缺少登录必要的信息')
     except Exception as e:
         print(e)
         return
@@ -126,7 +127,7 @@ def main():
             if 'ezhost' in configure:
                 configure_obj = configure['ezhost']
             else:
-                raise KeyError('Can not found ezhost configuration informations.')
+                raise KeyError('不能找到登录配置文件')
     except Exception as e:
         print(e)
         return
