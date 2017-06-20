@@ -20,15 +20,21 @@ Ezhost主要是用于主机与客户机通信执行自动化安装，在主机�
 使用客户机的配置文件进行连接
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-创建一个文件保存配置文件，例如创建一个 **development.ini** 的配置文件，然后在此配置文件中写入如下配置：
+在/config/文件夹下面创建 **ezhost.ini** 的配置文件，然后在此配置文件中写入如下配置：
 
 .. code-block:: bash
    :linenos:
 
-   [ezhost]
-   host=host
-   user=user
-   passwd=password
+   [develop_server]
+   host=hostd
+   user=userd
+   passwd=passwordd
+
+   [test_server]
+   host=hostt
+   user=usert
+   keyfile=~/.ssh/keyfile.pem
+
 
 .. note:: 如果你不想暴露你的客户机密码，则可以使用SSH KEY代替密码。将 ``passwd=password`` 改成 ``keyfile=~/.ssh/keyfile.pem`` 即可.（此处假设你的SSH KEY文件保存在~/.ssh/keyfile.pem里面）
 
@@ -36,7 +42,7 @@ Ezhost主要是用于主机与客户机通信执行自动化安装，在主机�
 
 .. code-block:: bash
 
-   $ ezhost -C development.ini [keyword]
+   $ ezhost -C /config/ezhost.ini develop_server [keyword]
 
 
 [keyword]的使用方法

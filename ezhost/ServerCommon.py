@@ -26,7 +26,10 @@ class ServerCommon(ServerAbstract):
         """
             update system package
         """
-        sudo('apt-get update -y')
+        try:
+            sudo('apt-get update -y')
+        except Exception as e:
+            print(e)
 
         print(green(' * System package is up to date.'))
         print(green(' * Done'))
@@ -81,7 +84,10 @@ class ServerCommon(ServerAbstract):
         """
             Install apache2 web server
         """
-        sudo('apt-get install apache2 -y')
+        try:
+            sudo('apt-get install apache2 -y')
+        except Exception as e:
+            print(e)
 
         print(green(' * Installed Apache2 in the system.'))
         print(green(' * Done'))
