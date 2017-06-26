@@ -95,6 +95,12 @@ def main():
         help='客户机SSH KEY的路径',
     )
 
+    parser.add_argument(
+        '-ap', '--active-port',
+        help='客户机已经开启的端口',
+        action='store_true'
+    )
+
     args = parser.parse_args()
 
     # if config file and host both not provide, throw a error

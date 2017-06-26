@@ -40,3 +40,12 @@ git代码更新
 .. code-block:: bash
 
    -my 或者 --mysql
+
+查看客户机运行中的端口
+-------------------------------
+
+打印客户机中正在运行的端口
+
+.. code-block:: bash
+
+   -ap 或者 --active-port

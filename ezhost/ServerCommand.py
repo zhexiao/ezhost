@@ -24,6 +24,7 @@ from fabric.state import output
 # hide exec command
 output['running'] = False
 
+
 class ServerCommand(ServerAbstract):
     def __init__(self, args):
         self.args = args
@@ -40,6 +41,9 @@ class ServerCommand(ServerAbstract):
 
         if self.args.login_server:
             self.login_server()
+
+        if self.args.active_port:
+            self.display_active_port()
 
     def install(self):
         pass
@@ -63,3 +67,10 @@ class ServerCommand(ServerAbstract):
         local('ssh -i {0} {1}@{2}'.format(
             env.key_filename, env.user, env.host_string
         ))
+
+    def display_active_port(self):
+        """
+        显示已经激活的端口
+        :return:
+        """
+        list_port = sudo('netstat -ntlp | grep LISTEN')
