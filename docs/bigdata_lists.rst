@@ -32,13 +32,13 @@ Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理
 ~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: bash
 
-    sudo ./bin/kafka-console-producer.sh --broker-list IP:9092 --topic test
+    sudo ./bin/kafka-console-producer.sh --broker-list <IP Address>:9092 --topic test
 
 运行消费者（consumer）
 ~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: bash
 
-    sudo ./bin/kafka-console-consumer.sh --bootstrap-server IP:9092 --topic test --from-beginning
+    sudo ./bin/kafka-console-consumer.sh --bootstrap-server <IP Address>:9092 --topic test --from-beginning
 
 Kafka安装配置
 ~~~~~~~~~~~~~~~~~
