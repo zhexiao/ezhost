@@ -11,6 +11,7 @@ from ezhost.ServerLnmp import ServerLnmp
 from ezhost.ServerDjango import ServerDjango
 from ezhost.ServerLnmpWordpress import ServerLnmpWordpress
 from ezhost.ServerDjangoUwsgi import ServerDjangoUwsgi
+from ezhost.BigDataArchi import BigDataArchi
 from ezhost.ServerCommand import ServerCommand
 
 

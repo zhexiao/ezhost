@@ -18,6 +18,7 @@ Ezhost是一个自动化安装常见服务器服务的Python命令库，例如LA
    命令行列表 <commands>
    服务器列表 <server_lists>
    项目列表 <project_lists>
+   大数据应用列表 <bigdata_lists>
 
 .. _api-docs:
 

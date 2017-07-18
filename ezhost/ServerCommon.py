@@ -10,17 +10,28 @@ Github: https://github.com/zhexiao/ezhost.git
 from io import StringIO
 
 from ezhost.ServerAbstract import ServerAbstract
+import ezhost.config.bigdata_conf_string as bigdata_conf
 
 # fabric libs
 from fabric.colors import red, green
 from fabric.api import prompt, run, sudo, put
 from fabric.contrib.files import exists
+from fabric.context_managers import cd
+from fabric.api import env
+from fabric.contrib.files import sed, uncomment
 
 
 class ServerCommon(ServerAbstract):
     """
         All common function will create inside this class.
     """
+
+    def prompt_check(self, message):
+        message += ' (y/n)'
+        p_signal = prompt(red(message), default='n')
+        if p_signal == 'y':
+            return True
+        return False
 
     def common_update_sys(self):
         """
@@ -31,8 +42,7 @@ class ServerCommon(ServerAbstract):
         except Exception as e:
             print(e)
 
-        print(green(' * System package is up to date.'))
-        print(green(' * Done'))
+        print(green('System package is up to date.'))
         print()
 
     def common_install_mysql(self):
@@ -105,3 +115,88 @@ class ServerCommon(ServerAbstract):
         print(green(' * Installed Python3 virtual environment in the system.'))
         print(green(' * Done'))
         print()
+
+    def systemctl_autostart(self, service_name, start_cmd, stop_cmd):
+        """
+        ubuntu 16.04 systemctl service config
+        :param service_name:
+        :param start_cmd:
+        :param stop_cmd:
+        :return:
+        """
+        # get config content
+        service_content = bigdata_conf.systemctl_config.format(
+            service_name=service_name,
+            start_cmd=start_cmd,
+            stop_cmd=stop_cmd
+        )
+
+        # write config into file
+        with cd('/lib/systemd/system'):
+            if not exists(service_name):
+                sudo('touch {0}'.format(service_name))
+            put(StringIO(service_content), service_name, use_sudo=True)
+
+        # make service auto-start
+        sudo('systemctl daemon-reload')
+        sudo('systemctl enable {0}'.format(service_name))
+        sudo('systemctl start {0}'.format(service_name))
+
+    def java_install(self):
+        """
+        install java
+        :return:
+        """
+        if self.prompt_check("Install Java JDK"):
+            sudo('apt-get install default-jdk -y')
+
+    def kafka_install(self):
+        """
+        kafka download and install
+        :return:
+        """
+        with cd('/tmp'):
+            sudo('rm -rf kafka*')
+            sudo('wget {0} -O kafka.tgz'.format(
+                bigdata_conf.kafka_download_url
+            ))
+
+            sudo('tar -zxf kafka.tgz')
+
+            if not exists(bigdata_conf.kafka_home):
+                sudo('mv kafka_* {0}'.format(bigdata_conf.kafka_home))
+
+            print(green('Install kafka at {0}'.format(
+                bigdata_conf.kafka_home
+            )))
+            print()
+
+    def kafka_config(self):
+        """
+        kafka config
+        :return:
+        """
+        uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
+                  , 'delete.topic.enable=true', use_sudo=True)
+        uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
+                  , 'listeners=PLAINTEXT', use_sudo=True)
+        sed('{0}/config/server.properties'.format(bigdata_conf.kafka_home),
+            'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
+            use_sudo=True)
+
+    def kafka_autostart(self):
+        """
+        kafka autostart
+        :return:
+        """
+        self.systemctl_autostart(
+            'ez_kafka_zookeeper.service',
+            '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
+            '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
+        )
+
+        self.systemctl_autostart(
+            'ez_kafka.service',
+            '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
+            '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
+        )

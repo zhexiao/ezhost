@@ -11,3 +11,4 @@ class ServerLists(Enum):
     ServerDjango = 'django'
     ServerDjangoUwsgi = 'django-uwsgi'
     ServerLnmpWordpress = 'lnmp-wordpress'
+    BigDataArchi = 'bigdata'

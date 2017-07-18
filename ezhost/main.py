@@ -25,6 +25,11 @@ def main():
         help='服务器代替名',
     )
 
+    parser.add_argument(
+        '-ba', '--bigdata-app',
+        help='大数据服务应用替代名',
+    )
+
     # force to install packages without ask question
     parser.add_argument(
         '-f', '--force',

@@ -5,7 +5,7 @@ import ezhost.config.apache_conf_string as apache_conf_string
 import ezhost.config.php_conf_string as php_conf_string
 import ezhost.config.nginx_conf_string as nginx_conf_string
 import ezhost.config.django_conf_string as django_conf_string
-
+import ezhost.config.bigdata_conf_string as bigdata_conf
 
 class ServerAbstract(metaclass=ABCMeta):
     """
@@ -253,6 +253,14 @@ class ServerAbstract(metaclass=ABCMeta):
         return nginx_conf_string.wordpress_php7_web_conf.format(
             self.nginx_web_dir, self.project
         )
+
+    @property
+    def kafka_install_dir(self):
+        """
+        kafka install dir
+        :return:
+        """
+        return bigdata_conf.kafka_home
 
     @abstractmethod
     def install(self):
