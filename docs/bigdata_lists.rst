@@ -60,5 +60,27 @@ ELK是ElasticSearch, Logstash, Kibana架构的简称，Elasticsearch是个开源
 ~~~~~~~~~~~~
 .. code-block:: bash
 
-    -s bigdata -ba kafka 或者 --server bigdata --bigdata-app kafka
+    -s bigdata -ba elk 或者 --server bigdata --bigdata-app elk
 
+ELK安装配置
+~~~~~~~~~~~~~
+Elasticsearch
+^^^^^^^^^^^^^^^
+- 安装路径：/usr/share/elasticsearch
+- 配置路径：/etc/default/elasticsearch
+
+Logstash
+^^^^^^^^^^^^^^^
+- 安装路径：/usr/share/logstash
+- 配置路径：/etc/logstash
+
+Kibana
+^^^^^^^^^^^^^^^
+- 安装路径：/usr/share/kibana
+- 配置路径：/etc/kibana
+
+测试
+~~~~~~~
+.. code-block:: bash
+
+    curl 127.0.0.1:9200
