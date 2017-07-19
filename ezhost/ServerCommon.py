@@ -184,11 +184,6 @@ class ServerCommon(ServerAbstract):
             'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
             use_sudo=True)
 
-    def kafka_autostart(self):
-        """
-        kafka autostart
-        :return:
-        """
         self.systemctl_autostart(
             'ez_kafka_zookeeper.service',
             '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
@@ -200,3 +195,93 @@ class ServerCommon(ServerAbstract):
             '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
             '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
         )
+
+    def elastic_install(self):
+        """
+        elasticsearch install
+        :return:
+        """
+        with cd('/tmp'):
+            if not exists('elastic.deb'):
+                sudo('wget {0} -O elastic.deb'.format(
+                    bigdata_conf.elastic_download_url
+                ))
+
+            sudo('dpkg -i elastic.deb')
+            sudo('apt-get install -y')
+
+    def elastic_config(self):
+        """
+        config elasticsearch
+        :return:
+        """
+        sudo('systemctl stop elasticsearch.service')
+        sudo('systemctl daemon-reload')
+        sudo('systemctl enable elasticsearch.service')
+        sudo('systemctl start elasticsearch.service')
+
+    def logstash_install(self):
+        """
+        logstash install
+        :return:
+        """
+        with cd('/tmp'):
+            if not exists('logstash.deb'):
+                sudo('wget {0} -O logstash.deb'.format(
+                    bigdata_conf.logstash_download_url
+                ))
+
+            sudo('dpkg -i logstash.deb')
+            sudo('apt-get install -y')
+
+    def logstash_config(self):
+        """
+        config logstash
+        :return:
+        """
+        sudo('systemctl stop logstash.service')
+        sudo('systemctl daemon-reload')
+        sudo('systemctl enable logstash.service')
+        sudo('systemctl start logstash.service')
+
+    def kibana_install(self):
+        """
+        kibana install
+        :return:
+        """
+        with cd('/tmp'):
+            if not exists('kibana.deb'):
+                sudo('wget {0} -O kibana.deb'.format(
+                    bigdata_conf.kibana_download_url
+                ))
+
+            sudo('dpkg -i kibana.deb')
+            sudo('apt-get install -y')
+
+    def kibana_config(self):
+        """
+        config kibana
+        :return:
+        """
+        sudo('systemctl stop kibana.service')
+        sudo('systemctl daemon-reload')
+        sudo('systemctl enable kibana.service')
+        sudo('systemctl start kibana.service')
+
+    def elk_install(self):
+        """
+        elastic, logstash, kibana install
+        :return:
+        """
+        self.elastic_install()
+        self.logstash_install()
+        self.kibana_install()
+
+    def elk_config(self):
+        """
+        elastic, logstash, kibana config
+        :return:
+        """
+        self.elastic_config()
+        self.logstash_config()
+        self.kibana_config()

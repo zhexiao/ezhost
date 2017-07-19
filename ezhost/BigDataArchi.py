@@ -30,6 +30,8 @@ class BigDataArchi(ServerCommon):
         self.java_install()
         if self.args.bigdata_app == 'kafka':
             self.install_config_kafka()
+        elif self.args.bigdata_app == 'elk':
+            self.install_config_elk()
         else:
             raise Exception('找不到匹配的应用')
 
@@ -45,8 +47,16 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Download and install kafka"):
             self.kafka_install()
 
-        if self.prompt_check("Config kafka"):
+        if self.prompt_check("Config and autostart kafka"):
             self.kafka_config()
 
-        if self.prompt_check("Autostart kafka"):
-            self.kafka_autostart()
+    def install_config_elk(self):
+        """
+        install and config elk
+        :return:
+        """
+        if self.prompt_check("Download and install elk"):
+            self.elk_install()
+
+        if self.prompt_check("Config and autostart elk"):
+            self.elk_config()
