@@ -47,6 +47,39 @@ Kafka安装配置
 - zookeeper配置文件：/opt/kafka/config/zookeeper.properties
 - kafka配置文件：/opt/kafka/config/server.properties
 
+Spark
+--------
+Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark 是一种与 Hadoop 相似的
+开源集群计算环境，但是两者之间还存在一些不同之处，这些有用的不同之处使 Spark 在某些
+工作负载方面表现得更加优越，换句话说，Spark 启用了内存分布数据集，除了能够提供交互式查询外，
+它还可以优化迭代工作负载。
+
+安装关键字
+~~~~~~~~~~
+.. code-block:: bash
+
+    -s bigdata -ba spark 或者 --server bigdata --bigdata-app spark
+
+安装配置
+~~~~~~~~~~~~~
+Spark
+^^^^^^^^
+- 安装路径：/opt/spark
+- 配置路径：/opt/spark/conf
+
+Hadoop
+^^^^^^^^
+- 安装路径：/opt/hadoop
+- 配置路径：/opt/hadoop/etc
+
+测试
+~~~~~~
+.. code-block:: bash
+
+    cd /opt/spark
+    ./bin/run-example SparkPi 10
+
+
 Elasticsearch
 ----------------
 Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，

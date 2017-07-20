@@ -15,7 +15,7 @@ import ezhost.config.bigdata_conf_string as bigdata_conf
 # fabric libs
 from fabric.colors import red, green
 from fabric.api import prompt, run, sudo, put
-from fabric.contrib.files import exists
+from fabric.contrib.files import exists, append
 from fabric.context_managers import cd
 from fabric.api import env
 from fabric.contrib.files import sed, uncomment
@@ -148,7 +148,15 @@ class ServerCommon(ServerAbstract):
         :return:
         """
         if self.prompt_check("Install Java JDK"):
-            sudo('apt-get install default-jdk -y')
+            sudo('apt-get install openjdk-8-jdk -y')
+
+            java_home = run('readlink -f /usr/bin/java | '
+                            'sed "s:/jre/bin/java::"')
+
+            append(bigdata_conf.global_env_home, 'export JAVA_HOME={0}'.format(
+                java_home
+            ), use_sudo=True)
+            run('source {0}'.format(bigdata_conf.global_env_home))
 
     def kafka_install(self):
         """
@@ -156,20 +164,15 @@ class ServerCommon(ServerAbstract):
         :return:
         """
         with cd('/tmp'):
-            sudo('rm -rf kafka*')
-            sudo('wget {0} -O kafka.tgz'.format(
-                bigdata_conf.kafka_download_url
-            ))
+            if not exists('kafka.tgz'):
+                sudo('wget {0} -O kafka.tgz'.format(
+                    bigdata_conf.kafka_download_url
+                ))
 
             sudo('tar -zxf kafka.tgz')
 
-            if not exists(bigdata_conf.kafka_home):
-                sudo('mv kafka_* {0}'.format(bigdata_conf.kafka_home))
-
-            print(green('Install kafka at {0}'.format(
-                bigdata_conf.kafka_home
-            )))
-            print()
+            sudo('rm -rf {0}'.format(bigdata_conf.kafka_home))
+            sudo('mv kafka_* {0}'.format(bigdata_conf.kafka_home))
 
     def kafka_config(self):
         """
@@ -271,3 +274,54 @@ class ServerCommon(ServerAbstract):
         sudo('systemctl daemon-reload')
         sudo('systemctl enable kibana.service')
         sudo('systemctl start kibana.service')
+
+    def hadoop_install(self):
+        """
+        install hadoop
+        :return:
+        """
+        with cd('/tmp'):
+            if not exists('hadoop.tar.gz'):
+                sudo('wget {0} -O hadoop.tar.gz'.format(
+                    bigdata_conf.hadoop_download_url
+                ))
+
+            sudo('rm -rf hadoop-*')
+            sudo('tar -zxf hadoop.tar.gz')
+            sudo('rm -rf {0}'.format(bigdata_conf.hadoop_home))
+            sudo('mv hadoop-* {0}'.format(bigdata_conf.hadoop_home))
+
+    def spark_install(self):
+        """
+        download and install spark
+        :return:
+        """
+        sudo('apt-get -y install build-essential python-dev python-six \
+             python-virtualenv libcurl4-nss-dev libsasl2-dev libsasl2-modules \
+             maven libapr1-dev libsvn-dev zlib1g-dev')
+
+        with cd('/tmp'):
+            if not exists('spark.tgz'):
+                sudo('wget {0} -O spark.tgz'.format(
+                    bigdata_conf.spark_download_url
+                ))
+
+            sudo('rm -rf spark-*')
+            sudo('tar -zxf spark.tgz')
+            sudo('rm -rf {0}'.format(bigdata_conf.spark_home))
+            sudo('mv spark-* {0}'.format(bigdata_conf.spark_home))
+
+    def spark_config(self):
+        """
+        config spark
+        :return:
+        """
+        configs = [
+            'export LD_LIBRARY_PATH={0}/lib/native/:$LD_LIBRARY_PATH'.format(
+                bigdata_conf.hadoop_home
+            ),
+            'export SPARK_LOCAL_IP={0}'.format(env.host_string)
+        ]
+
+        append(bigdata_conf.global_env_home, configs, use_sudo=True)
+        run('source {0}'.format(bigdata_conf.global_env_home))

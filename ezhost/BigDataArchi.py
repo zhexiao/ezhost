@@ -28,6 +28,8 @@ class BigDataArchi(ServerCommon):
     def install(self):
         self.update_sys()
         self.java_install()
+
+        # check bigdata app
         if self.args.bigdata_app == 'kafka':
             self.install_config_kafka()
         elif self.args.bigdata_app == 'elastic':
@@ -38,6 +40,8 @@ class BigDataArchi(ServerCommon):
             self.install_config_kibana()
         elif self.args.bigdata_app == 'elk':
             self.install_config_elk()
+        elif self.args.bigdata_app == 'spark':
+            self.install_config_spark()
         else:
             raise Exception('找不到匹配的应用')
 
@@ -53,7 +57,7 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Download and install kafka"):
             self.kafka_install()
 
-        if self.prompt_check("Config and autostart kafka"):
+        if self.prompt_check("Configure and autostart kafka"):
             self.kafka_config()
 
     def install_config_elastic(self):
@@ -64,7 +68,7 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Download and install elasticsearch"):
             self.elastic_install()
 
-        if self.prompt_check("Config and autostart elasticsearch"):
+        if self.prompt_check("Configure and autostart elasticsearch"):
             self.elastic_config()
 
     def install_config_logstash(self):
@@ -75,7 +79,7 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Download and install logstash"):
             self.logstash_install()
 
-        if self.prompt_check("Config and autostart logstash"):
+        if self.prompt_check("Configure and autostart logstash"):
             self.logstash_config()
 
     def install_config_kibana(self):
@@ -86,7 +90,7 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Download and install kibana"):
             self.kibana_install()
 
-        if self.prompt_check("Config and autostart kibana"):
+        if self.prompt_check("Configure and autostart kibana"):
             self.kibana_config()
 
     def install_config_elk(self):
@@ -97,3 +101,17 @@ class BigDataArchi(ServerCommon):
         self.install_config_elastic()
         self.install_config_kibana()
         self.install_config_logstash()
+
+    def install_config_spark(self):
+        """
+        install and config spark
+        :return:
+        """
+        if self.prompt_check("Download and install hadoop"):
+            self.hadoop_install()
+
+        if self.prompt_check("Download and install spark"):
+            self.spark_install()
+
+        if self.prompt_check("Configure spark"):
+            self.spark_config()
