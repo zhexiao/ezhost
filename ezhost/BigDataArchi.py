@@ -30,6 +30,12 @@ class BigDataArchi(ServerCommon):
         self.java_install()
         if self.args.bigdata_app == 'kafka':
             self.install_config_kafka()
+        elif self.args.bigdata_app == 'elastic':
+            self.install_config_elastic()
+        elif self.args.bigdata_app == 'logstash':
+            self.install_config_logstash()
+        elif self.args.bigdata_app == 'kibana':
+            self.install_config_kibana()
         elif self.args.bigdata_app == 'elk':
             self.install_config_elk()
         else:
@@ -50,13 +56,44 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Config and autostart kafka"):
             self.kafka_config()
 
+    def install_config_elastic(self):
+        """
+        install and config elasticsearch
+        :return:
+        """
+        if self.prompt_check("Download and install elasticsearch"):
+            self.elastic_install()
+
+        if self.prompt_check("Config and autostart elasticsearch"):
+            self.elastic_config()
+
+    def install_config_logstash(self):
+        """
+        install and config logstash
+        :return:
+        """
+        if self.prompt_check("Download and install logstash"):
+            self.logstash_install()
+
+        if self.prompt_check("Config and autostart logstash"):
+            self.logstash_config()
+
+    def install_config_kibana(self):
+        """
+        install and config kibana
+        :return:
+        """
+        if self.prompt_check("Download and install kibana"):
+            self.kibana_install()
+
+        if self.prompt_check("Config and autostart kibana"):
+            self.kibana_config()
+
     def install_config_elk(self):
         """
         install and config elk
         :return:
         """
-        if self.prompt_check("Download and install elk"):
-            self.elk_install()
-
-        if self.prompt_check("Config and autostart elk"):
-            self.elk_config()
+        self.install_config_elastic()
+        self.install_config_kibana()
+        self.install_config_logstash()

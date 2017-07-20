@@ -1,5 +1,5 @@
-大数据应用列表
-================
+大数据应用列表（运行在Ubuntu 16）
+===================================
 
 Kafka
 ------
@@ -47,40 +47,59 @@ Kafka安装配置
 - zookeeper配置文件：/opt/kafka/config/zookeeper.properties
 - kafka配置文件：/opt/kafka/config/server.properties
 
-
-ELK
-------
-ELK是ElasticSearch, Logstash, Kibana架构的简称，Elasticsearch是个开源分布式搜索引擎，
-它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，
-多数据源，自动搜索负载等。Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，
-并将其存储供以后使用。Kibana也是一个开源和免费的工具，它可以为Logstash和ElasticSearch
-提供的日志分析友好的Web界面，可以帮助您汇总、分析和搜索重要数据日志。
+Elasticsearch
+----------------
+Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，
+索引副本机制，restful风格接口，多数据源，自动搜索负载等。
 
 安装关键字
-~~~~~~~~~~~~
+~~~~~~~~~~
 .. code-block:: bash
 
-    -s bigdata -ba elk 或者 --server bigdata --bigdata-app elk
+    -s bigdata -ba elastic 或者 --server bigdata --bigdata-app elastic
 
-ELK安装配置
+安装配置
 ~~~~~~~~~~~~~
-Elasticsearch
-^^^^^^^^^^^^^^^
 - 安装路径：/usr/share/elasticsearch
 - 配置路径：/etc/default/elasticsearch
-
-Logstash
-^^^^^^^^^^^^^^^
-- 安装路径：/usr/share/logstash
-- 配置路径：/etc/logstash
-
-Kibana
-^^^^^^^^^^^^^^^
-- 安装路径：/usr/share/kibana
-- 配置路径：/etc/kibana
 
 测试
 ~~~~~~~
 .. code-block:: bash
 
     curl 127.0.0.1:9200
+
+Logstash
+-----------
+Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用。
+
+安装关键字
+~~~~~~~~~~~~
+.. code-block:: bash
+
+    -s bigdata -ba logstash 或者 --server bigdata --bigdata-app logstash
+
+安装配置
+~~~~~~~~~~~~~
+- 安装路径：/usr/share/logstash
+- 配置路径：/etc/logstash
+
+Kibana
+------
+Kibana也是一个开源和免费的工具，它可以为Logstash和ElasticSearch提供的日志分析友好的Web界面，
+可以帮助您汇总、分析和搜索重要数据日志。
+
+安装关键字
+~~~~~~~~~~
+.. code-block:: bash
+
+    -s bigdata -ba kibana 或者 --server bigdata --bigdata-app kibana
+
+安装配置
+~~~~~~~~~~~~~
+- 安装路径：/usr/share/kibana
+- 配置路径：/etc/kibana
+
+测试
+~~~~~~~~~~~~
+访问web页面：http://<IP Address>:5601

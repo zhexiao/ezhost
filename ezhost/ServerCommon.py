@@ -263,25 +263,11 @@ class ServerCommon(ServerAbstract):
         config kibana
         :return:
         """
+
+        uncomment("/etc/kibana/kibana.yml", "#server.host:", use_sudo=True)
+        sed('/etc/kibana/kibana.yml', 'server.host:.*',
+            'server.host: "{0}"'.format(env.host_string), use_sudo=True)
         sudo('systemctl stop kibana.service')
         sudo('systemctl daemon-reload')
         sudo('systemctl enable kibana.service')
         sudo('systemctl start kibana.service')
-
-    def elk_install(self):
-        """
-        elastic, logstash, kibana install
-        :return:
-        """
-        self.elastic_install()
-        self.logstash_install()
-        self.kibana_install()
-
-    def elk_config(self):
-        """
-        elastic, logstash, kibana config
-        :return:
-        """
-        self.elastic_config()
-        self.logstash_config()
-        self.kibana_config()
