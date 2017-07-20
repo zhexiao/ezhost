@@ -3,23 +3,27 @@
 """
 
 import unittest
-from ezhost.ServerLists import ServerLists
+import argparse
+import configparser
+from ezhost.BigDataArchi import BigDataArchi
 
 
-class ServerListTest(unittest.TestCase):
+class ServerTest(unittest.TestCase):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-s', '--server',
+        help='服务器代替名',
+    )
 
-    def test_server_exist(self):
+    def test_bigdata(self):
         """
-            Check server is exist in ServerLists
+        Test ssh generate
+        :return:
         """
-        self.assertEqual(ServerLists('lamp').value, 'lamp')
-
-    def test_server_non_exist(self):
-        """
-            Check if server is not exist, should raise a valueError
-        """
-        self.assertRaises(ValueError, lambda: ServerLists('namp').value)
-
+        args = self.parser.parse_args([
+            '-'
+        ])
+        BigDataArchi(args).install()
 
 if __name__ == '__main__':
     unittest.main()
