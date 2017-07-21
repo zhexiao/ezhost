@@ -26,25 +26,26 @@ class BigDataArchi(ServerCommon):
             raise Exception('请使用`-ba`指定需要安装的应用')
 
     def install(self):
-        # self.update_sys()
-        # if self.prompt_check("Install Java JDK"):
-            # self.java_install()
+        if not self.args.skip_master:
+            self.update_sys()
+            if self.prompt_check("Install Java JDK"):
+                self.java_install()
 
-        # check bigdata app
-        if self.args.bigdata_app == 'kafka':
-            self.install_config_kafka()
-        elif self.args.bigdata_app == 'elastic':
-            self.install_config_elastic()
-        elif self.args.bigdata_app == 'logstash':
-            self.install_config_logstash()
-        elif self.args.bigdata_app == 'kibana':
-            self.install_config_kibana()
-        elif self.args.bigdata_app == 'elk':
-            self.install_config_elk()
-        elif self.args.bigdata_app == 'spark':
-            self.install_config_spark()
-        else:
-            raise Exception('找不到匹配的应用')
+            # check bigdata app
+            if self.args.bigdata_app == 'kafka':
+                self.install_config_kafka()
+            elif self.args.bigdata_app == 'elastic':
+                self.install_config_elastic()
+            elif self.args.bigdata_app == 'logstash':
+                self.install_config_logstash()
+            elif self.args.bigdata_app == 'kibana':
+                self.install_config_kibana()
+            elif self.args.bigdata_app == 'elk':
+                self.install_config_elk()
+            elif self.args.bigdata_app == 'spark':
+                self.install_config_spark()
+            else:
+                raise Exception('找不到匹配的应用')
 
         if self.args.add_slave is not None:
             self.add_slave_server()
@@ -111,14 +112,14 @@ class BigDataArchi(ServerCommon):
         install and config spark
         :return:
         """
-        # if self.prompt_check("Download and install hadoop"):
-        #     self.hadoop_install()
-        #
-        # if self.prompt_check("Download and install spark"):
-        #     self.spark_install()
-        #
-        # if self.prompt_check("Configure spark"):
-        #     self.spark_config()
+        if self.prompt_check("Download and install hadoop"):
+            self.hadoop_install()
+
+        if self.prompt_check("Download and install spark"):
+            self.spark_install()
+
+        if self.prompt_check("Configure spark"):
+            self.spark_config()
 
     def add_slave_server(self):
         """

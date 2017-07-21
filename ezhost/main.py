@@ -35,6 +35,13 @@ def main():
         help='添加一个子节点服务器',
     )
 
+    parser.add_argument(
+        '-skip-master', '--skip-master',
+        dest='skip_master',
+        action='store_true',
+        help='跳过master服务器的安装过程',
+    )
+
     # force to install packages without ask question
     parser.add_argument(
         '-f', '--force',

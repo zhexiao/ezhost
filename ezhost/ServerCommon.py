@@ -368,8 +368,12 @@ class ServerCommon(ServerAbstract):
             spark_env = bigdata_conf.spark_env.format(
                 spark_home=bigdata_conf.spark_home,
                 hadoop_home=bigdata_conf.hadoop_home,
-                host=env.host_string
+                host=env.host_string,
+                SPARK_DRIVER_MEMORY=configure[master].get(
+                    'SPARK_DRIVER_MEMORY', '512M'
+                )
             )
+
             put(StringIO(spark_env), 'conf/spark-env.sh', use_sudo=True)
 
             if not exists('conf/slaves'):

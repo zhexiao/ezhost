@@ -47,6 +47,8 @@ Kafka安装配置
 - zookeeper配置文件：/opt/kafka/config/zookeeper.properties
 - kafka配置文件：/opt/kafka/config/server.properties
 
+
+
 Spark
 --------
 Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark 是一种与 Hadoop 相似的
@@ -80,6 +82,61 @@ Hadoop
     ./bin/run-example SparkPi 10
 
 
+
+
+Spark Cluster
+-------------------
+
+demo_config.ini
+~~~~~~~~~~~~~~~~~
+.. code-block:: bash
+
+    [demo_spark_master]
+    host=192.168.33.25
+    user=ubuntu
+    passwd=18fc2f8e53c021a965cd9628
+    SPARK_DRIVER_MEMORY=512M
+
+    [demo_spark_slave1]
+    host=192.168.33.26
+    user=ubuntu
+    passwd=18fc2f8e53c021a965cd9628
+
+    [demo_spark_slave2]
+    host=192.168.33.27
+    user=ubuntu
+    passwd=18fc2f8e53c021a965cd9628
+
+.. note::
+
+    可以在Spark主（master）服务器中配置每个从（slave）服务器的执行内存大小，
+    通过 **SPARK_DRIVER_MEMORY** 进行赋值。
+
+
+安装实例
+~~~~~~~~~~~
+我们把 **demo_config.ini** 中的 **demo_spark_master** 做为主spark服务器, 把 **demo_spark_slave1**
+作为第一个从服务器，则安装命令如下：
+
+.. code-block:: bash
+
+    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark --add-slave demo_spark_slave1
+
+
+假如你已经完成了上面的命令操作，现在想为 **demo_spark_master** 主服务器多增加一个从服务器
+**demo_spark_slave2** ，则可以通过增加 *-skip-master* 来避免重复安装主服务器，安装命令如下：
+
+.. code-block:: bash
+
+    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark --add-slave demo_spark_slave2 -skip-master
+
+
+
+
+
+
+
+
 Elasticsearch
 ----------------
 Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，
@@ -102,6 +159,10 @@ Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，�
 
     curl 127.0.0.1:9200
 
+
+
+
+
 Logstash
 -----------
 Logstash是一个完全开源的工具，他可以对你的日志进行收集、过滤，并将其存储供以后使用。
@@ -116,6 +177,10 @@ Logstash是一个完全开源的工具，他可以对你的日志进行收集、
 ~~~~~~~~~~~~~
 - 安装路径：/usr/share/logstash
 - 配置路径：/etc/logstash
+
+
+
+
 
 Kibana
 ------
