@@ -6,23 +6,31 @@ from fabric.api import env
 
 from ezhost.ServerAbstract import ServerAbstract
 from ezhost.ServerLists import ServerLists
-from ezhost.ServerLamp import ServerLamp
-from ezhost.ServerLnmp import ServerLnmp
-from ezhost.ServerDjango import ServerDjango
-from ezhost.ServerLnmpWordpress import ServerLnmpWordpress
-from ezhost.ServerDjangoUwsgi import ServerDjangoUwsgi
-from ezhost.BigDataArchi import BigDataArchi
 from ezhost.ServerCommand import ServerCommand
+
+
+class DynamicImporter:
+    """
+    Dynamic import module and call class
+    """
+    def __init__(self, module_name, class_name, **kwargs):
+        args = kwargs.get('args')
+        configure = kwargs.get('configure')
+
+        module_name = __import__(module_name)
+        my_class = getattr(module_name, class_name)
+        my_class(args, configure=configure).install()
 
 
 class ServerBase(ServerAbstract):
     """
-        Server command bootstrap class
+    Server command bootstrap class
     """
 
-    def __init__(self, args, configure_obj):
+    def __init__(self, args, configure_obj, **kwargs):
         self.args = args
         self.configure_obj = configure_obj
+        self.configure = kwargs.get('configure')
 
         # set common parameters
         self.server_type = self.args.server
@@ -75,13 +83,17 @@ class ServerBase(ServerAbstract):
 
     def install(self):
         """
-            install the server
+        install the server
         """
-
         try:
             if self.args.server is not None:
                 server = ServerLists(self.server_type)
-                eval(server.name)(self.args).install()
+                DynamicImporter(
+                    'ezhost',
+                    server.name,
+                    args=self.args,
+                    configure=self.configure
+                )
             else:
                 ServerCommand(self.args)
         except Exception as e:

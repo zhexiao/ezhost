@@ -30,6 +30,11 @@ def main():
         help='大数据服务应用替代名',
     )
 
+    parser.add_argument(
+        '-add-slave', '--add-slave',
+        help='添加一个子节点服务器',
+    )
+
     # force to install packages without ask question
     parser.add_argument(
         '-f', '--force',
@@ -118,6 +123,7 @@ def main():
             raise ValueError('缺少登录必要的信息')
 
     # if exist config file, read configuration from file
+    configure = None
     if args.config is not None:
         # init configuration parser
         configure = configparser.ConfigParser()
@@ -131,4 +137,7 @@ def main():
 
         configure_obj = configure[args.config[1]]
     # init server
-    ServerBase(args, configure_obj)
+    ServerBase(
+        args, configure_obj,
+        configure=configure
+    )

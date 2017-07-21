@@ -26,7 +26,7 @@ output['running'] = False
 
 
 class ServerCommand(ServerAbstract):
-    def __init__(self, args):
+    def __init__(self, args, **kwargs):
         self.args = args
 
         # parse args

@@ -28,7 +28,7 @@ output['running'] = False
 
 
 class ServerDjangoUwsgi(ServerCommon):
-    def __init__(self, args):
+    def __init__(self, args, **kwargs):
         self.args = args
         self.project = self.args.project
         self.project_dir = '{0}/{1}'.format(self.nginx_web_dir, self.project)

@@ -6,13 +6,11 @@ Author: Zhe Xiao
 Github: https://github.com/zhexiao/ezhost.git
 """
 from ezhost.ServerCommon import ServerCommon
-import ezhost.config.bigdata_conf_string as bigdata_conf
 
 # fabric libs
-from fabric.colors import red, green
-from fabric.api import sudo
 from fabric.state import output
-from fabric.context_managers import cd
+from fabric.api import run
+
 
 # hide exec command
 output['running'] = False
@@ -20,14 +18,17 @@ output['running'] = False
 
 class BigDataArchi(ServerCommon):
 
-    def __init__(self, args):
+    def __init__(self, args, **kwargs):
         self.args = args
+        self.configure = kwargs.get('configure')
+
         if self.args.bigdata_app is None:
             raise Exception('请使用`-ba`指定需要安装的应用')
 
     def install(self):
-        self.update_sys()
-        self.java_install()
+        # self.update_sys()
+        # if self.prompt_check("Install Java JDK"):
+            # self.java_install()
 
         # check bigdata app
         if self.args.bigdata_app == 'kafka':
@@ -44,6 +45,9 @@ class BigDataArchi(ServerCommon):
             self.install_config_spark()
         else:
             raise Exception('找不到匹配的应用')
+
+        if self.args.add_slave is not None:
+            self.add_slave_server()
 
     def update_sys(self):
         if self.prompt_check("Update system package"):
@@ -107,11 +111,63 @@ class BigDataArchi(ServerCommon):
         install and config spark
         :return:
         """
-        if self.prompt_check("Download and install hadoop"):
-            self.hadoop_install()
+        # if self.prompt_check("Download and install hadoop"):
+        #     self.hadoop_install()
+        #
+        # if self.prompt_check("Download and install spark"):
+        #     self.spark_install()
+        #
+        # if self.prompt_check("Configure spark"):
+        #     self.spark_config()
 
-        if self.prompt_check("Download and install spark"):
-            self.spark_install()
+    def add_slave_server(self):
+        """
+        添加slave服务器
+        :return:
+        """
+        master = self.args.config[1]
+        slave = self.args.add_slave
 
-        if self.prompt_check("Configure spark"):
-            self.spark_config()
+        # install java at slave server
+        self.reset_server_env(slave, self.configure)
+        if self.prompt_check("Update package at slave server"):
+            self.common_update_sys()
+
+        if self.prompt_check("Install java at slave server"):
+            self.java_install()
+
+        # generate ssh key at master server
+        if self.prompt_check("Generate ssh key at Master Server"):
+            self.generate_ssh(master, self.args, self.configure)
+
+        # generate ssh key at slave server and make slave connect with master
+        if self.prompt_check("Make ssh connection within master and slave"):
+            self.generate_ssh(slave, self.args, self.configure)
+
+            # scp slave server ssh key to master server
+            run('scp ~/.ssh/id_rsa.pub {0}@{1}:~/.ssh/id_rsa.pub.{2}'.format(
+                self.configure[master]['user'],
+                self.configure[master]['host'],
+                slave
+            ))
+
+            # add slave ssh key to master authorized_keys
+            self.reset_server_env(master, self.configure)
+            run('cat ~/.ssh/id_rsa.pub* >> ~/.ssh/authorized_keys')
+
+            # scp master authorized_keys to slave authorized_keys
+            run('scp ~/.ssh/authorized_keys {0}@{1}:~/.ssh'.format(
+                self.configure[slave]['user'],
+                self.configure[slave]['host']
+            ))
+
+        # config slave and master
+        if self.prompt_check("Configure master and slave server"):
+            master = self.args.config[1]
+            slave = self.args.add_slave
+
+            if self.args.bigdata_app == 'spark':
+                self.add_spark_slave(master, slave, self.configure)
+
+
+

@@ -24,7 +24,7 @@ output['running'] = False
 
 class ServerDjango(ServerCommon):
 
-    def __init__(self, args):
+    def __init__(self, args, **kwargs):
         self.args = args
         self.project = self.args.project
 

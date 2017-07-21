@@ -14,11 +14,9 @@ import ezhost.config.bigdata_conf_string as bigdata_conf
 
 # fabric libs
 from fabric.colors import red, green
-from fabric.api import prompt, run, sudo, put
-from fabric.contrib.files import exists, append
+from fabric.api import prompt, run, sudo, put, env
+from fabric.contrib.files import exists, append, comment, sed, uncomment
 from fabric.context_managers import cd
-from fabric.api import env
-from fabric.contrib.files import sed, uncomment
 
 
 class ServerCommon(ServerAbstract):
@@ -147,16 +145,15 @@ class ServerCommon(ServerAbstract):
         install java
         :return:
         """
-        if self.prompt_check("Install Java JDK"):
-            sudo('apt-get install openjdk-8-jdk -y')
+        sudo('apt-get install openjdk-8-jdk -y')
 
-            java_home = run('readlink -f /usr/bin/java | '
-                            'sed "s:/jre/bin/java::"')
+        java_home = run('readlink -f /usr/bin/java | '
+                        'sed "s:/jre/bin/java::"')
 
-            append(bigdata_conf.global_env_home, 'export JAVA_HOME={0}'.format(
-                java_home
-            ), use_sudo=True)
-            run('source {0}'.format(bigdata_conf.global_env_home))
+        append(bigdata_conf.global_env_home, 'export JAVA_HOME={0}'.format(
+            java_home
+        ), use_sudo=True)
+        run('source {0}'.format(bigdata_conf.global_env_home))
 
     def kafka_install(self):
         """
@@ -325,3 +322,86 @@ class ServerCommon(ServerAbstract):
 
         append(bigdata_conf.global_env_home, configs, use_sudo=True)
         run('source {0}'.format(bigdata_conf.global_env_home))
+
+    def reset_server_env(self, server_name, configure):
+        """
+        reset server env to server-name
+        :param server_name:
+        :param configure:
+        :return:
+        """
+        env.host_string = configure[server_name]['host']
+        env.user = configure[server_name]['user']
+        env.password = configure[server_name]['passwd']
+
+    def generate_ssh(self, server, args, configure):
+        """
+        异步同时执行SSH生成 generate ssh
+        :param server:
+        :param args:
+        :param configure:
+        :return:
+        """
+        self.reset_server_env(server, configure)
+
+        # chmod project root owner
+        sudo('chown {user}:{user} -R {path}'.format(
+            user=configure[server]['user'],
+            path=bigdata_conf.project_root
+        ))
+
+        # generate ssh key
+        if not exists('~/.ssh/id_rsa.pub'):
+            run('ssh-keygen -t rsa -P "" -f ~/.ssh/id_rsa')
+
+    def add_spark_slave(self, master, slave, configure):
+        """
+        add spark slave
+        :return:
+        """
+        # go to master server, add config
+        self.reset_server_env(master, configure)
+        with cd(bigdata_conf.spark_home):
+            if not exists('conf/spark-env.sh'):
+                sudo('cp conf/spark-env.sh.template conf/spark-env.sh')
+
+            spark_env = bigdata_conf.spark_env.format(
+                spark_home=bigdata_conf.spark_home,
+                hadoop_home=bigdata_conf.hadoop_home,
+                host=env.host_string
+            )
+            put(StringIO(spark_env), 'conf/spark-env.sh', use_sudo=True)
+
+            if not exists('conf/slaves'):
+                sudo('cp conf/slaves.template conf/slaves')
+
+        # comment slaves localhost
+        comment('{0}/conf/slaves'.format(bigdata_conf.spark_home),
+                'localhost', use_sudo=True)
+
+        # add slave into config
+        append('{0}/conf/slaves'.format(bigdata_conf.spark_home),
+               '\n{0}'.format(configure[slave]['host']), use_sudo=True)
+
+        run('scp -r {0} {1}@{2}:/opt'.format(
+            bigdata_conf.spark_home,
+            configure[slave]['user'],
+            configure[slave]['host']
+        ))
+
+        # go to slave server
+        self.reset_server_env(slave, configure)
+
+        append(bigdata_conf.global_env_home, 'export SPARK_LOCAL_IP={0}'.format(
+            configure[slave]['host']
+        ), use_sudo=True)
+        run('source {0}'.format(bigdata_conf.global_env_home))
+
+        # go to master server, restart server
+        self.reset_server_env(master, configure)
+        with cd(bigdata_conf.spark_home):
+            run('./sbin/stop-master.sh')
+            run('./sbin/stop-slaves.sh')
+            run('./sbin/start-master.sh')
+            run('./sbin/start-slaves.sh')
+
