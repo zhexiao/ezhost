@@ -131,7 +131,11 @@ demo_config.ini
     ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark --add-slave demo_spark_slave2 -skip-master
 
 
+Web UI
+~~~~~~~~~~~~~~~
+.. code-block:: bash
 
+    192.168.33.25:8080
 
 
 
