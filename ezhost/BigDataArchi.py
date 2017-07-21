@@ -138,8 +138,9 @@ class BigDataArchi(ServerCommon):
             self.java_install()
 
         # generate ssh key at master server
-        if self.prompt_check("Generate ssh key at Master Server"):
-            self.generate_ssh(master, self.args, self.configure)
+        if not self.args.skip_master:
+            if self.prompt_check("Generate ssh key at Master Server"):
+                self.generate_ssh(master, self.args, self.configure)
 
         # generate ssh key at slave server and make slave connect with master
         if self.prompt_check("Make ssh connection within master and slave"):

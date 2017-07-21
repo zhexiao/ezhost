@@ -115,8 +115,8 @@ demo_config.ini
 
 安装实例
 ~~~~~~~~~~~
-我们把 **demo_config.ini** 中的 **demo_spark_master** 做为主spark服务器, 把 **demo_spark_slave1**
-作为第一个从服务器，则安装命令如下：
+我们把 **demo_config.ini** 中的 **demo_spark_master** 做为spark主（master）服务器,
+把 **demo_spark_slave1** 作为第一个从（slave）服务器，则安装命令如下：
 
 .. code-block:: bash
 
