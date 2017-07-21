@@ -177,8 +177,6 @@ class ServerCommon(ServerAbstract):
         :return:
         """
         uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
-                  , 'delete.topic.enable=true', use_sudo=True)
-        uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
                   , 'listeners=PLAINTEXT', use_sudo=True)
         sed('{0}/config/server.properties'.format(bigdata_conf.kafka_home),
             'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
