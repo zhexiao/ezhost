@@ -47,6 +47,17 @@ Kafka安装配置
 - zookeeper配置文件：/opt/kafka/config/zookeeper.properties
 - kafka配置文件：/opt/kafka/config/server.properties
 
+服务
+~~~~~~~
+.. code-block:: bash
+
+    # 查看状态
+    sudo systemctl status kafka
+    sudo systemctl status zookeeper
+
+    # 重启服务
+    sudo systemctl restart kafka
+    sudo systemctl restart zookeeper
 
 
 Spark
@@ -139,8 +150,6 @@ Web UI
 
 
 
-
-
 Elasticsearch
 ----------------
 Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，
@@ -163,7 +172,15 @@ Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，�
 
     curl 127.0.0.1:9200
 
+服务
+~~~~~~
+.. code-block:: bash
 
+    # 查看状态
+    sudo systemctl status elasticsearch
+
+    # 重启服务
+    sudo systemctl restart elasticsearch
 
 
 
@@ -182,7 +199,15 @@ Logstash是一个完全开源的工具，他可以对你的日志进行收集、
 - 安装路径：/usr/share/logstash
 - 配置路径：/etc/logstash
 
+服务
+~~~~~~
+.. code-block:: bash
 
+    # 查看状态
+    sudo systemctl status logstash
+
+    # 重启服务
+    sudo systemctl restart logstash
 
 
 
@@ -205,3 +230,13 @@ Kibana也是一个开源和免费的工具，它可以为Logstash和ElasticSearc
 测试
 ~~~~~~~~~~~~
 访问web页面：http://<IP Address>:5601
+
+服务
+~~~~~~
+.. code-block:: bash
+
+    # 查看状态
+    sudo systemctl status kibana
+
+    # 重启服务
+    sudo systemctl restart kibana
