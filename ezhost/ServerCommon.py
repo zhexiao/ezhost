@@ -183,13 +183,13 @@ class ServerCommon(ServerAbstract):
             use_sudo=True)
 
         self.systemctl_autostart(
-            'ez_kafka_zookeeper.service',
+            'zookeeper.service',
             '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
             '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
         )
 
         self.systemctl_autostart(
-            'ez_kafka.service',
+            'kafka.service',
             '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
             '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
         )
