@@ -9,7 +9,7 @@ from ezhost.ServerCommon import ServerCommon
 
 # fabric libs
 from fabric.state import output
-from fabric.api import run
+from fabric.api import run, sudo
 
 
 # hide exec command
@@ -134,8 +134,9 @@ class BigDataArchi(ServerCommon):
         if self.prompt_check("Update package at slave server"):
             self.common_update_sys()
 
-        if self.prompt_check("Install java at slave server"):
+        if self.prompt_check("Install java and python at slave server"):
             self.java_install()
+            sudo('apt-get install -y python python3 python-dev python3-dev')
 
         # generate ssh key at master server
         if not self.args.skip_master:
