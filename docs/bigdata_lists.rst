@@ -89,8 +89,9 @@ Hadoop
 ~~~~~~
 .. code-block:: bash
 
-    cd /opt/spark
-    ./bin/run-example SparkPi 10
+    > cd /opt/spark
+    > ./bin/run-example SparkPi 10
+    > sudo ./bin/pyspark --master local[2]
 
 
 
