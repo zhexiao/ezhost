@@ -55,6 +55,17 @@ class ServerCommon(ServerAbstract):
         print(green(' * Done'))
         print()
 
+    def update_source_list(self):
+        """
+        update ubuntu 16 source list
+        :return: 
+        """
+        with cd('/etc/apt'):
+            sudo('mv sources.list sources.list.bak')
+            put(StringIO(bigdata_conf.ubuntu_source_list_16),
+                'sources.list', use_sudo=True)
+            sudo('apt-get update -y')
+
     def common_install_nginx(self):
         """
             Install nginx
@@ -176,23 +187,31 @@ class ServerCommon(ServerAbstract):
         kafka config
         :return:
         """
-        uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
-                  , 'listeners=PLAINTEXT', use_sudo=True)
-        sed('{0}/config/server.properties'.format(bigdata_conf.kafka_home),
-            'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
-            use_sudo=True)
+        kafka_ports = self.configure[self.args.config[1]].get('KAFKA_PORTS')
+        if not kafka_ports:
+            kafka_ports_arr = ['9092']
+        else:
+            kafka_ports_arr = kafka_ports.replace(' ', '').split(',')
+        for k_port in kafka_ports_arr:
+            print(k_port)
 
-        self.systemctl_autostart(
-            'zookeeper.service',
-            '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
-            '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
-        )
-
-        self.systemctl_autostart(
-            'kafka.service',
-            '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
-            '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
-        )
+        # uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
+        #           , 'listeners=PLAINTEXT', use_sudo=True)
+        # sed('{0}/config/server.properties'.format(bigdata_conf.kafka_home),
+        #     'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
+        #     use_sudo=True)
+        #
+        # self.systemctl_autostart(
+        #     'zookeeper.service',
+        #     '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
+        #     '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
+        # )
+        #
+        # self.systemctl_autostart(
+        #     'kafka.service',
+        #     '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
+        #     '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
+        # )
 
     def elastic_install(self):
         """

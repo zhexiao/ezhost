@@ -27,7 +27,15 @@ class BigDataArchi(ServerCommon):
 
     def install(self):
         if not self.args.skip_master:
-            self.update_sys()
+            # update source list
+            if self.prompt_check("Change ubuntu 16 source lists"):
+                self.update_source_list()
+
+            # update package
+            if self.prompt_check("Update system package"):
+                self.common_update_sys()
+
+            # JAVA
             if self.prompt_check("Install Java JDK"):
                 self.java_install()
 
@@ -49,10 +57,6 @@ class BigDataArchi(ServerCommon):
 
         if self.args.add_slave is not None:
             self.add_slave_server()
-
-    def update_sys(self):
-        if self.prompt_check("Update system package"):
-            self.common_update_sys()
 
     def install_config_kafka(self):
         """
