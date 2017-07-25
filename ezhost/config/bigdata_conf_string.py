@@ -35,7 +35,6 @@ export HADOOP_HOME={hadoop_home}
 export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SCALA_HOME/bin
 export SPARK_LIBARY_PATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$HADOOP_HOME/lib/native
 
-export SPARK_MASTER_IP={host}
 export SPARK_MASTER_HOST={host}
 
 SPARK_LOCAL_DIRS={spark_home}
