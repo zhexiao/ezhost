@@ -89,8 +89,9 @@ Hadoop
 ~~~~~~
 .. code-block:: bash
 
-    cd /opt/spark
-    ./bin/run-example SparkPi 10
+    > cd /opt/spark
+    > ./bin/run-example SparkPi 10
+    > sudo ./bin/pyspark --master local[2]
 
 
 
@@ -131,7 +132,7 @@ demo_config.ini
 
 .. code-block:: bash
 
-    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark --add-slave demo_spark_slave1
+    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark -add-slave demo_spark_slave1
 
 
 假如你已经完成了上面的命令操作，现在想为 **demo_spark_master** 主服务器多增加一个从服务器
@@ -139,7 +140,7 @@ demo_config.ini
 
 .. code-block:: bash
 
-    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark --add-slave demo_spark_slave2 -skip-master
+    ezhost -C /vagrant/ezhost/data/demo_config.ini demo_spark_master -s bigdata -ba spark -add-slave demo_spark_slave2 -skip-master
 
 
 Web UI
