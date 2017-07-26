@@ -148,6 +148,7 @@ class ServerCommon(ServerAbstract):
 
         # make service auto-start
         sudo('systemctl daemon-reload')
+        sudo('systemctl disable {0}'.format(service_name))
         sudo('systemctl stop {0}'.format(service_name))
         sudo('systemctl enable {0}'.format(service_name))
         sudo('systemctl start {0}'.format(service_name))
@@ -224,6 +225,8 @@ class ServerCommon(ServerAbstract):
                 sed(conf_file, 'PLAINTEXT://.*', 'PLAINTEXT://{0}:{1}'.format(
                     env.host_string, k_port
                 ))
+                sed(conf_file, 'log.dirs=.*',
+                    'log.dirs=/tmp/kafka-log-{0}'.format(k_port))
 
                 # 配置kafka服务
                 self.systemctl_autostart(
