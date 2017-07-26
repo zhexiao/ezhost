@@ -148,6 +148,7 @@ class ServerCommon(ServerAbstract):
 
         # make service auto-start
         sudo('systemctl daemon-reload')
+        sudo('systemctl stop {0}'.format(service_name))
         sudo('systemctl enable {0}'.format(service_name))
         sudo('systemctl start {0}'.format(service_name))
 
@@ -187,31 +188,49 @@ class ServerCommon(ServerAbstract):
         kafka config
         :return:
         """
-        kafka_ports = self.configure[self.args.config[1]].get('KAFKA_PORTS')
+        # 读取配置文件中的端口
+        config_obj = self.configure[self.args.config[1]]
+        kafka_ports = config_obj.get('KAFKA_PORTS')
+        # 默认端口9092
         if not kafka_ports:
             kafka_ports_arr = ['9092']
         else:
             kafka_ports_arr = kafka_ports.replace(' ', '').split(',')
-        for k_port in kafka_ports_arr:
-            print(k_port)
 
-        # uncomment('{0}/config/server.properties'.format(bigdata_conf.kafka_home)
-        #           , 'listeners=PLAINTEXT', use_sudo=True)
-        # sed('{0}/config/server.properties'.format(bigdata_conf.kafka_home),
-        #     'PLAINTEXT://.*', 'PLAINTEXT://{0}:9092'.format(env.host_string),
-        #     use_sudo=True)
-        #
-        # self.systemctl_autostart(
-        #     'zookeeper.service',
-        #     '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
-        #     '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
-        # )
-        #
-        # self.systemctl_autostart(
-        #     'kafka.service',
-        #     '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties',
-        #     '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/server.properties'
-        # )
+        # chmod project root owner
+        sudo('chown {user}:{user} -R {path}'.format(
+            user=config_obj.get('user'),
+            path=bigdata_conf.project_root
+        ))
+        # change kafka bin permission for JAVA
+        sudo('chmod -R 777 {0}/bin'.format(bigdata_conf.kafka_home))
+
+        # 配置zookeeper服务
+        self.systemctl_autostart(
+            'zookeeper.service',
+            '/opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties',
+            '/opt/kafka/bin/zookeeper-server-stop.sh /opt/kafka/config/zookeeper.properties'
+        )
+
+        # 循环生成kafka配置文件
+        with cd('{0}/config'.format(bigdata_conf.kafka_home)):
+            for idx, k_port in enumerate(kafka_ports_arr):
+                conf_file = 'server.properties-{0}'.format(k_port)
+                run('cp server.properties {0}'.format(conf_file))
+
+                # 修改kafka配置文件
+                sed(conf_file, 'broker.id=.*', 'broker.id={0}'.format(idx))
+                uncomment(conf_file, 'listeners=PLAINTEXT')
+                sed(conf_file, 'PLAINTEXT://.*', 'PLAINTEXT://{0}:{1}'.format(
+                    env.host_string, k_port
+                ))
+
+                # 配置kafka服务
+                self.systemctl_autostart(
+                    'kafka-{0}.service'.format(k_port),
+                    '/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/{0}'.format(conf_file),
+                    '/opt/kafka/bin/kafka-server-stop.sh /opt/kafka/config/{0}'.format(conf_file)
+                )
 
     def elastic_install(self):
         """

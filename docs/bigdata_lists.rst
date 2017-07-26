@@ -59,6 +59,38 @@ Kafka安装配置
     sudo systemctl restart kafka
     sudo systemctl restart zookeeper
 
+Kafka分配多个启动端口
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+假设我想为我安装的kafka服务启动三个运行端口:9092,9093,9094，则我需要创建如下配置
+文件：
+
+.. code-block:: bash
+
+    [kafka_server]
+    host=192.168.33.31
+    user=ubuntu
+    passwd=18fc2f8e53c021a965cd9628
+    KAFKA_PORTS=9092, 9093, 9094
+
+.. note::
+
+    我们在配置文件中使用 **KAFKA_PORTS** 来指定需要开启的端口，用“，“分割多个端口。
+
+然后直接通过配置文件安装方法，假设创建的配置文件名为 **config.ini** ,则可以执行下列命令
+生成多端口服务器：
+
+.. code-block:: shell
+
+    > ezhost -C config.ini kafka_server -s bigdata -ba kafka
+
+登录到服务器检查端口服务是否开启：
+
+.. code-block:: shell
+
+    > sudo systemctl status zookeeper.service
+    > sudo systemctl status kafka-9092.service
+    > sudo systemctl status kafka-9093.service
+    > sudo systemctl status kafka-9094.service
 
 Spark
 --------

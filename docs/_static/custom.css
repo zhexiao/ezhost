@@ -3,3 +3,7 @@
 body{
     background-color: yellow;
 }
+
+.strike {
+    text-decoration: line-through;
+}
