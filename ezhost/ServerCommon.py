@@ -408,8 +408,8 @@ class ServerCommon(ServerAbstract):
                 spark_home=bigdata_conf.spark_home,
                 hadoop_home=bigdata_conf.hadoop_home,
                 host=env.host_string,
-                SPARK_DRIVER_MEMORY=configure[master].get(
-                    'SPARK_DRIVER_MEMORY', '512M'
+                SPARK_WORKER_MEMORY=configure[master].get(
+                    'SPARK_WORKER_MEMORY', '512M'
                 )
             )
 

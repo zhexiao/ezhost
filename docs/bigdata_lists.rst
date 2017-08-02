@@ -139,7 +139,7 @@ demo_config.ini
     host=192.168.33.25
     user=ubuntu
     passwd=18fc2f8e53c021a965cd9628
-    SPARK_DRIVER_MEMORY=512M
+    SPARK_WORKER_MEMORY=512M
 
     [demo_spark_slave1]
     host=192.168.33.26
@@ -154,7 +154,7 @@ demo_config.ini
 .. note::
 
     可以在Spark主（master）服务器中配置每个从（slave）服务器的执行内存大小，
-    通过 **SPARK_DRIVER_MEMORY** 进行赋值。
+    通过 **SPARK_WORKER_MEMORY** 进行赋值。
 
 
 安装实例
