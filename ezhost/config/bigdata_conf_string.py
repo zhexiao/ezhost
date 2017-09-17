@@ -7,7 +7,7 @@ kafka_download_url = "http://mirrors.tuna.tsinghua.edu.cn/apache/kafka/0.10.2.0/
 spark_home = '{0}/spark'.format(project_root)
 hadoop_home = '{0}/hadoop'.format(project_root)
 spark_download_url = "http://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz"
-hadoop_download_url = "http://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz"
+hadoop_download_url = "http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.7.4/hadoop-2.7.4-src.tar.gz"
 
 elastic_download_url = "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.5.0.deb"
 logstash_download_url = "https://artifacts.elastic.co/downloads/logstash/logstash-5.5.0.deb"
