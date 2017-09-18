@@ -136,6 +136,7 @@ class BigDataArchi(ServerCommon):
         # install java at slave server
         self.reset_server_env(slave, self.configure)
         if self.prompt_check("Update package at slave server"):
+            self.update_source_list()
             self.common_update_sys()
 
         if self.prompt_check("Install java and python at slave server"):

@@ -36,7 +36,7 @@ class ServerCommon(ServerAbstract):
             update system package
         """
         try:
-            sudo('apt-get update -y')
+            sudo('apt-get update -y --fix-missing')
         except Exception as e:
             print(e)
 
@@ -64,7 +64,7 @@ class ServerCommon(ServerAbstract):
             sudo('mv sources.list sources.list.bak')
             put(StringIO(bigdata_conf.ubuntu_source_list_16),
                 'sources.list', use_sudo=True)
-            sudo('apt-get update -y')
+            sudo('apt-get update -y --fix-missing')
 
     def common_install_nginx(self):
         """
