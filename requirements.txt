@@ -18,7 +18,7 @@ pathtools==0.1.2
 port-for==0.3.1
 pyasn1==0.1.9
 pycparser==2.17
-Pygments==2.2.0
+Pygments==2.7.4
 pyparsing==2.1.10
 pytz==2016.10
 PyYAML==3.12
